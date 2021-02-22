@@ -31,3 +31,9 @@ The system will also provide effective analysis to determine factors or programm
 
 ## ERD Diagram
 ![alt text](https://github.com/921am/csc2008-grpAssg/blob/main/csc2008ERD.png)
+
+## To run ASP.NET application
+- Create Database under SQL Server Object Explorer
+- Database name: CRUD
+- Go to Solution Explorer -> Double Click on DB_WebApp.sln
+- Find Users.apsx and Run
