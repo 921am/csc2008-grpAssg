@@ -8,3 +8,6 @@
 | Abdel Haadee Faahym Bin Hisham     | 1901853   |
 | Tan Qi Guang                       | 1901844   |
 | Tan Zhen Xuan                      | 1901882   |
+
+# ERD Diagram
+![alt text](https://github.com/921am/csc2008-grpAssg/blob/main/csc2008ERD.png)
