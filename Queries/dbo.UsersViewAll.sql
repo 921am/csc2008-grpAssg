@@ -1,0 +1,6 @@
+﻿CREATE PROC UsersViewAll
+AS 
+	BEGIN
+	SELECT *
+	FROM Users
+	END
