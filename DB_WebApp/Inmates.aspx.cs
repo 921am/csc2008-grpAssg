@@ -14,6 +14,18 @@ namespace DB_WebApp
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-    }
-}
+        } //Page_Load
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+        } //btnSave_Click
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+        } //btnDelete_Click
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+        } //btnClear_Click
+
+    } //Inmates Class
+} //DB_WebApp
