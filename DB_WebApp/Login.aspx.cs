@@ -23,18 +23,19 @@ namespace DB_WebApp
             string Password = tbPassword.Text;
             if (UserId == "" || Password == "")
                 lblLoginErrorMsg.Text = "Please ensure all fields are filled.";
-            else if (sqlcon.State == ConnectionState.Closed)
+            if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlCommand sqlCmd = new SqlCommand("UserRetrieve", sqlcon);
-            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+            SqlCommand sqlCmd = new SqlCommand("select * from User where UserID=@UserID and Password=@Password", sqlcon);
             sqlCmd.SelectCommand.Parameters.AddWithValue("@UserID", UserID);
             sqlCmd.SelectCommand.Parameters.AddWithValue("@Password", Password);
+            SqlDataAdapter sda = new SqlDataAdapter(sqlCmd);
             DataTable dtbl = new DataTable();
-            sqlDa.Fill(dtbl);
+            sda.Fill(dtbl);
             sqlCmd.ExecuteNonQuery();
-            sqlcon.Close();
+            int i = sqlCmd.ExecuteNonQuery();  
+            sqlcon.Close();  
             if (dtbl.Rows.Count > 1 )
-                Response.Redirect("Redirectform.aspx");
+                Response.Redirect("User.aspx");
             else
                 lblLoginErrorMsg.Text = "Your username or password is incorrect.";  
 
