@@ -67,7 +67,7 @@
                     <td> </td>  
                     <td> </td>  
                     <td>  
-                        <asp:Label ID="Label4" runat="server" Font-Size="X-Large"></asp:Label>  
+                        <asp:Label ID="lblLoginErrorMsg" runat="server" Font-Size="X-Large"></asp:Label>  
                     </td>  
                     <td> </td>  
                     <td> </td>  

@@ -67,7 +67,7 @@ CREATE TABLE VocationalProgramme (
 -- ALTER TABLE InmateProgress ADD CONSTRAINT InmateProgress_AcadProgramme FOREIGN KEY InmateProgress_AcadProgramme (AcadProgramme_ProgID)
 --     REFERENCES AcadProgramme (ProgID);
 
--- Reference: InmateProgress_DraugRehabProgramme (table: InmateProgress)
+-- Reference: InmateProg]\ress_DraugRehabProgramme (table: InmateProgress)
 -- ALTER TABLE InmateProgress ADD CONSTRAINT InmateProgress_DraugRehabProgramme FOREIGN KEY InmateProgress_DraugRehabProgramme (DraugRehabProgramme_ProgID)
 --     REFERENCES DraugRehabProgramme (ProgID);
 
