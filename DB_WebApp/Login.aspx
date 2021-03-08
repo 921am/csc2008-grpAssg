@@ -57,7 +57,7 @@
                     <td> </td>  
                     <td> </td>  
                     <td style="text-align: center">  
-                        <asp:Button ID="btnLogin" runat="server" BorderStyle="None" Font-Size="X-Large" OnClick="Button1_Click" Text="Log In" />  
+                        <asp:Button ID="btnLogin" runat="server" BorderStyle="None" Font-Size="X-Large" OnClick="btnLogin_Click" Text="Log In" />  
                     </td>  
                     <td> </td>  
                     <td> </td>  

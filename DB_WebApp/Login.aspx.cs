@@ -18,7 +18,7 @@ namespace DB_WebApp
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void btnLogin_Click(object sender, EventArgs e)
         {
             string Name = tbName.Text;
             string Password = tbPwd.Text;
@@ -38,10 +38,12 @@ namespace DB_WebApp
             sda.Fill(dtbl);
             sqlCmd.ExecuteNonQuery();
             sqlcon.Close();
-            if (dtbl.Rows.Count > 0) { 
+            if (dtbl.Rows.Count > 0)
+            {
                 Response.Redirect("User.aspx");
             }
-            else { 
+            else
+            {
                 lblLoginErrorMsg.Text = "Your username or password is incorrect.";
             }
         }
