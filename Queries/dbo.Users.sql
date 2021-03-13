@@ -3,6 +3,7 @@
     [Name]    VARCHAR (50)  NULL,
     [Mobile]  VARCHAR (50)  NULL,
     [Address] VARCHAR (250) NULL,
+    [Password] VARCHAR (75) NULL,
     PRIMARY KEY CLUSTERED ([UserID] ASC)
 );
 
