@@ -1,58 +1,17 @@
-﻿
-CREATE TABLE [dbo].[Inmates] (
-    [inmateID]     INT           NOT NULL,
-    [inmateName]   VARCHAR (100) NULL,
-    [gender]       VARCHAR (1)   NULL,
-    [DateEntered]  DATE          NULL,
-    [DateReleased] DATE          NULL,
-    CONSTRAINT [inmateID] PRIMARY KEY CLUSTERED ([inmateID] ASC)
-);
-
-
-CREATE TABLE [dbo].[AcadProgramme] (
-    [ProgID]      INT  NOT NULL,
-    [ProgName]    VARCHAR(75)  NULL,
-    [ProgDescrip] VARCHAR(MAX)  NULL,
-    [StartDate]   DATE NULL,
-    [EndDate]     DATE NULL,
-    CONSTRAINT [AcadProgramme_pk] PRIMARY KEY CLUSTERED ([ProgID] ASC)
-);
-
-CREATE TABLE [dbo].[DrugRehabProgramme] (
-    [ProgID]      INT           NOT NULL,
-    [ProgName]    VARCHAR (75)  NULL,
-    [ProgDescrip] VARCHAR (MAX) NULL,
-    [StartDate]   DATE          NULL,
-    [EndDate]     DATE          NULL,
-    CONSTRAINT [DrugRehabProgramme_pk] PRIMARY KEY CLUSTERED ([ProgID] ASC)
-);
-
-CREATE TABLE [dbo].[VocationalProgramme] (
-    [ProgID]      INT           NOT NULL,
-    [ProgName]    VARCHAR (75)  NULL,
-    [ProgDescrip] VARCHAR (MAX) NULL,
-    [StartDate]   DATE          NULL,
-    [EndDate]     DATE          NULL,
-    CONSTRAINT [VocationalProgramme_pk] PRIMARY KEY CLUSTERED ([ProgID] ASC)
-);
-
-
-
-
-INSERT INTO Inmates(inmateID, inmateName, gender, DateEntered, DateReleased)
+INSERT INTO Inmates(inmateID, inmateName, gender, DateEntered, DateReleased, DrugOffender)
 VALUES 
     (1, 'Mukasa Kiriwawanvu', 'M', (CONVERT(DATE, '17/12/2015', 103)), 
-    (CONVERT(DATE, '17/12/2015', 103))),
+    (CONVERT(DATE, '17/12/2015', 103)), 'False'),
     (2, 'Maximilian Kolbe', 'M', (CONVERT(DATE, '17/12/2015', 103)), 
-    (CONVERT(DATE, '17/12/2015', 103))),
+    (CONVERT(DATE, '17/12/2015', 103)), 'False'),
     (3, 'Raphael Kalinowskin','M', (CONVERT(DATE, '17/12/2015', 103)), 
-    (CONVERT(DATE, '17/12/2015', 103))),
+    (CONVERT(DATE, '17/12/2015', 103)), 'False'),
     (4, 'Dorothy Day', 'F', (CONVERT(DATE, '17/12/2015', 103)), 
-    (CONVERT(DATE, '17/12/2015', 103))),
+    (CONVERT(DATE, '17/12/2015', 103)), 'False'),
     (5, 'Jacques Fesch', 'M', (CONVERT(DATE, '17/12/2015', 103)), 
-    (CONVERT(DATE, '17/12/2015', 103)));
+    (CONVERT(DATE, '17/12/2015', 103)), 'False');
 
--- Acadmic Programmes
+-- SEEDING INTO DRUG REHAB PROGRAMME
 INSERT INTO DrugRehabProgramme(ProgID, ProgName, ProgDescrip, StartDate, EndDate)
 VALUES 
     (1, 'Alcohol Addiction Treatment', 'Substance abuse programmes', (CONVERT(DATE, '17/12/2015', 103)), 
@@ -66,7 +25,7 @@ VALUES
     (5, 'Family Programme', 'Family programmes', (CONVERT(DATE, '17/12/2015', 103)), 
     (CONVERT(DATE, '17/12/2015', 103)));
 
--- Drug Rehad Programmes
+-- SEEDING INTO ACADPROGRAMME
 INSERT INTO AcadProgramme(ProgID, ProgName, ProgDescrip, StartDate, EndDate)
 VALUES 
     (1, 'O-Level', 'GCE O-Levels', (CONVERT(DATE, '17/12/2015', 103)), 
@@ -80,8 +39,7 @@ VALUES
     (5, 'Technical Certification', 'Professional Certificate', (CONVERT(DATE, '17/12/2015', 103)), 
     (CONVERT(DATE, '17/12/2015', 103)));
 
--- Vocational Progrmmes
--- Vocational Progrmmes
+-- SEEDING INTO VOCATIONAL PROGRAMME
 INSERT INTO VocationalProgramme(ProgID, ProgName, ProgDescrip, StartDate, EndDate)
 VALUES 
     (1, 'Biology', 'Applied and pure science vocational course', (CONVERT(DATE, '17/12/2015', 103)), 
@@ -102,5 +60,4 @@ VALUES
     (CONVERT(DATE, '17/12/2015', 103))),
     (9, 'Interior Design', 'Computer Scienece and IT vocational course', (CONVERT(DATE, '17/12/2015', 103)), 
     (CONVERT(DATE, '17/12/2015', 103)));
-
 
