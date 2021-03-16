@@ -36,4 +36,7 @@ The system will also provide effective analysis to determine factors or programm
 - Create Database under SQL Server Object Explorer
 - Database name: CRUD
 - Go to Solution Explorer -> Double Click on DB_WebApp.sln
-- Find Users.apsx and Run
+
+## To Create Tables
+- Run all the User queries
+- Run Create Tables, followed by Create FK, and lastly seed data
