@@ -61,3 +61,11 @@ VALUES
     (9, 'Interior Design', 'Computer Scienece and IT vocational course', (CONVERT(DATE, '17/12/2015', 103)), 
     (CONVERT(DATE, '17/12/2015', 103)));
 
+-- SEEDING INTO INMAREPROGRESS 
+INSERT INTO InmateProgress(InmateProgressID, RehabProgID, RehabProgStatus, AcadProgID, AcadProgStatus, VocProgID, VocProgStatus)
+VALUES
+    (1, 1, "Ongoing", NULL, NULL, NULL, NULL),
+    (2, NULL, NULL, 2, "Ongoing", NULL, NULL),
+    (3, NULL, NULL, NULL, NULL, 9, "Ongoing"),
+    (4, NULL, NULL, NULL, NULL, 3, "Complete"),
+    (5, 2, "Ongoing", NULL, NULL, NULL, NULL);
