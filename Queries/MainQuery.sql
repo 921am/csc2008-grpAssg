@@ -59,7 +59,7 @@ VALUES
     (CONVERT(DATE, '17/12/2015', 103))),
     (2, 'Drug Addiction Treatment', 'Substance abuse programmes', (CONVERT(DATE, '17/12/2015', 103)), 
     (CONVERT(DATE, '17/12/2015', 103))),
-    (3, 'Process Addiction Treatment', 'Gambling programmes', (CONVERT(DATE, '17/12/2015', 103)), 
+    (3, 'Process Addiction Treatment', 'Gambling programmes', (CONVER T(DATE, '17/12/2015', 103)), 
     (CONVERT(DATE, '17/12/2015', 103))),
     (4, 'Relapse Prevention', 'Relapse prevention Programme', (CONVERT(DATE, '17/12/2015', 103)), 
     (CONVERT(DATE, '17/12/2015', 103))),
@@ -103,4 +103,15 @@ VALUES
     (9, 'Interior Design', 'Computer Scienece and IT vocational course', (CONVERT(DATE, '17/12/2015', 103)), 
     (CONVERT(DATE, '17/12/2015', 103)));
 
+<<<<<<< Updated upstream:Queries/MainQuery.sql
 
+=======
+-- SEEDING INTO INMAREPROGRESS 
+INSERT INTO InmateProgress(InmateProgressID, RehabProgID, RehabProgStatus, AcadProgID, AcadProgStatus, VocProgID, VocProgStatus)
+VALUES
+    (1. 1, "Ongoing", NULL, NULL, NULL, NULL)
+    (2. NULL, NULL, 2, "Ongoing", NULL, NULL)
+    (3. NULL, NULL, NULL, NULL, 9, "Ongoing")
+    (4. NULL, NULL, NULL, NULL, 3, "Complete")
+    (5. 2, "Ongoing", NULL, NULL, NULL, NULL)
+>>>>>>> Stashed changes:Queries/SeedingData_Query.sql
