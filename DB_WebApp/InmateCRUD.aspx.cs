@@ -1,59 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Globalization;
 
 namespace DB_WebApp
 {
-    public partial class User : System.Web.UI.Page
+    public partial class InmateCRUD : System.Web.UI.Page
     {
-        
-        /// Change connection string here
-        /// under your Database, click on properties and find Connection String
         SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CRUD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                btnDelete.Enabled = false;
+                btnDeleteInmate.Enabled = false;
                 FillGridView();
             }
         }
 
-        protected void btnClear_Click(object sender, EventArgs e)
+        void FillGridView()
         {
-            Clear();
+            if (sqlcon.State == ConnectionState.Closed)
+                sqlcon.Open();
+            SqlDataAdapter sqlDa = new SqlDataAdapter("InmatesViewAll", sqlcon);
+            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlDa.Fill(dtbl);
+            sqlcon.Close();
+            gvInmate.DataSource = dtbl;
+            gvInmate.DataBind();
+
         }
 
         public void Clear()
         {
-            hfUserID.Value = "";
-            txtName.Text = "";
-            txtMobile.Text = "";
-            txtAddress.Text = "";
+            hfInmateID.Value = "";
+            txtInmateName.Text = "";
+            txtGender.Text = "";
+            txtDateEntered.Text = "";
+            txtDateReleased.Text = "";
             lblErrorMessage.Text = lblSuccessMessage.Text = "";
-            btnSave.Text = "Save";
-            btnDelete.Enabled = false;
+            btnSaveInmate.Text = "Save";
+            btnDeleteInmate.Enabled = false;
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlCommand sqlCmd = new SqlCommand("UsersCreateOrUpdate", sqlcon);
+            SqlCommand sqlCmd = new SqlCommand("InmatesCreateOrUpdate", sqlcon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@UserID", (hfUserID.Value == "" ? 0 : Convert.ToInt32(hfUserID.Value)));
-            sqlCmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Mobile", txtMobile.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@inmateID", (hfInmateID.Value == "" ? 0 : Convert.ToInt32(hfInmateID.Value)));
+            sqlCmd.Parameters.AddWithValue("@inmateName", txtInmateName.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@gender", txtGender.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@DateEntered", DateTime.ParseExact(txtDateEntered.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+            sqlCmd.Parameters.AddWithValue("@DateReleased", DateTime.ParseExact(txtDateReleased.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+            sqlCmd.Parameters.AddWithValue("@DrugOffender", txtDrugOff.Text.Trim());
             sqlCmd.ExecuteNonQuery();
             sqlcon.Close();
-            string UserID = hfUserID.Value;
+            string UserID = hfInmateID.Value;
             Clear();
             if (UserID == "")
                 lblSuccessMessage.Text = "Saved Successfully";
@@ -62,46 +74,39 @@ namespace DB_WebApp
             FillGridView();
         }
 
-        void FillGridView()
+        protected void btnClear_Click(object sender, EventArgs e)
         {
-            if (sqlcon.State == ConnectionState.Closed)
-                sqlcon.Open();
-            SqlDataAdapter sqlDa = new SqlDataAdapter("UsersViewAll", sqlcon);
-            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            DataTable dtbl = new DataTable();
-            sqlDa.Fill(dtbl);
-            sqlcon.Close();
-            gvUsers.DataSource = dtbl;
-            gvUsers.DataBind();
-
+            Clear();
         }
 
         protected void lnk_OnClick(object sender, EventArgs e)
         {
-            int UserID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+            int inmateID = Convert.ToInt32((sender as LinkButton).CommandArgument);
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlDataAdapter sqlDa = new SqlDataAdapter("UsersViewByID", sqlcon);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("InmatesViewByID", sqlcon);
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@UserID", UserID);
+            sqlDa.SelectCommand.Parameters.AddWithValue("@inmateID", inmateID);
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
             sqlcon.Close();
-            hfUserID.Value = UserID.ToString();
-            txtName.Text = dtbl.Rows[0]["Name"].ToString();
-            txtMobile.Text = dtbl.Rows[0]["Mobile"].ToString();
-            txtAddress.Text = dtbl.Rows[0]["Address"].ToString();
-            btnSave.Text = "Update";
-            btnDelete.Enabled = true;
+            hfInmateID.Value = inmateID.ToString();
+            txtInmateName.Text = dtbl.Rows[0]["inmateName"].ToString();
+            txtGender.Text = dtbl.Rows[0]["gender"].ToString();
+            txtDateEntered.Text = dtbl.Rows[0]["DateEntered"].ToString();
+            txtDateReleased.Text = dtbl.Rows[0]["DateReleased"].ToString();
+            txtDrugOff.Text = dtbl.Rows[0]["DrugOffender"].ToString();
+            btnSaveInmate.Text = "Update";
+            btnDeleteInmate.Enabled = true;
         }
 
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlCommand sqlCmd = new SqlCommand("UsersDeleteByID", sqlcon);
+            SqlCommand sqlCmd = new SqlCommand("InmatesDeleteByID", sqlcon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(hfUserID.Value));
+            sqlCmd.Parameters.AddWithValue("@inmateID", Convert.ToInt32(hfInmateID.Value));
             sqlCmd.ExecuteNonQuery();
             sqlcon.Close();
             Clear();
