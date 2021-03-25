@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="User.aspx.cs" Inherits="DB_WebApp.User" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="VocProgrammeCRUD.aspx.cs" Inherits="DB_WebApp.VocProgrammeCRUD" %>
 
 <!DOCTYPE html>
 
@@ -9,35 +9,48 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:HiddenField ID="hfUserID" runat="server" />
+            <asp:HiddenField ID="hfVocProgID" runat="server" />
             <table>
                     <tr>
                     <td>
-                        <asp:Label ID="lblName" runat="server" Text="Name"></asp:Label>
+                        <asp:Label ID="lblProgName" runat="server" Text="Programme Name"></asp:Label>
 
                     </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtProgName" runat="server"></asp:TextBox>
                     </td>
                     </tr>
 
                    <tr>
                        <td>
-                        <asp:Label ID="lblMobile" runat="server" Text="Mobile"></asp:Label>
+                        <asp:Label ID="lblProgDescription" runat="server" Text="Programme Description"></asp:Label>
                         </td>
-
+                
                     <td colspan="2">
-                        <asp:TextBox ID="txtMobile" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtProgDescription" runat="server" TextMode="MultiLine"></asp:TextBox>
                     </td>
                     </tr>
                 <tr>
-                    <td>
-                        <asp:Label ID="lblAddress" runat="server"></asp:Label>
-                    </td>
+                       <td>
+                        <asp:Label ID="lblStartDate" runat="server" Text="Start Date"></asp:Label>
+                        </td>
+
                     <td colspan="2">
-                        <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine"></asp:TextBox>
+                        <asp:TextBox ID="txtStartDate" runat="server" TextMode="DateTime"></asp:TextBox>
                     </td>
-                </tr>
+                    </tr>
+
+                <tr>
+                       <td>
+                        <asp:Label ID="lblEndDate" runat="server" Text="End Date"></asp:Label>
+                        </td>
+
+                    <td colspan="2">
+                        <asp:TextBox ID="txtEndDate" runat="server" TextMode="DateTime"></asp:TextBox>
+                    </td>
+                    </tr>
+               
+                
                 <tr>
                 <td>
                     
@@ -66,14 +79,16 @@
             </tr>
             </table>
             <br />
-            <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false">
+            <asp:GridView ID="gvVocProg" runat="server" AutoGenerateColumns="false">
             <Columns>
-                <asp:BoundField DataField="Name" HeaderText="Name" />
-                <asp:BoundField DataField="Mobile" HeaderText="Mobile" />
-                <asp:BoundField DataField="Address" HeaderText="Address" />
+                <asp:BoundField DataField="ProgName" HeaderText="Programme Name" />
+                <asp:BoundField DataField="ProgDescrip" HeaderText="Description" />
+                <asp:BoundField DataField="StartDate" HeaderText="Start"  DataFormatString="{0:d}" />
+                <asp:BoundField DataField="EndDate" HeaderText="End"  DataFormatString="{0:d}" />
+
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:LinkButton ID="lnkView" runat="server" CommandArgument='<%# Eval("UserID") %>' OnClick="lnk_OnClick">View</asp:LinkButton>
+                        <asp:LinkButton ID="lnkView" runat="server" CommandArgument='<%# Eval("ProgID") %>' OnClick="lnk_OnClick">View</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -84,7 +99,6 @@
                     <asp:Button ID="btnVocProg" runat="server" Text="Vocational Programmes" OnClick="btnVocProg_Click" /></br>
                     <asp:Button ID="btnInmates" runat="server" Text="Inmates" OnClick="btnInmates_Click" />
                     <asp:Button ID="btnUsers" runat="server" Text="Users" OnClick="btnUsers_Click" />
-
         </div>
     </form>
 </body>

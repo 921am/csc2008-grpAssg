@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Globalization;
 
 namespace DB_WebApp
 {
-    public partial class User : System.Web.UI.Page
+    public partial class DrugRehabCRUD : System.Web.UI.Page
     {
-        
-        /// Change connection string here
-        /// under your Database, click on properties and find Connection String
         SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CRUD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,72 +25,75 @@ namespace DB_WebApp
             }
         }
 
-        protected void btnClear_Click(object sender, EventArgs e)
-        {
-            Clear();
-        }
-
         public void Clear()
         {
-            hfUserID.Value = "";
-            txtName.Text = "";
-            txtMobile.Text = "";
-            txtAddress.Text = "";
+            hfDrugRehabID.Value = "";
+            txtProgName.Text = "";
+            txtProgDescription.Text = "";
+            txtStartDate.Text = "";
+            txtEndDate.Text = "";
             lblErrorMessage.Text = lblSuccessMessage.Text = "";
             btnSave.Text = "Save";
             btnDelete.Enabled = false;
-        }
-
-        protected void btnSave_Click(object sender, EventArgs e)
-        {
-            if (sqlcon.State == ConnectionState.Closed)
-                sqlcon.Open();
-            SqlCommand sqlCmd = new SqlCommand("UsersCreateOrUpdate", sqlcon);
-            sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@UserID", (hfUserID.Value == "" ? 0 : Convert.ToInt32(hfUserID.Value)));
-            sqlCmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Mobile", txtMobile.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
-            sqlCmd.ExecuteNonQuery();
-            sqlcon.Close();
-            string UserID = hfUserID.Value;
-            Clear();
-            if (UserID == "")
-                lblSuccessMessage.Text = "Saved Successfully";
-            else
-                lblSuccessMessage.Text = "Updated Successfully";
-            FillGridView();
         }
 
         void FillGridView()
         {
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlDataAdapter sqlDa = new SqlDataAdapter("UsersViewAll", sqlcon);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("DrugRehabProgrammeViewAll", sqlcon);
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
             sqlcon.Close();
-            gvUsers.DataSource = dtbl;
-            gvUsers.DataBind();
+            gvDrugRehab.DataSource = dtbl;
+            gvDrugRehab.DataBind();
 
+        }
+
+        protected void btnClear_Click(object sender, EventArgs e)
+        {
+            Clear();
+        }
+
+        protected void btnSave_Click(object sender, EventArgs e)
+        {
+            if (sqlcon.State == ConnectionState.Closed)
+                sqlcon.Open();
+            SqlCommand sqlCmd = new SqlCommand("DrugRehabProgrammeCreateOrUpdate", sqlcon);
+            sqlCmd.CommandType = CommandType.StoredProcedure;
+            sqlCmd.Parameters.AddWithValue("@ProgID", (hfDrugRehabID.Value == "" ? 0 : Convert.ToInt32(hfDrugRehabID.Value)));
+            sqlCmd.Parameters.AddWithValue("@ProgName", txtProgName.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@ProgDescrip", txtProgDescription.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@StartDate", DateTime.ParseExact(txtStartDate.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+            sqlCmd.Parameters.AddWithValue("@EndDate", DateTime.ParseExact(txtEndDate.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+            sqlCmd.ExecuteNonQuery();
+            sqlcon.Close();
+            string ProgID = hfDrugRehabID.Value;
+            Clear();
+            if (ProgID == "")
+                lblSuccessMessage.Text = "Saved Successfully";
+            else
+                lblSuccessMessage.Text = "Updated Successfully";
+            FillGridView();
         }
 
         protected void lnk_OnClick(object sender, EventArgs e)
         {
-            int UserID = Convert.ToInt32((sender as LinkButton).CommandArgument);
+            int ProgID = Convert.ToInt32((sender as LinkButton).CommandArgument);
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlDataAdapter sqlDa = new SqlDataAdapter("UsersViewByID", sqlcon);
+            SqlDataAdapter sqlDa = new SqlDataAdapter("DrugRehabProgrammeViewByID", sqlcon);
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlDa.SelectCommand.Parameters.AddWithValue("@UserID", UserID);
+            sqlDa.SelectCommand.Parameters.AddWithValue("@ProgID", ProgID);
             DataTable dtbl = new DataTable();
             sqlDa.Fill(dtbl);
             sqlcon.Close();
-            hfUserID.Value = UserID.ToString();
-            txtName.Text = dtbl.Rows[0]["Name"].ToString();
-            txtMobile.Text = dtbl.Rows[0]["Mobile"].ToString();
-            txtAddress.Text = dtbl.Rows[0]["Address"].ToString();
+            hfDrugRehabID.Value = ProgID.ToString();
+            txtProgName.Text = dtbl.Rows[0]["ProgName"].ToString();
+            txtProgDescription.Text = dtbl.Rows[0]["ProgDescrip"].ToString();
+            txtStartDate.Text = dtbl.Rows[0]["StartDate"].ToString();
+            txtEndDate.Text = dtbl.Rows[0]["EndDate"].ToString();
             btnSave.Text = "Update";
             btnDelete.Enabled = true;
         }
@@ -99,9 +102,9 @@ namespace DB_WebApp
         {
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlCommand sqlCmd = new SqlCommand("UsersDeleteByID", sqlcon);
+            SqlCommand sqlCmd = new SqlCommand("DrugRehabProgrammeDeleteByID", sqlcon);
             sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(hfUserID.Value));
+            sqlCmd.Parameters.AddWithValue("@ProgID", Convert.ToInt32(hfDrugRehabID.Value));
             sqlCmd.ExecuteNonQuery();
             sqlcon.Close();
             Clear();
@@ -133,6 +136,7 @@ namespace DB_WebApp
         {
             Response.Redirect("User.aspx");
         }
+
 
     }
 }

@@ -25,7 +25,7 @@
                        <td>
                         <asp:Label ID="lblGender" runat="server" Text="Gender"></asp:Label>
                         </td>
-                 <%-- change to drop down --%>
+                
                     <td colspan="2">
                         <asp:TextBox ID="txtGender" runat="server"></asp:TextBox>
                     </td>
@@ -49,7 +49,7 @@
                         <asp:TextBox ID="txtDateReleased" runat="server" ></asp:TextBox>
                     </td>
                     </tr>
-                <%-- change to drop down --%>
+                
                 <tr>
                        <td>
                         <asp:Label ID="lblDrugOffender" runat="server" Text="Drug Offender (True/False)"></asp:Label>
@@ -92,8 +92,8 @@
             <Columns>
                 <asp:BoundField DataField="inmateName" HeaderText="Inmate Name" />
                 <asp:BoundField DataField="gender" HeaderText="Gender" />
-                <asp:BoundField DataField="DateEntered" HeaderText="Entered" />
-                <asp:BoundField DataField="DateReleased" HeaderText="Released" />
+                <asp:BoundField DataField="DateEntered" HeaderText="Entered" DataFormatString="{0:d}"/>
+                <asp:BoundField DataField="DateReleased" HeaderText="Released" DataFormatString="{0:d}"/>
                 <asp:BoundField DataField="DrugOffender" HeaderText="Drug Off." />
 
                 <asp:TemplateField>
@@ -103,6 +103,12 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+            <br />
+                    <asp:Button ID="btnAcadProg" runat="server" Text="Academic Programmes" OnClick="btnAcadProg_Click" />
+                    <asp:Button ID="btnDrugRehab" runat="server" Text="Drug Rehab Programmes" OnClick="btnDrugRehab_Click" />
+                    <asp:Button ID="btnVocProg" runat="server" Text="Vocational Programmes" OnClick="btnVocProg_Click" /></br>
+                    <asp:Button ID="btnInmates" runat="server" Text="Inmates" OnClick="btnInmates_Click" />
+                    <asp:Button ID="btnUsers" runat="server" Text="Users" OnClick="btnUsers_Click" />
         </div>
     </form>
 </body>

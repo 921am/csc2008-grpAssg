@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 namespace DB_WebApp
 {
@@ -59,8 +60,8 @@ namespace DB_WebApp
             sqlCmd.Parameters.AddWithValue("@inmateID", (hfInmateID.Value == "" ? 0 : Convert.ToInt32(hfInmateID.Value)));
             sqlCmd.Parameters.AddWithValue("@inmateName", txtInmateName.Text.Trim());
             sqlCmd.Parameters.AddWithValue("@gender", txtGender.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@DateEntered", txtDateEntered.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@DateReleased", txtDateReleased.Text.Trim());
+            sqlCmd.Parameters.AddWithValue("@DateEntered", DateTime.ParseExact(txtDateEntered.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+            sqlCmd.Parameters.AddWithValue("@DateReleased", DateTime.ParseExact(txtDateReleased.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
             sqlCmd.Parameters.AddWithValue("@DrugOffender", txtDrugOff.Text.Trim());
             sqlCmd.ExecuteNonQuery();
             sqlcon.Close();
@@ -112,5 +113,31 @@ namespace DB_WebApp
             FillGridView();
             lblSuccessMessage.Text = "Deleted Successfully";
         }
+
+        protected void btnAcadProg_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AcadProgrammeCRUD.aspx");
+        }
+
+        protected void btnDrugRehab_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DrugRehabCRUD.aspx");
+        }
+
+        protected void btnVocProg_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("VocProgrammeCRUD.aspx");
+        }
+
+        protected void btnInmates_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("InmateCRUD.aspx");
+        }
+
+        protected void btnUsers_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("User.aspx");
+        }
+
     }
 }
