@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InmateCRUD.aspx.cs" Inherits="DB_WebApp.InmateCRUD" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InmateProgress.aspx.cs" Inherits="DB_WebApp.InmateProgress" %>
 
 <!DOCTYPE html>
 
@@ -9,66 +9,70 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:HiddenField ID="hfInmateID" runat="server" />
+            <asp:HiddenField ID="hfInmateProgressID" runat="server" />
             <table>
-                    <tr>
+                    <%--<tr>
                     <td>
-                        <asp:Label ID="lblInmateName" runat="server" Text="Name"></asp:Label>
+                        <asp:Label ID="lblInmateProgressID" runat="server" Text="Progress ID"></asp:Label>
 
                     </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtInmateName" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtInmateProgressID" runat="server"></asp:TextBox>
                     </td>
-                    </tr>
+                    </tr>--%>
 
-                   <tr>
-                       <td>
-                        <asp:Label ID="lblGender" runat="server" Text="Gender"></asp:Label>
-                        </td>
-                
-                    <td colspan="2">
-                        <asp:TextBox ID="txtGender" runat="server"></asp:TextBox>
-                    </td>
-                    </tr>
                 <tr>
-                       <td>
-                        <asp:Label ID="lblDateEntered" runat="server" Text="Date Entered"></asp:Label>
-                        </td>
+                    <td>
+                        <asp:Label ID="lblInmateID" runat="server" Text="Inmate ID"></asp:Label>
 
+                    </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtDateEntered" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtInmateID" runat="server"></asp:TextBox>
                     </td>
                     </tr>
 
                 <tr>
-                       <td>
-                        <asp:Label ID="lblDateReleased" runat="server" Text="Date Released"></asp:Label>
-                        </td>
+                    <td>
+                        <asp:Label ID="lblRehabProgID" runat="server" Text="Rehab Prog ID"></asp:Label>
 
+                    </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtDateReleased" runat="server" ></asp:TextBox>
+                        <asp:TextBox ID="txtRehabProgID" runat="server"></asp:TextBox>
                     </td>
                     </tr>
-                
+
                 <tr>
-                       <td>
-                        <asp:Label ID="lblDrugOffender" runat="server" Text="Drug Offender (True/False)"></asp:Label>
-                        </td>
+                    <td>
+                        <asp:Label ID="lblAcadProgID" runat="server" Text="Acad Prog ID"></asp:Label>
 
+                    </td>
                     <td colspan="2">
-                        <asp:TextBox ID="txtDrugOff" runat="server" ></asp:TextBox>
+                        <asp:TextBox ID="txtAcadProgID" runat="server"></asp:TextBox>
                     </td>
                     </tr>
+
+                <tr>
+                    <td>
+                        <asp:Label ID="lblVocProgID" runat="server" Text="Vocational Prog ID"></asp:Label>
+
+                    </td>
+                    <td colspan="2">
+                        <asp:TextBox ID="txtVocProgID" runat="server"></asp:TextBox>
+                    </td>
+                    </tr>
+
+               
+
                 
                 <tr>
                 <td>
                     
                 </td>
-                <td colspan="2">
+                <%--<td colspan="2">
                     <asp:Button ID="btnSaveInmate" runat="server" Text="Save" OnClick="btnSave_Click" />
                     <asp:Button ID="btnDeleteInmate" runat="server" Text="Delete" OnClick="btnDelete_Click" />
                     <asp:Button ID="btnClearInmate" runat="server" Text="Clear" OnClick="btnClear_Click" />
-                </td>
+                </td>--%>
             </tr>
                 <tr>
                 <td>
@@ -88,17 +92,20 @@
             </tr>
             </table>
             <br />
-            <asp:GridView ID="gvInmate" runat="server" AutoGenerateColumns="false">
+            <asp:GridView ID="gvInmateProgress" runat="server" AutoGenerateColumns="false">
             <Columns>
-                <asp:BoundField DataField="inmateName" HeaderText="Inmate Name" />
-                <asp:BoundField DataField="gender" HeaderText="Gender" />
-                <asp:BoundField DataField="DateEntered" HeaderText="Entered" DataFormatString="{0:d}"/>
-                <asp:BoundField DataField="DateReleased" HeaderText="Released" DataFormatString="{0:d}"/>
-                <asp:BoundField DataField="DrugOffender" HeaderText="Drug Off." />
+                <asp:BoundField DataField="inmateName" HeaderText="Inmate" />
+                <asp:BoundField DataField="ProgName" HeaderText="Rehab Programme" />
+                <asp:BoundField DataField="RehabProgStatus" HeaderText="Status"/>
+                <asp:BoundField DataField="ProgName" HeaderText="Acad Programme"/>
+                <asp:BoundField DataField="AcadProgStatus" HeaderText="Status" />
+                <asp:BoundField DataField="ProgName" HeaderText="Vocational Programme" />
+                <asp:BoundField DataField="VocProgStatus" HeaderText="Status" />
+                
 
                 <asp:TemplateField>
                     <ItemTemplate>
-                        <asp:LinkButton ID="lnkViewInmate" runat="server" CommandArgument='<%# Eval("inmateID") %>' OnClick="lnk_OnClick">View</asp:LinkButton>
+                        <asp:LinkButton ID="lnkViewInmate" runat="server" CommandArgument='<%# Eval("InmateProgressID") %>' OnClick="lnk_OnClick">View</asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
