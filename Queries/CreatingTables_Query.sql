@@ -40,12 +40,19 @@ CREATE TABLE [dbo].[VocationalProgramme] (
 
 -- INMATE PROGRESS
 CREATE TABLE [dbo].[InmateProgress] (
-    [InmateProgressID]           INT NOT NULL,
-    [RehabProgID] INT NULL,
-	[RehabProgStatus] VARCHAR (20) NULL,
-	[AcadProgID] INT NULL,
-	[AcadProgStatus] VARCHAR (20) NULL,
-	[VocProgID] INT NULL,
-	[VocProgStatus] VARCHAR (20) NULL,
-    CONSTRAINT [InmateProgress_pk] PRIMARY KEY CLUSTERED ([InmateProgressID] ASC)
+    [InmateProgressID] INT          NOT NULL,
+    [RehabProgID]      INT          NULL,
+    [RehabProgStatus]  VARCHAR (20) NULL,
+    [AcadProgID]       INT          NULL,
+    [AcadProgStatus]   VARCHAR (20) NULL,
+    [VocProgID]        INT          NULL,
+    [VocProgStatus]    VARCHAR (20) NULL,
+    [InmateID]         INT          NULL,
+    CONSTRAINT [InmateProgress_pk] PRIMARY KEY CLUSTERED ([InmateProgressID] ASC),
+    CONSTRAINT [FK_InmateProgress_InmateID] FOREIGN KEY ([InmateID]) REFERENCES [dbo].[Inmates] ([inmateID]),
+    CONSTRAINT [FK_InmateProgress_DrugRehabProgramme] FOREIGN KEY ([RehabProgID]) REFERENCES [dbo].[DrugRehabProgramme] ([ProgID]),
+    CONSTRAINT [FK_InmateProgress_AcadProgramme] FOREIGN KEY ([AcadProgID]) REFERENCES [dbo].[AcadProgramme] ([ProgID]),
+    CONSTRAINT [FK_InmateProgress_VocationalProgramme] FOREIGN KEY ([VocProgID]) REFERENCES [dbo].[VocationalProgramme] ([ProgID])
 );
+
+

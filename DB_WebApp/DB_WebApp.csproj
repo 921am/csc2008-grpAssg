@@ -128,6 +128,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="InmateCRUD.aspx" />
+    <Content Include="InmateProgress.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -211,6 +212,13 @@
     </Compile>
     <Compile Include="InmateCRUD.aspx.designer.cs">
       <DependentUpon>InmateCRUD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InmateProgress.aspx.cs">
+      <DependentUpon>InmateProgress.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InmateProgress.aspx.designer.cs">
+      <DependentUpon>InmateProgress.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

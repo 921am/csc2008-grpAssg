@@ -136,6 +136,10 @@ namespace DB_WebApp
         {
             Response.Redirect("User.aspx");
         }
+        protected void btnInmateProgress_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("InmateProgress.aspx");
+        }
 
 
     }
