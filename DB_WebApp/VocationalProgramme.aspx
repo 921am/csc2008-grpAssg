@@ -8,7 +8,6 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <table>
             <table>
             <tr>
                 <td>
