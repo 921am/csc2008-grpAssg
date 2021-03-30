@@ -126,6 +126,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="GraphDisplay.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="InmateCRUD.aspx" />
     <Content Include="InmateProgress.aspx" />
@@ -255,6 +256,13 @@
     </Compile>
     <Compile Include="VocProgrammeCRUD.aspx.designer.cs">
       <DependentUpon>VocProgrammeCRUD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GraphDisplay.aspx.cs">
+      <DependentUpon>GraphDisplay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GraphDisplay.aspx.designer.cs">
+      <DependentUpon>GraphDisplay.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
