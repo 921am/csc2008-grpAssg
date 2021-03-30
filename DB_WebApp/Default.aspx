@@ -20,23 +20,77 @@
             </p>
         </div>
         <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
+            <div class="card">
+                <div class="card-header">
+                    Bar Chart
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="bar"></canvas>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
+            <div class="card">
+                <div class="card-header">
+                    Pie Chart
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="pie"></canvas>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>   
+    
+    <script type="text/javascript">
+
+        // Chart.js for bar chart
+        var barchart = document.getElementById('bar').getContext('2d');
+        var mybarchart = new Chart(barchart, {
+            type: 'bar',
+            data: {
+                labels: ['001', '002', '003'],
+                datasets: [{
+                    label: 'Bar Chart',
+                    data: [100, 200, 300],
+                    backgroundcolor: 'rgba(6,128,250)'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+
+        // Chart.js for pie chart
+        var piechart = document.getElementById('pie').getContext('2d');
+        var mypiechart = new Chart(piechart, {
+            type: 'pie',
+            data: {
+                labels: ['001', '002', '003'],
+                datasets: [{
+                    label: 'Pie Chart',
+                    data: [100, 200, 300],
+                    backgroundcolor: 'rgba(6,128,250)'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
+    </script>
 
 </asp:Content>

@@ -1,0 +1,10 @@
+
+*.cache
+*.dll
+DB_WebApp/obj/Debug/DB_WebApp.csprojAssemblyReference.cache
+DB_WebApp/obj/Debug/DB_WebApp.dll
+DB_WebApp/obj/Debug/DB_WebApp.pdb
+DB_WebApp/bin/DB_WebApp.dll
+DB_WebApp/bin/DB_WebApp.pdb
+DB_WebApp/.vs/DB_WebApp/v16/.suo
+
