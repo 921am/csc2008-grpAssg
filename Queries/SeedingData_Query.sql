@@ -62,10 +62,10 @@ VALUES
     (CONVERT(DATE, '17/12/2015', 103)));
 
 -- SEEDING INTO INMAREPROGRESS 
-INSERT INTO InmateProgress(InmateProgressID, RehabProgID, RehabProgStatus, AcadProgID, AcadProgStatus, VocProgID, VocProgStatus)
+INSERT INTO InmateProgress(InmateProgressID, RehabProgID, RehabProgStatus, AcadProgID, AcadProgStatus, VocProgID, VocProgStatus, InmateID)
 VALUES
-    (1, 1, "Ongoing", NULL, NULL, NULL, NULL),
-    (2, NULL, NULL, 2, "Ongoing", NULL, NULL),
-    (3, NULL, NULL, NULL, NULL, 9, "Ongoing"),
-    (4, NULL, NULL, NULL, NULL, 3, "Complete"),
-    (5, 2, "Ongoing", NULL, NULL, NULL, NULL);
+    (1, 1, 'Ongoing', NULL, NULL, NULL, NULL, NULL),
+    (2, NULL, NULL, 2, 'Ongoing', NULL, NULL, NULL),
+    (3, NULL, NULL, NULL, NULL, 9, 'Ongoing', NULL),
+    (4, NULL, NULL, NULL, NULL, 3, 'Complete', NULL),
+    (5, 2, 'Ongoing', NULL, NULL, NULL, NULL, NULL);

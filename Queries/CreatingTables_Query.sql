@@ -7,6 +7,7 @@ CREATE TABLE [dbo].[Inmates] (
 	[DrugOffender] VARCHAR(20) NULL,
 	[InmateProgressID] INT NULL,
     CONSTRAINT [inmateID] PRIMARY KEY CLUSTERED ([inmateID] ASC)
+);
 
 -- ACADEMIC PROGRAMME
 CREATE TABLE [dbo].[AcadProgramme] (
