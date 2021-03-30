@@ -1,13 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InmateProgress.aspx.cs" Inherits="DB_WebApp.InmateProgress" %>
+﻿<%@ Page Title="Inmate Progress" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InmateProgress.aspx.cs" Inherits="DB_WebApp.InmateProgress" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <h2><%: Title %></h2>
         <div>
             <asp:HiddenField ID="hfInmateProgressID" runat="server" />
             <table>
@@ -118,6 +112,5 @@
                     <asp:Button ID="btnUsers" runat="server" Text="Users" OnClick="btnUsers_Click" />
                     <asp:Button ID="btnInmateProgress" runat="server" Text="Inmate Progress" OnClick="btnInmateProgress_Click" />
         </div>
-    </form>
-</body>
-</html>
+
+</asp:Content>
