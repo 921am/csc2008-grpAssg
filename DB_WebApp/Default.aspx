@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="DB_WebApp._Default" %>
-
+    
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
@@ -10,14 +10,14 @@
 
     <div class="row">
         <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
+            <div class="card">
+                <div class="card-header">
+                    Line Chart
+                </div>
+                <div class="card-body">
+                    <canvas class="my-4 h-25" id="line"></canvas>
+                </div>
+            </div>
         </div>
         <div class="col-md-4">
             <div class="card">
@@ -45,6 +45,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>   
     
     <script type="text/javascript">
+
+        // Chart.js for bar chart
+        var linechart = document.getElementById('line').getContext('2d');
+        var mylinechart = new Chart(linechart, {
+            type: 'line',
+            data: {
+                labels: ['001', '002', '003'],
+                datasets: [{
+                    label: 'Line Chart',
+                    data: [100, 200, 300],
+                    backgroundcolor: 'rgba(6,128,250)'
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        })
 
         // Chart.js for bar chart
         var barchart = document.getElementById('bar').getContext('2d');
