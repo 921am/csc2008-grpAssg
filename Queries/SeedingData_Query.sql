@@ -1,5 +1,15 @@
 INSERT INTO Inmates(inmateID, inmateName, gender, DateEntered, DateReleased, DrugOffender)
 VALUES  
+    (1, 'Mukasa Kiriwawanvu', 'M', (CONVERT(DATE, '08/01/2015', 103)), 
+    (CONVERT(DATE, '27/06/2016', 103)), 'True'),
+    (2, 'Maximilian Kolbe', 'M', (CONVERT(DATE, '01/12/2014', 103)), 
+    (CONVERT(DATE, '17/12/2016', 103)), 'True'),
+    (3, 'Raphael Kalinowskin','M', (CONVERT(DATE, '22/12/2014', 103)), 
+    (CONVERT(DATE, '17/12/2017', 103)), 'True'),
+    (4, 'Dorothy Day', 'F', (CONVERT(DATE, '16/12/2012', 103)), 
+    (CONVERT(DATE, '03/11/2016', 103)), 'True'),
+    (5, 'Jacques Fesch', 'M', (CONVERT(DATE, '07/02/2014', 103)), 
+    (CONVERT(DATE, '26/10/2018', 103)), 'True'),
     (6, 'Tommy Watts', 'M', (CONVERT(DATE, '10/01/2013', 103)), 
     (CONVERT(DATE, '18/05/2019', 103)), 'True'),
     (7, 'Unity Harmon', 'M', (CONVERT(DATE, '03/01/2010', 103)), 
@@ -272,7 +282,7 @@ VALUES
     (1, 'O-Level', 'GCE O-Levels', (CONVERT(DATE, '01/04/2015', 103)), 
     (CONVERT(DATE, '23/12/2015', 103))),
     (2, 'A-Level', 'GCE A-Levels', (CONVERT(DATE, '09/01/2015', 103)), 
-    (CONVERT(DATE, '26/9/2015', 103))),
+    (CONVERT(DATE, '26/09/2015', 103))),
     (3, 'Private Diploma', 'Private diploma', (CONVERT(DATE, '21/01/2015', 103)), 
     (CONVERT(DATE, '14/12/2015', 103))),
     (4, 'Undergraduate Degree', 'Degree Programme', (CONVERT(DATE, '01/02/2015', 103)), 
@@ -307,8 +317,18 @@ VALUES
 -- SEEDING INTO INMAREPROGRESS 
 INSERT INTO InmateProgress(InmateProgressID, RehabProgID, RehabProgStatus, AcadProgID, AcadProgStatus, VocProgID, VocProgStatus, InmateID)
 VALUES
-    (1, 2, "Ongoing", 1, "Pass", "1", "Pass", 1),
-    (2, 2, "Pass", 1, "Pass", "1", "Pass", 2),
-    (3, 5, "Pass", 1, "Pass", "1", "Pass", 3),
-    (4, 1, "Pass", 1, "Pass", "1", "Pass", 4),
-    (5, 3, "Pass", 1, "Pass", "1", "Pass", 5);
+    (1, 2, 'Pass', 1, 'Pass', 1, 'Pass', 1),
+    (2, 2, 'Pass', 3, 'Pass', 2, 'Pass', 2),
+    (3, 5, 'Pass', 3, 'Pass', 3, 'Pass', 3),
+    (4, 1, 'Pass', 1, 'Pass', 7, 'Pass', 4),
+    (5, 3, 'Pass', 5, 'Pass', 4, 'Pass', 5),
+	(6, 2, 'Pass', 1, 'Pass', 8, 'Pass', 53),
+    (7, 4, 'Pass', 1, 'Pass', 6, 'Pass', 19),
+    (8, 5, 'Pass', 5, 'Pass', 3, 'Pass', 15),
+    (9, 1, 'Pass', 5, 'Pass', 1, 'Pass', 18),
+    (10, 3, 'Pass', 1, 'Pass', 4, 'Pass', 50),
+	(11, 2, 'Pass', 3, 'Pass', 1, 'Pass', 30),
+    (12, 4, 'Pass', 5, 'Pass', 2, 'Pass', 55),
+    (13, 5, 'Pass', 3, 'Pass', 3, 'Pass', 20),
+    (14, 1, 'Pass', 3, 'Pass', 2, 'Pass', 14),
+    (15, 3, 'Pass', 3, 'Pass', 9, 'Pass', 67);
