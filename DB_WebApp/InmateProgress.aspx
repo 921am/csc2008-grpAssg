@@ -95,11 +95,11 @@
             <asp:GridView ID="gvInmateProgress" runat="server" AutoGenerateColumns="false">
             <Columns>
                 <asp:BoundField DataField="inmateName" HeaderText="Inmate" />
-                <asp:BoundField DataField="ProgName" HeaderText="Rehab Programme" />
+                <asp:BoundField DataField="RehabProgName" HeaderText="Rehab Programme" />
                 <asp:BoundField DataField="RehabProgStatus" HeaderText="Status"/>
-                <asp:BoundField DataField="ProgName" HeaderText="Acad Programme"/>
+                <asp:BoundField DataField="AcadProgName" HeaderText="Acad Programme"/>
                 <asp:BoundField DataField="AcadProgStatus" HeaderText="Status" />
-                <asp:BoundField DataField="ProgName" HeaderText="Vocational Programme" />
+                <asp:BoundField DataField="VocProgName" HeaderText="Vocational Programme" />
                 <asp:BoundField DataField="VocProgStatus" HeaderText="Status" />
                 
 
