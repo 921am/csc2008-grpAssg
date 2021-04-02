@@ -2,7 +2,13 @@
 @inmateID int
 AS
 	BEGIN 
-	SELECT *
+	SELECT *,
+	CASE WHEN EXISTS (select InmateProgress.inmateID from InmateProgress
+		where InmateProgress.InmateID = Inmates.inmateID)
+		THEN 'Yes'
+		ELSE 'No'
+		END
+	AS Enrolled
 	FROM Inmates
-	WHERE inmateID = @inmateID
+	WHERE Inmates.inmateID = @inmateID
 	END
