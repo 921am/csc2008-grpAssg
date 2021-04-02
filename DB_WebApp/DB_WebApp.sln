@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_WebApp", "DB_WebApp.csproj", "{DF9D1D5D-1F95-4859-9F7D-A8D0945A7444}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MongoDB_WebApp", "..\MongoDB_WebApp\MongoDB_WebApp.csproj", "{A0FB36B6-BEB0-4EAB-82EA-D514BE1341D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDB_API", "..\MongoDB_WebApp\MongoDB_API.csproj", "{A0FB36B6-BEB0-4EAB-82EA-D514BE1341D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
