@@ -78,7 +78,6 @@ namespace DB_WebApp
             sqlCmd.Parameters.AddWithValue("@DateEntered", DateTime.ParseExact(txtDateEntered.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
             sqlCmd.Parameters.AddWithValue("@DateReleased", DateTime.ParseExact(txtDateReleased.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
             sqlCmd.Parameters.AddWithValue("@DrugOffender", txtDrugOff.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@InmateProgressID", txtEnrolled.Text.Trim());
             sqlCmd.ExecuteNonQuery();
             sqlcon.Close();
             string UserID = hfInmateID.Value;

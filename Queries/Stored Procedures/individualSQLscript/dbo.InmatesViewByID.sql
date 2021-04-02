@@ -3,8 +3,12 @@
 AS
 	BEGIN 
 	SELECT *,
-	CASE WHEN InmateProgressID > 0 then 'Yes' else 'No' end
+	CASE WHEN EXISTS (select InmateProgress.inmateID from InmateProgress
+		where InmateProgress.InmateID = Inmates.inmateID)
+		THEN 'Yes'
+		ELSE 'No'
+		END
 	AS Enrolled
 	FROM Inmates
-	WHERE inmateID = @inmateID
+	WHERE Inmates.inmateID = @inmateID
 	END

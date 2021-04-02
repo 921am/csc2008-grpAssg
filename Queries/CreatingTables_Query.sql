@@ -1,3 +1,13 @@
+CREATE TABLE [dbo].[Users] (
+    [UserID]   INT IDENTITY (1, 1) NOT NULL,
+    [Name]     VARCHAR (50)  NULL,
+    [Mobile]   VARCHAR (50)  NULL,
+    [Address]  VARCHAR (250) NULL,
+    [Password] VARCHAR (75)  NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([UserID] ASC)
+);
+
+-- INMATES
 CREATE TABLE [dbo].[Inmates] (
     [inmateID]         INT           IDENTITY (1, 1) NOT NULL,
     [inmateName]       VARCHAR (100) NULL,
@@ -5,7 +15,6 @@ CREATE TABLE [dbo].[Inmates] (
     [DateEntered]      DATE          NULL,
     [DateReleased]     DATE          NULL,
     [DrugOffender]     VARCHAR (20)  NULL,
-    [InmateProgressID] INT           DEFAULT ((0)) NULL,
     CONSTRAINT [inmateID] PRIMARY KEY CLUSTERED ([inmateID] ASC),
     
 );
@@ -50,16 +59,20 @@ CREATE TABLE [dbo].[InmateProgress] (
     [AcadProgStatus]   VARCHAR (20) NULL,
     [VocProgID]        INT          NULL,
     [VocProgStatus]    VARCHAR (20) NULL,
-    [InmateID]         INT          DEFAULT ((0)) NULL,
-    CONSTRAINT [PK_InmateProgress] PRIMARY KEY CLUSTERED ([InmateProgressID] ASC),
-    CONSTRAINT [FK_InmateProgress_DrugRehabProgramme] FOREIGN KEY ([RehabProgID]) REFERENCES [dbo].[DrugRehabProgramme] ([ProgID]),
-    CONSTRAINT [FK_InmateProgress_AcadProgramme] FOREIGN KEY ([AcadProgID]) REFERENCES [dbo].[AcadProgramme] ([ProgID]),
-    CONSTRAINT [FK_InmateProgress_InmateID] FOREIGN KEY ([InmateID]) REFERENCES [dbo].[Inmates] ([inmateID]),
-    CONSTRAINT [FK_InmateProgress_VocationalProgramme] FOREIGN KEY ([VocProgID]) REFERENCES [dbo].[VocationalProgramme] ([ProgID])
+    [InmateID]         INT          DEFAULT 0 NULL,
+    CONSTRAINT [PK_InmateProgress] PRIMARY KEY CLUSTERED ([InmateProgressID] ASC)
 );
 
+  --drop this before 1st seed
 
-ALTER TABLE [dbo].[Inmates] 
-	ADD CONSTRAINT [FK_Inmates_InmateProgress] FOREIGN KEY ([InmateProgressID]) REFERENCES [InmateProgress]([InmateProgressID])
+ALTER TABLE [dbo].[InmateProgress] 
+	ADD CONSTRAINT [FK_InmateProgress_DrugRehabProgramme] FOREIGN KEY ([RehabProgID]) REFERENCES [DrugRehabProgramme]([ProgID])
+	
+ALTER TABLE [dbo].[InmateProgress]
+	ADD CONSTRAINT [FK_InmateProgress_AcadProgramme] FOREIGN KEY ([AcadProgID]) REFERENCES [AcadProgramme]([ProgID])
 
+ALTER TABLE [dbo].[InmateProgress]
+	ADD CONSTRAINT [FK_InmateProgress_VocationalProgramme] FOREIGN KEY ([VocProgID]) REFERENCES [VocationalProgramme]([ProgID])
 
+ALTER TABLE [dbo].[InmateProgress] 
+	ADD CONSTRAINT [FK_InmateProgress_InmateID] FOREIGN KEY ([InmateID]) REFERENCES [Inmates]([inmateID])

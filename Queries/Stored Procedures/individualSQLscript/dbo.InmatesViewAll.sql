@@ -1,8 +1,12 @@
 ﻿CREATE PROC InmatesViewAll
 AS 
 	BEGIN
-	SELECT *,
-	CASE WHEN InmateProgressID > 0 THEN 'Yes' ELSE 'No' END
+	SELECT *, (DATEDIFF(DAY, DateEntered, DateReleased)) AS TimeSpent,
+	CASE WHEN EXISTS (select InmateProgress.inmateID from InmateProgress
+		where InmateProgress.InmateID = Inmates.inmateID)
+		THEN 'Yes'
+		ELSE 'No'
+		END
 	AS Enrolled
 	FROM Inmates
 

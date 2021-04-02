@@ -1,5 +1,4 @@
-ALTER TABLE [dbo].[Inmates] 
-	ADD CONSTRAINT [FK_Inmates_InmateProgress] FOREIGN KEY ([InmateProgressID]) REFERENCES [InmateProgress]([InmateProgressID])
+  --drop this before 1st seed
 
 ALTER TABLE [dbo].[InmateProgress] 
 	ADD CONSTRAINT [FK_InmateProgress_DrugRehabProgramme] FOREIGN KEY ([RehabProgID]) REFERENCES [DrugRehabProgramme]([ProgID])
@@ -9,3 +8,6 @@ ALTER TABLE [dbo].[InmateProgress]
 
 ALTER TABLE [dbo].[InmateProgress]
 	ADD CONSTRAINT [FK_InmateProgress_VocationalProgramme] FOREIGN KEY ([VocProgID]) REFERENCES [VocationalProgramme]([ProgID])
+
+ALTER TABLE [dbo].[InmateProgress] 
+	ADD CONSTRAINT [FK_InmateProgress_InmateID] FOREIGN KEY ([InmateID]) REFERENCES [Inmates]([inmateID])
