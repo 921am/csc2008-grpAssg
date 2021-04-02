@@ -1,26 +1,9 @@
-﻿CREATE PROC [AcadProgrammeCreateOrUpdate]
-@ProgID int,
-@ProgName varchar(75),
-@ProgDescrip varchar(MAX),
-@StartDate date,
-@EndDate date
-
-AS
-BEGIN
-IF (@ProgID=0)
-	BEGIN 
-	INSERT INTO AcadProgramme(ProgName, ProgDescrip, StartDate, EndDate)
-	VALUES(@ProgName, @ProgDescrip, @StartDate, @EndDate)
-	END
-ELSE
+﻿CREATE PROC InmatesViewAll
+AS 
 	BEGIN
-	UPDATE AcadProgramme
-	SET
-		ProgName = @ProgName,
-		ProgDescrip = @ProgDescrip,
-		StartDate = @StartDate,
-		EndDate = @EndDate
-	WHERE ProgID = @ProgID
-	END
+	SELECT *, (DATEDIFF(DAY, DateEntered, DateReleased)) AS TimeSpent,
+	CASE WHEN InmateProgressID > 0 THEN 'Yes' ELSE 'No' END
+	AS Enrolled
+	FROM Inmates
 
-END
+	END

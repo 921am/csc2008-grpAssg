@@ -30,12 +30,25 @@ namespace DB_WebApp
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
             SqlDataAdapter sqlDa = new SqlDataAdapter("InmatesViewAll", sqlcon);
+            SqlDataAdapter sqlDa2 = new SqlDataAdapter("AverageEnroll", sqlcon);
+            
             sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+            sqlDa2.SelectCommand.CommandType = CommandType.StoredProcedure;
+           
             DataTable dtbl = new DataTable();
+            DataTable dtbl2 = new DataTable();
+
             sqlDa.Fill(dtbl);
+            sqlDa2.Fill(dtbl2);
+            
             sqlcon.Close();
             gvInmate.DataSource = dtbl;
+            gvAverage.DataSource = dtbl2;
+
             gvInmate.DataBind();
+            gvAverage.DataBind();
+
+            
 
         }
 
