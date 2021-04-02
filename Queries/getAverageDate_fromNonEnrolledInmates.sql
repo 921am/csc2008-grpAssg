@@ -8,7 +8,7 @@ from
 	Inmates
 
 where
-	InmateProgressID IS NULL
+	InmateProgressID = 0
 
 group by
 	inmateID,
