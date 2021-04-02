@@ -23,7 +23,7 @@ namespace MongoDB_WebApp.Services
             _inmates.Find( inmate => true).ToList();
 
         public Inmates Get(int InmateID) =>
-            _inmates.Find<Inmates>(inmate => inmate.InmateID == InmateID).FirstOrDefault();
+            _inmates.Find(inmate => inmate.InmateID == InmateID).FirstOrDefault();
 
         public Inmates Create(Inmates inmates)
         {
@@ -37,7 +37,7 @@ namespace MongoDB_WebApp.Services
         public void Remove(Inmates inmateIn) =>
             _inmates.DeleteOne(inmate => inmate.InmateID == inmateIn.InmateID);
 
-        public void Remove(int inmateID) =>
-            _inmates.DeleteOne(inmate => inmate.InmateID == inmateID);
+        public void Remove(int InmateID) =>
+            _inmates.DeleteOne(inmate => inmate.InmateID == InmateID);
     }
 }

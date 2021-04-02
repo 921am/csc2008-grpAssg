@@ -33,7 +33,12 @@ namespace MongoDB_WebApp
             services.AddSingleton<IPrisonDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<PrisonDatabaseSettings>>().Value);
 
+            services.AddSingleton<AcadProgrammeService>();
+            services.AddSingleton<DrugRehabProgrammeService>();
+            services.AddSingleton<InmateProgressService>();
             services.AddSingleton<InmateService>();
+            services.AddSingleton<UsersService>();
+            services.AddSingleton<VocationalProgrammeService>();
 
             services.AddControllers();
         }

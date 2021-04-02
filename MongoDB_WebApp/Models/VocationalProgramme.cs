@@ -7,7 +7,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoDB_WebApp.Models
 {
-    public class AcadProgramme
+    public class VocationalProgramme
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
