@@ -1,5 +1,5 @@
 CREATE TABLE [dbo].[Inmates] (
-    [InmateID]     INT           NOT NULL,
+    [InmateID]     INT           NOT NULL IDENTITY,
     [InmateName]   VARCHAR (100) NULL,
     [Gender]       VARCHAR (1)   NULL,
     [DateEntered]  DATE          NULL,

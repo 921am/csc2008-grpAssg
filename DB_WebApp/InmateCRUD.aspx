@@ -66,7 +66,7 @@
                         </td>
 
                     <td colspan="2">
-                        <asp:TextBox ID="txtEnrolled" runat="server" ></asp:TextBox>
+                        <asp:TextBox ID="txtEnrolled" runat="server" Enabled="False" ></asp:TextBox>
                     </td>
                     </tr>
                 
