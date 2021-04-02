@@ -1,0 +1,176 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.Extensions.Azure</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Extensions.Azure.AzureClientBuilderExtensions">
+            <summary>
+            Extension methods to configure client registrations.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientBuilderExtensions.WithName``2(Azure.Core.Extensions.IAzureClientBuilder{``0,``1},System.String)">
+            <summary>
+            Sets the name for the client registration. To resolve named clients use <see cref="M:Microsoft.Extensions.Azure.IAzureClientFactory`1.CreateClient(System.String)"/> method.
+            </summary>
+            <typeparam name="TClient">The type of the client.</typeparam>
+            <typeparam name="TOptions">The options type the client uses.</typeparam>
+            <param name="builder">The client builder instance.</param>
+            <param name="name">The name to set.</param>
+            <returns>The client builder instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientBuilderExtensions.WithCredential``2(Azure.Core.Extensions.IAzureClientBuilder{``0,``1},Azure.Core.TokenCredential)">
+            <summary>
+            Set the credential to use for this client registration.
+            </summary>
+            <typeparam name="TClient">The type of the client.</typeparam>
+            <typeparam name="TOptions">The options type the client uses.</typeparam>
+            <param name="builder">The client builder instance.</param>
+            <param name="credential">The credential to use.</param>
+            <returns>The client builder instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientBuilderExtensions.WithCredential``2(Azure.Core.Extensions.IAzureClientBuilder{``0,``1},System.Func{System.IServiceProvider,Azure.Core.TokenCredential})">
+            <summary>
+            Set the credential factory to use for this client registration.
+            </summary>
+            <typeparam name="TClient">The type of the client.</typeparam>
+            <typeparam name="TOptions">The options type the client uses.</typeparam>
+            <param name="builder">The client builder instance.</param>
+            <param name="credentialFactory">The credential factory to use.</param>
+            <returns>The client builder instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientBuilderExtensions.ConfigureOptions``2(Azure.Core.Extensions.IAzureClientBuilder{``0,``1},System.Action{``1})">
+            <summary>
+            Adds a delegate to configure the client options. All delegates are executed in order they were added.
+            </summary>
+            <typeparam name="TClient">The type of the client.</typeparam>
+            <typeparam name="TOptions">The options type the client uses.</typeparam>
+            <param name="builder">The client builder instance.</param>
+            <param name="configureOptions">The delegate to use to configure options.</param>
+            <returns>The client builder instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientBuilderExtensions.ConfigureOptions``2(Azure.Core.Extensions.IAzureClientBuilder{``0,``1},Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configures client options using provided <see cref="T:Microsoft.Extensions.Configuration.IConfiguration"/> instance.
+            </summary>
+            <typeparam name="TClient">The type of the client.</typeparam>
+            <typeparam name="TOptions">The options type the client uses.</typeparam>
+            <param name="builder">The client builder instance.</param>
+            <param name="configuration">The configuration instance to use.</param>
+            <returns>The client builder instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientBuilderExtensions.ConfigureOptions``2(Azure.Core.Extensions.IAzureClientBuilder{``0,``1},System.Action{``1,System.IServiceProvider})">
+            <summary>
+            Adds a delegate to configure the client options. All delegates are executed in order they were added.
+            </summary>
+            <typeparam name="TClient">The type of the client.</typeparam>
+            <typeparam name="TOptions">The options type the client uses.</typeparam>
+            <param name="builder">The client builder instance.</param>
+            <param name="configureOptions">The delegate to use to configure options.</param>
+            <returns>The client builder instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientBuilderExtensions.WithVersion``3(Azure.Core.Extensions.IAzureClientBuilder{``0,``1},``2)">
+            <summary>
+            Sets the service version to use for this client registration.
+            </summary>
+            <typeparam name="TClient">The type of the client.</typeparam>
+            <typeparam name="TOptions">The options type the client uses.</typeparam>
+            <typeparam name="TVersion">The service version enum type.</typeparam>
+            <param name="builder">The client builder instance.</param>
+            <param name="version">The delegate to use to configure options.</param>
+            <returns>The client builder instance.</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Azure.AzureClientFactoryBuilder">
+            <summary>
+            The builder type for registering Azure SDK clients.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientFactoryBuilder.ConfigureDefaults(System.Action{Azure.Core.ClientOptions})">
+            <summary>
+            Adds a configuration delegate that gets executed for all clients.
+            </summary>
+            <param name="configureOptions">The configuration delegate.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientFactoryBuilder.ConfigureDefaults(System.Action{Azure.Core.ClientOptions,System.IServiceProvider})">
+            <summary>
+            Adds a configuration delegate that gets executed for all clients.
+            </summary>
+            <param name="configureOptions">The configuration delegate.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientFactoryBuilder.ConfigureDefaults(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Adds a configuration instance to initialize all clients from.
+            </summary>
+            <param name="configuration">The configuration instance.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientFactoryBuilder.UseCredential(Azure.Core.TokenCredential)">
+            <summary>
+            Sets the credential to use by default for all clients.
+            </summary>
+            <param name="tokenCredential">The credential to use.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientFactoryBuilder.UseCredential(System.Func{System.IServiceProvider,Azure.Core.TokenCredential})">
+            <summary>
+            Sets the credential to use by default for all clients.
+            </summary>
+            <param name="tokenCredentialFactory">The credential factory to use.</param>
+            <returns>This instance.</returns>
+        </member>
+        <member name="T:Microsoft.Extensions.Azure.AzureClientServiceCollectionExtensions">
+            <summary>
+            Azure clients builder extensions for <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.AzureClientServiceCollectionExtensions.AddAzureClients(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.Azure.AzureClientFactoryBuilder})">
+            <summary>
+            Adds the <see cref="T:Microsoft.Extensions.Azure.IAzureClientFactory`1"/> and related services to the <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.
+            </summary>
+            <param name="collection">The <see cref="T:Microsoft.Extensions.DependencyInjection.IServiceCollection"/>.</param>
+            <param name="configureClients">An <see cref="T:Microsoft.Extensions.Azure.AzureClientFactoryBuilder"/> that can be used to configure the client.</param>
+        </member>
+        <member name="T:Microsoft.Extensions.Azure.IAzureClientFactory`1">
+            <summary>
+            A factory abstraction for a component that can create Azure client instances with custom configuration for a given logical name.
+            </summary>
+            <typeparam name="TClient">The type of the client.</typeparam>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.IAzureClientFactory`1.CreateClient(System.String)">
+            <summary>
+            Creates and configures an <typeparamref name="TClient"/> instance using the configuration that corresponds to the logical name specified by <paramref name="name"/>.
+            </summary>
+            <param name="name">The logical name of the client to create.</param>
+            <returns>An instance of <typeparamref name="TClient"/>.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.ClientOptionsFactory`2.Create(System.String)">
+            <summary>
+            Returns a configured <typeparamref name="TOptions"/> instance with the given <paramref name="name"/>.
+            </summary>
+        </member>
+        <member name="P:Microsoft.Extensions.Azure.ClientOptionsMonitor`2.CurrentValue">
+            <summary>
+            The present value of the options.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.ClientOptionsMonitor`2.Get(System.String)">
+            <summary>
+            Returns a configured <typeparamref name="TOptions"/> instance with the given <paramref name="name"/>.
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.ClientOptionsMonitor`2.OnChange(System.Action{`1,System.String})">
+            <summary>
+            Registers a listener to be called whenever <typeparamref name="TOptions"/> changes.
+            </summary>
+            <param name="listener">The action to be invoked when <typeparamref name="TOptions"/> has changed.</param>
+            <returns>An <see cref="T:System.IDisposable"/> which should be disposed to stop listening for changes.</returns>
+        </member>
+        <member name="M:Microsoft.Extensions.Azure.ClientOptionsMonitor`2.Dispose">
+            <summary>
+            Removes all change registration subscriptions.
+            </summary>
+        </member>
+    </members>
+</doc>
