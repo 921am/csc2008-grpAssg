@@ -25,18 +25,29 @@ namespace MongoDB_WebApp.Services
         public AcadProgramme Get(int ProgID) =>
             _AcadProgramme.Find(AcadProg => AcadProg.ProgID == ProgID).FirstOrDefault();
 
-        public AcadProgramme Create(AcadProgramme AcadProg)
+        public AcadProgramme Create(AcadProgramme AcadProg, int counter)
         {
+            AcadProg.ProgID = counter;
             _AcadProgramme.InsertOne(AcadProg);
             return AcadProg;
         }
 
-        public void Update(int ProgID, AcadProgramme AcadProgIn) =>
-            _AcadProgramme.ReplaceOne(AcadProg => AcadProg.ProgID == ProgID, AcadProgIn);
+        public void Update(int ProgID, AcadProgramme AcadProgIn)
+        {
+            var targetAcadProj = Get(ProgID);
 
-        public void Remove(AcadProgramme AcadProgIn) =>
-            _AcadProgramme.DeleteOne(AcadProg => AcadProg.ProgID == AcadProgIn.ProgID);
+            if (AcadProgIn.ProgName != null)
+                targetAcadProj.ProgName = AcadProgIn.ProgName;
+            if (AcadProgIn.ProgDescrip != null)
+                targetAcadProj.ProgDescrip = AcadProgIn.ProgDescrip;
+            if (AcadProgIn.StartDate != null)
+                targetAcadProj.StartDate = AcadProgIn.StartDate;
+            if (AcadProgIn.EndDate != null)
+                targetAcadProj.EndDate = AcadProgIn.EndDate;
 
+            _AcadProgramme.ReplaceOne(AcadProg => AcadProg.ProgID == ProgID, targetAcadProj);
+        }
+            
         public void Remove(int ProgID) =>
             _AcadProgramme.DeleteOne(AcadProg => AcadProg.ProgID == ProgID);
 

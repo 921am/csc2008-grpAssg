@@ -12,10 +12,12 @@ namespace MongoDB_WebApp.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UsersService _userService;
+        private readonly CounterService _counterService;
 
-        public UsersController(UsersService usersService)
+        public UsersController(UsersService usersService, CounterService counterService)
         {
             _userService = usersService;
+            _counterService = counterService;
         }
 
         [HttpGet]
@@ -37,7 +39,8 @@ namespace MongoDB_WebApp.Controllers
         [HttpPost]
         public ActionResult<Users> Create(Users user)
         {
-            _userService.Create(user);
+            var counter = _counterService.getNextSequence("userID");
+            _userService.Create(user, counter);
 
             return CreatedAtRoute("GetUser", new { id = user.UserID.ToString() }, user);
         }

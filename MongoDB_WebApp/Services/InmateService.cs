@@ -25,17 +25,31 @@ namespace MongoDB_WebApp.Services
         public Inmates Get(int InmateID) =>
             _inmates.Find(inmate => inmate.InmateID == InmateID).FirstOrDefault();
 
-        public Inmates Create(Inmates inmates)
+        public Inmates Create(Inmates inmates, int counter)
         {
+            inmates.InmateID = counter;
             _inmates.InsertOne(inmates);
             return inmates;
         }
 
-        public void Update(int InmateID, Inmates inmateIn) =>
-            _inmates.ReplaceOne(inmate => inmate.InmateID == InmateID, inmateIn);
+        public void Update(int InmateID, Inmates inmateIn)
+        {
+            var targetInmate = Get(InmateID);
 
-        public void Remove(Inmates inmateIn) =>
-            _inmates.DeleteOne(inmate => inmate.InmateID == inmateIn.InmateID);
+            targetInmate.DrugOffender = inmateIn.DrugOffender;
+            if (inmateIn.InmateName != null)
+                targetInmate.InmateName = inmateIn.InmateName;
+            if (inmateIn.Gender != null)
+                targetInmate.Gender = inmateIn.Gender;
+            if (inmateIn.DateEntered != null)
+                targetInmate.DateEntered = inmateIn.DateEntered;
+            if (inmateIn.DateReleased != null)
+                targetInmate.DateReleased = inmateIn.DateReleased;
+            if (inmateIn.InmateProgressID != 0)
+                targetInmate.InmateProgressID = inmateIn.InmateProgressID;
+
+            _inmates.ReplaceOne(inmate => inmate.InmateID == InmateID, inmateIn);
+        }
 
         public void Remove(int InmateID) =>
             _inmates.DeleteOne(inmate => inmate.InmateID == InmateID);

@@ -12,10 +12,12 @@ namespace MongoDB_WebApp.Controllers
     public class InmateProgressController : ControllerBase
     {
         private readonly InmateProgressService _inmateProgressService;
+        private readonly CounterService _counterService;
 
-        public InmateProgressController(InmateProgressService inmateProgressService)
+        public InmateProgressController(InmateProgressService inmateProgressService, CounterService counterService)
         {
             _inmateProgressService = inmateProgressService;
+            _counterService = counterService;
         }
 
         [HttpGet]
@@ -37,6 +39,7 @@ namespace MongoDB_WebApp.Controllers
         [HttpPost]
         public ActionResult<InmateProgress> Create(InmateProgress inmateProg)
         {
+            var counter = _counterService.getNextSequence("inmateProjID");
             _inmateProgressService.Create(inmateProg);
 
             return CreatedAtRoute("GetInmateProg", new { id = inmateProg.InmateProgressID.ToString() }, inmateProg);

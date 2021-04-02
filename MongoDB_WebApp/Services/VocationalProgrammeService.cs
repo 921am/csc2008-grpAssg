@@ -25,17 +25,28 @@ namespace MongoDB_WebApp.Services
         public VocationalProgramme Get(int ProgID) =>
             _VocationalProgramme.Find(VocationalProg => VocationalProg.ProgID == ProgID).FirstOrDefault();
 
-        public VocationalProgramme Create(VocationalProgramme VocationalProg)
+        public VocationalProgramme Create(VocationalProgramme VocationalProg, int counter)
         {
+            VocationalProg.ProgID = counter;
             _VocationalProgramme.InsertOne(VocationalProg);
             return VocationalProg;
         }
 
-        public void Update(int ProgID, VocationalProgramme VocationalProgIn) =>
-            _VocationalProgramme.ReplaceOne(VocationalProg => VocationalProg.ProgID == ProgID, VocationalProgIn);
+        public void Update(int ProgID, VocationalProgramme VocationalProgIn)
+        {
+            var targetVocationalProj = Get(ProgID);
 
-        public void Remove(VocationalProgramme VocationalProgIn) =>
-            _VocationalProgramme.DeleteOne(VocationalProg => VocationalProg.ProgID == VocationalProgIn.ProgID);
+            if (VocationalProgIn.ProgName != null)
+                targetVocationalProj.ProgName = VocationalProgIn.ProgName;
+            if (VocationalProgIn.ProgDescrip != null)
+                targetVocationalProj.ProgDescrip = VocationalProgIn.ProgDescrip;
+            if (VocationalProgIn.StartDate != null)
+                targetVocationalProj.StartDate = VocationalProgIn.StartDate;
+            if (VocationalProgIn.EndDate != null)
+                targetVocationalProj.EndDate = VocationalProgIn.EndDate;
+
+            _VocationalProgramme.ReplaceOne(VocationalProg => VocationalProg.ProgID == ProgID, targetVocationalProj);
+        } 
 
         public void Remove(int ProgID) =>
             _VocationalProgramme.DeleteOne(VocationalProg => VocationalProg.ProgID == ProgID);

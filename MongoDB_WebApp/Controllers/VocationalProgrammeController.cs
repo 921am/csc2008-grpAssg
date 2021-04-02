@@ -12,10 +12,12 @@ namespace MongoDB_WebApp.Controllers
     public class VocationalProgrammeController : ControllerBase
     {
         private readonly VocationalProgrammeService _vocationalProgrammeService;
+        private readonly CounterService _counterService;
 
-        public VocationalProgrammeController(VocationalProgrammeService vocationalProgrammeService)
+        public VocationalProgrammeController(VocationalProgrammeService vocationalProgrammeService, CounterService counterService)
         {
             _vocationalProgrammeService = vocationalProgrammeService;
+            _counterService = counterService;
         }
 
         [HttpGet]
@@ -37,7 +39,8 @@ namespace MongoDB_WebApp.Controllers
         [HttpPost]
         public ActionResult<VocationalProgramme> Create(VocationalProgramme vocationalProg)
         {
-            _vocationalProgrammeService.Create(vocationalProg);
+            var counter = _counterService.getNextSequence("vocationalProjID");
+            _vocationalProgrammeService.Create(vocationalProg, counter);
 
             return CreatedAtRoute("GetVocationalProg", new { id = vocationalProg.ProgID.ToString() }, vocationalProg);
         }

@@ -12,10 +12,12 @@ namespace MongoDB_WebApp.Controllers
     public class AcadProgrammeController : ControllerBase
     {
         private readonly AcadProgrammeService _acadProgrammeService;
+        private readonly CounterService _counterService;
 
-        public AcadProgrammeController(AcadProgrammeService acadProgrammeService)
+        public AcadProgrammeController(AcadProgrammeService acadProgrammeService, CounterService counterService)
         {
             _acadProgrammeService = acadProgrammeService;
+            _counterService = counterService;
         }
 
         [HttpGet]
@@ -37,7 +39,8 @@ namespace MongoDB_WebApp.Controllers
         [HttpPost]
         public ActionResult<AcadProgramme> Create(AcadProgramme acadProg)
         {
-            _acadProgrammeService.Create(acadProg);
+            var counter = _counterService.getNextSequence("acadProjID");
+            _acadProgrammeService.Create(acadProg, counter);
 
             return CreatedAtRoute("GetAcadProg", new { id = acadProg.ProgID.ToString() }, acadProg);
         }

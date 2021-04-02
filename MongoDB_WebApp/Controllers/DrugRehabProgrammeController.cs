@@ -12,10 +12,12 @@ namespace MongoDB_WebApp.Controllers
     public class DrugRehabProgrammeController : ControllerBase
     {
         private readonly DrugRehabProgrammeService _drugRehabProgrammeService;
+        private readonly CounterService _counterService;
 
-        public DrugRehabProgrammeController(DrugRehabProgrammeService drugRehabProgrammeService)
+        public DrugRehabProgrammeController(DrugRehabProgrammeService drugRehabProgrammeService, CounterService counterService)
         {
             _drugRehabProgrammeService = drugRehabProgrammeService;
+            _counterService = counterService;
         }
 
         [HttpGet]
@@ -37,7 +39,8 @@ namespace MongoDB_WebApp.Controllers
         [HttpPost]
         public ActionResult<DrugRehabProgramme> Create(DrugRehabProgramme drugRehabProg)
         {
-            _drugRehabProgrammeService.Create(drugRehabProg);
+            var counter = _counterService.getNextSequence("drugRehabProjID");
+            _drugRehabProgrammeService.Create(drugRehabProg, counter);
 
             return CreatedAtRoute("GetDrugRehabProg", new { id = drugRehabProg.ProgID.ToString() }, drugRehabProg);
         }

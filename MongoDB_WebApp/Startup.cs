@@ -39,6 +39,7 @@ namespace MongoDB_WebApp
             services.AddSingleton<InmateService>();
             services.AddSingleton<UsersService>();
             services.AddSingleton<VocationalProgrammeService>();
+            services.AddSingleton<CounterService>();
 
             services.AddControllers();
         }

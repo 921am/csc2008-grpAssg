@@ -25,17 +25,28 @@ namespace MongoDB_WebApp.Services
         public Users Get(int UserID) =>
             _Users.Find(user => user.UserID == UserID).FirstOrDefault();
 
-        public Users Create(Users users)
+        public Users Create(Users users, int counter)
         {
+            users.UserID = counter;
             _Users.InsertOne(users);
             return users;
         }
 
-        public void Update(int UserID, Users userIn) =>
-            _Users.ReplaceOne(user => user.UserID == UserID, userIn);
+        public void Update(int UserID, Users userIn)
+        {
+            var targetUser = Get(UserID);
 
-        public void Remove(Users userIn) =>
-            _Users.DeleteOne(user => user.UserID == userIn.UserID);
+            if (userIn.Name != null)
+                targetUser.Name = userIn.Name;
+            if (userIn.Mobile != null)
+                targetUser.Mobile = userIn.Mobile;
+            if (userIn.Address != null)
+                targetUser.Address = userIn.Address;
+            if (userIn.Password != null)
+                targetUser.Password = userIn.Password;
+
+            _Users.ReplaceOne(user => user.UserID == UserID, targetUser);
+        }
 
         public void Remove(int UserID) =>
             _Users.DeleteOne(user => user.UserID == UserID);

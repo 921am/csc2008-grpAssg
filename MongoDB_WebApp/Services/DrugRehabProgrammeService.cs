@@ -25,17 +25,28 @@ namespace MongoDB_WebApp.Services
         public DrugRehabProgramme Get(int ProgID) =>
             _DrugRehabProgramme.Find(DrugRehabProg => DrugRehabProg.ProgID == ProgID).FirstOrDefault();
 
-        public DrugRehabProgramme Create(DrugRehabProgramme DrugRehabProg)
+        public DrugRehabProgramme Create(DrugRehabProgramme DrugRehabProg, int counter)
         {
+            DrugRehabProg.ProgID = counter;
             _DrugRehabProgramme.InsertOne(DrugRehabProg);
             return DrugRehabProg;
         }
 
-        public void Update(int ProgID, DrugRehabProgramme DrugRehabProgIn) =>
-            _DrugRehabProgramme.ReplaceOne(DrugRehabProg => DrugRehabProg.ProgID == ProgID, DrugRehabProgIn);
+        public void Update(int ProgID, DrugRehabProgramme DrugRehabProgIn)
+        {
+            var targetDrugRehabProg = Get(ProgID);
 
-        public void Remove(DrugRehabProgramme DrugRehabProgIn) =>
-            _DrugRehabProgramme.DeleteOne(DrugRehabProg => DrugRehabProg.ProgID == DrugRehabProgIn.ProgID);
+            if (DrugRehabProgIn.ProgName != null)
+                targetDrugRehabProg.ProgName = DrugRehabProgIn.ProgName;
+            if (DrugRehabProgIn.ProgDescrip != null)
+                targetDrugRehabProg.ProgDescrip = DrugRehabProgIn.ProgDescrip;
+            if (DrugRehabProgIn.StartDate != null)
+                targetDrugRehabProg.StartDate = DrugRehabProgIn.StartDate;
+            if (DrugRehabProgIn.EndDate != null)
+                targetDrugRehabProg.EndDate = DrugRehabProgIn.EndDate;
+
+            _DrugRehabProgramme.ReplaceOne(DrugRehabProg => DrugRehabProg.ProgID == ProgID, DrugRehabProgIn);
+        }
 
         public void Remove(int ProgID) =>
             _DrugRehabProgramme.DeleteOne(DrugRehabProg => DrugRehabProg.ProgID == ProgID);
