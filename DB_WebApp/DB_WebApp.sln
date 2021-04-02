@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DB_WebApp", "DB_WebApp.csproj", "{DF9D1D5D-1F95-4859-9F7D-A8D0945A7444}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDB_API", "..\MongoDB_WebApp\MongoDB_API.csproj", "{A0FB36B6-BEB0-4EAB-82EA-D514BE1341D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MongoDB_API", "..\MongoDB_API\MongoDB_API.csproj", "{40B05CCA-D54A-4A2C-8C1D-63BCBCA6BD06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{DF9D1D5D-1F95-4859-9F7D-A8D0945A7444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF9D1D5D-1F95-4859-9F7D-A8D0945A7444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF9D1D5D-1F95-4859-9F7D-A8D0945A7444}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0FB36B6-BEB0-4EAB-82EA-D514BE1341D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0FB36B6-BEB0-4EAB-82EA-D514BE1341D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0FB36B6-BEB0-4EAB-82EA-D514BE1341D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0FB36B6-BEB0-4EAB-82EA-D514BE1341D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40B05CCA-D54A-4A2C-8C1D-63BCBCA6BD06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40B05CCA-D54A-4A2C-8C1D-63BCBCA6BD06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40B05CCA-D54A-4A2C-8C1D-63BCBCA6BD06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40B05CCA-D54A-4A2C-8C1D-63BCBCA6BD06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
