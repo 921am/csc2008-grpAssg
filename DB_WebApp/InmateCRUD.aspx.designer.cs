@@ -123,6 +123,24 @@ namespace DB_WebApp
         protected global::System.Web.UI.WebControls.TextBox txtDrugOff;
 
         /// <summary>
+        /// lblEnrolled control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEnrolled;
+
+        /// <summary>
+        /// txtEnrolled control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEnrolled;
+
+        /// <summary>
         /// btnSaveInmate control.
         /// </summary>
         /// <remarks>
@@ -166,6 +184,15 @@ namespace DB_WebApp
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblErrorMessage;
+
+        /// <summary>
+        /// gvAverage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvAverage;
 
         /// <summary>
         /// gvInmate control.
