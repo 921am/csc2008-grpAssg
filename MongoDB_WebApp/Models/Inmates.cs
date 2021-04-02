@@ -19,6 +19,5 @@ namespace MongoDB_WebApp.Models
         public string DateEntered { get; set; }
         public string DateReleased { get; set; }
         public Boolean DrugOffender { get; set; }
-        public int InmateProgressID { get; set; }
     }
 }

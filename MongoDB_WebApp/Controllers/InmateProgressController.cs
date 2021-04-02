@@ -40,7 +40,7 @@ namespace MongoDB_WebApp.Controllers
         public ActionResult<InmateProgress> Create(InmateProgress inmateProg)
         {
             var counter = _counterService.getNextSequence("inmateProjID");
-            _inmateProgressService.Create(inmateProg);
+            _inmateProgressService.Create(inmateProg, counter);
 
             return CreatedAtRoute("GetInmateProg", new { id = inmateProg.InmateProgressID.ToString() }, inmateProg);
         }

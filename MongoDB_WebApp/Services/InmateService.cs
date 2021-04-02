@@ -45,8 +45,6 @@ namespace MongoDB_WebApp.Services
                 targetInmate.DateEntered = inmateIn.DateEntered;
             if (inmateIn.DateReleased != null)
                 targetInmate.DateReleased = inmateIn.DateReleased;
-            if (inmateIn.InmateProgressID != 0)
-                targetInmate.InmateProgressID = inmateIn.InmateProgressID;
 
             _inmates.ReplaceOne(inmate => inmate.InmateID == InmateID, inmateIn);
         }
