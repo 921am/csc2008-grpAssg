@@ -96,6 +96,7 @@ namespace DB_WebApp
             txtDateEntered.Text = dtbl.Rows[0]["DateEntered"].ToString();
             txtDateReleased.Text = dtbl.Rows[0]["DateReleased"].ToString();
             txtDrugOff.Text = dtbl.Rows[0]["DrugOffender"].ToString();
+            txtEnrolled.Text = dtbl.Rows[0]["Enrolled"].ToString();
             btnSaveInmate.Text = "Update";
             btnDeleteInmate.Enabled = true;
         }

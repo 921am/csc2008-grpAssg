@@ -59,6 +59,16 @@
                         <asp:TextBox ID="txtDrugOff" runat="server" ></asp:TextBox>
                     </td>
                     </tr>
+
+                <tr>
+                       <td>
+                        <asp:Label ID="lblEnrolled" runat="server" Text="Enrolled to a programme (Yes/No)"></asp:Label>
+                        </td>
+
+                    <td colspan="2">
+                        <asp:TextBox ID="txtEnrolled" runat="server" ></asp:TextBox>
+                    </td>
+                    </tr>
                 
                 <tr>
                 <td>
@@ -95,7 +105,7 @@
                 <asp:BoundField DataField="DateEntered" HeaderText="Entered" DataFormatString="{0:d}"/>
                 <asp:BoundField DataField="DateReleased" HeaderText="Released" DataFormatString="{0:d}"/>
                 <asp:BoundField DataField="DrugOffender" HeaderText="Drug Off." />
-
+                <asp:BoundField DataField="Enrolled" HeaderText="Enrolled to a programme" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:LinkButton ID="lnkViewInmate" runat="server" CommandArgument='<%# Eval("inmateID") %>' OnClick="lnk_OnClick">View</asp:LinkButton>
