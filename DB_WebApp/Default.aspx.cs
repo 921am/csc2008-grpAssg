@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,16 @@ namespace DB_WebApp
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        void GetAvgEnrollData ()
+        {
+            if (sqlcon.State == ConnectionState.Closed)
+                sqlcon.Open();
+            SqlDataAdapter sqlDa = new SqlDataAdapter("AverageEnroll", sqlcon);
+            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
+            DataTable dtbl = new DataTable();
+            sqlDa.Fill(dtbl);
         }
     }
 }
