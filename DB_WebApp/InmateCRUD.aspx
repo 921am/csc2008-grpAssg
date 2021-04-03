@@ -53,6 +53,16 @@
                         <asp:TextBox ID="txtDrugOff" runat="server" ></asp:TextBox>
                     </td>
                     </tr>
+
+                <tr>
+                       <td>
+                        <asp:Label ID="lblEnrolled" runat="server" Text="Enrolled to a programme (Yes/No)"></asp:Label>
+                        </td>
+
+                    <td colspan="2">
+                        <asp:TextBox ID="txtEnrolled" runat="server" Enabled="False" ></asp:TextBox>
+                    </td>
+                    </tr>
                 
                 <tr>
                 <td>
@@ -81,6 +91,13 @@
             </tr>
             </tr>
             </table>
+            <asp:GridView ID="gvAverage" runat="server" AutoGenerateColumns="false">
+            <Columns>
+                <asp:BoundField DataField="dummyheader" HeaderText=" " />
+                <asp:BoundField DataField="AvgEnroll" HeaderText=" " />
+                
+            </Columns>
+        </asp:GridView>
             <br />
             <asp:GridView ID="gvInmate" runat="server" AutoGenerateColumns="false">
             <Columns>
@@ -89,7 +106,8 @@
                 <asp:BoundField DataField="DateEntered" HeaderText="Entered" DataFormatString="{0:d}"/>
                 <asp:BoundField DataField="DateReleased" HeaderText="Released" DataFormatString="{0:d}"/>
                 <asp:BoundField DataField="DrugOffender" HeaderText="Drug Off." />
-
+                <asp:BoundField DataField="Enrolled" HeaderText="Enrolled to a programme" />
+                <asp:BoundField DataField="TimeSpent" HeaderText="Sentence Duration" />
                 <asp:TemplateField>
                     <ItemTemplate>
                         <asp:LinkButton ID="lnkViewInmate" runat="server" CommandArgument='<%# Eval("inmateID") %>' OnClick="lnk_OnClick">View</asp:LinkButton>

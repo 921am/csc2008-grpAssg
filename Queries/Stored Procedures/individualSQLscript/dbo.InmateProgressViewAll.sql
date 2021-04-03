@@ -1,8 +1,8 @@
 ﻿CREATE PROC InmateProgressViewAll
 AS 
 	BEGIN
-	SELECT InmateProg.InmateProgressID, InmateProg.RehabProgID, InmateProg.RehabProgStatus, InmateProg.AcadProgID, InmateProg.AcadProgStatus, InmateProg.VocProgID, InmateProg.VocProgStatus, InmateProg.InmateID, RehabP.ProgName,
-			AcadProg.ProgName, VocProg.ProgName, InmatesN.inmateName
+	SELECT InmateProg.InmateProgressID, InmateProg.RehabProgID, InmateProg.RehabProgStatus, InmateProg.AcadProgID, InmateProg.AcadProgStatus, InmateProg.VocProgID, InmateProg.VocProgStatus, InmateProg.InmateID, RehabP.ProgName AS RehabProgName,
+			AcadProg.ProgName AS AcadProgName, VocProg.ProgName AS VocProgName, InmatesN.inmateName
 	FROM InmateProgress AS InmateProg
 	INNER JOIN DrugRehabProgramme AS RehabP
 	ON InmateProg.RehabProgID = RehabP.ProgID
