@@ -1,0 +1,16 @@
+﻿InmateProgressID,RehabProgID,RehabProgStatus,AcadProgID,AcadProgStatus,VocProgID,VocProgStatus,InmateID
+1,2,Pass,1,Pass,1,Pass,1
+2,2,Pass,3,Pass,2,Pass,2
+3,5,Pass,3,Pass,3,Pass,3
+4,1,Pass,1,Pass,7,Pass,4
+5,3,Pass,5,Pass,4,Pass,5
+6,2,Pass,1,Pass,8,Pass,53
+7,4,Pass,1,Pass,6,Pass,19
+8,5,Pass,5,Pass,3,Pass,15
+9,1,Pass,5,Pass,1,Pass,18
+10,3,Pass,1,Pass,4,Pass,50
+11,2,Pass,3,Pass,1,Pass,30
+12,4,Pass,5,Pass,2,Pass,55
+13,5,Pass,3,Pass,3,Pass,20
+14,1,Pass,3,Pass,2,Pass,14
+15,3,Pass,3,Pass,9,Pass,67

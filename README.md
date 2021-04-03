@@ -40,3 +40,17 @@ The system will also provide effective analysis to determine factors or programm
 ## To Create Tables
 - Run all the User queries
 - Run Create Tables, followed by Create FK, and lastly seed data
+
+## To Migrate
+- Run SQL scripts ```SELECT * FROM TABLE``` to get the results.
+	- Do make sure that the results are set to grids
+- Right click on the results and click ```Save result as``` to save the csv files in the same folder as ```MongoDB-Migration.ipynb```
+	- Do make sure that the csv files are named correctly:
+		1. acadProgramme.csv
+		2. drugRehabProgramme.csv
+		3. inmateProgress.csv
+		4. inmates.csv
+		5. vocationalProgramme.csv
+	- Insert header in the csv files as per the tables' attribute
+- Launch jupyer-notebook and run ```MongoDB-Migration.ipynb```
+
