@@ -55,7 +55,7 @@
                 datasets: [{
                     label: 'Line Chart',
                     data: [100, 200, 300],
-                    backgroundcolor: 'rgba(6,128,250)'
+                    backgroundColor: 'rgba(6,128,250)'
                 }]
             },
             options: {
@@ -78,7 +78,7 @@
                 datasets: [{
                     label: 'Bar Chart',
                     data: [100, 200, 300],
-                    backgroundcolor: 'rgba(6,128,250)'
+                    backgroundColor: 'rgba(6,128,250)'
                 }]
             },
             options: {
@@ -101,7 +101,7 @@
                 datasets: [{
                     label: 'Pie Chart',
                     data: [100, 200, 300],
-                    backgroundcolor: 'rgba(6,128,250)'
+                    backgroundColor: 'rgba(6,128,250)'
                 }]
             },
             options: {
