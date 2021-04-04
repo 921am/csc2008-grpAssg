@@ -99,8 +99,8 @@
             data: {
                 labels: ['001', '002', '003'],
                 datasets: [{
-                    label: 'Pie Chart',
-                    data: [100, 200, 300],
+                    label: "Enrolled duration",
+                    data: [12, 32, 4124],
                     backgroundColor: 'rgba(6,128,250)'
                 }]
             },
