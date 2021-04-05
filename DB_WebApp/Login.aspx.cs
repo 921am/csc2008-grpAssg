@@ -40,7 +40,7 @@ namespace DB_WebApp
             sqlcon.Close();
             if (dtbl.Rows.Count > 0)
             {
-                Response.Redirect("User.aspx");
+                Response.Redirect("Default.aspx");
             }
             else
             {
