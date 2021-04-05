@@ -1,72 +1,32 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="User.aspx.cs" Inherits="DB_WebApp.User" %>
+﻿<%@ Page Title="User" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="User.aspx.cs" Inherits="DB_WebApp.User" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            <asp:HiddenField ID="hfUserID" runat="server" />
-            <table>
-                    <tr>
-                    <td>
-                        <asp:Label ID="lblName" runat="server" Text="Name"></asp:Label>
-
-                    </td>
-                    <td colspan="2">
-                        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
-                    </td>
-                    </tr>
-
-                   <tr>
-                       <td>
-                        <asp:Label ID="lblMobile" runat="server" Text="Mobile"></asp:Label>
-                        </td>
-
-                    <td colspan="2">
-                        <asp:TextBox ID="txtMobile" runat="server"></asp:TextBox>
-                    </td>
-                    </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="lblAddress" runat="server"></asp:Label>
-                    </td>
-                    <td colspan="2">
-                        <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                <td>
-                    
-                </td>
-                <td colspan="2">
-                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
-                    <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
-                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
-                </td>
-            </tr>
-                <tr>
-                <td>
-                    
-                </td>
-                <td colspan="2">
-                    <asp:Label ID="lblSuccessMessage" runat="server" Text="" ForeColor="Green"></asp:Label>
-                </td>
-                <tr>
-                <td>
-                    
-                </td>
-                <td colspan="2">
-                    <asp:Label ID="lblErrorMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
-                </td>
-            </tr>
-            </tr>
-            </table>
-            <br />
-            <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false">
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <h2><%: Title %></h2>
+    <div>
+        <asp:HiddenField ID="hfUserID" runat="server" />
+        <div class="form-group">
+            <asp:Label ID="lblName" runat="server" Text="Name"></asp:Label>
+            <asp:TextBox ID="txtName" runat="server" class="form-control"></asp:TextBox>
+        </div>
+        <div class="form-group">
+            <asp:Label ID="lblMobile" runat="server" Text="Mobile"></asp:Label>
+            <asp:TextBox ID="txtMobile" runat="server" class="form-control"></asp:TextBox>
+        </div>
+        <div class="form-group">
+            <asp:Label ID="lblAddress" runat="server"></asp:Label>
+            <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" class="form-control"></asp:TextBox>
+        </div>
+        <div class="form-group">
+            <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" class="btn btn-primary" />
+            <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" class="btn btn-danger" />
+            <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" class="btn btn-secondary" />
+        </div>
+        <div class="form-group">
+            <asp:Label ID="lblSuccessMessage" runat="server" Text="" ForeColor="Green"></asp:Label>
+            <asp:Label ID="lblErrorMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
+        </div>
+        <br />
+        <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered table-condensed table-responsive table-hover">
             <Columns>
                 <asp:BoundField DataField="Name" HeaderText="Name" />
                 <asp:BoundField DataField="Mobile" HeaderText="Mobile" />
@@ -78,15 +38,6 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
-            <br />
-                    <asp:Button ID="btnAcadProg" runat="server" Text="Academic Programmes" OnClick="btnAcadProg_Click" />
-                    <asp:Button ID="btnDrugRehab" runat="server" Text="Drug Rehab Programmes" OnClick="btnDrugRehab_Click" />
-                    <asp:Button ID="btnVocProg" runat="server" Text="Vocational Programmes" OnClick="btnVocProg_Click" /></br>
-                    <asp:Button ID="btnInmates" runat="server" Text="Inmates" OnClick="btnInmates_Click" />
-                    <asp:Button ID="btnUsers" runat="server" Text="Users" OnClick="btnUsers_Click" />
-                    <asp:Button ID="btnInmateProgress" runat="server" Text="Inmate Progress" OnClick="btnInmateProgress_Click" />
-
-        </div>
-    </form>
-</body>
-</html>
+        <br />
+    </div>
+</asp:Content>

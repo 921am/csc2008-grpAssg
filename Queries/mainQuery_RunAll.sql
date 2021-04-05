@@ -85,6 +85,10 @@ ALTER TABLE [dbo].[InmateProgress]
 -- Elapsed Time: 0.001 s
 
 
+-- SEEDING INTO USER
+INSERT INTO Users(Name, Mobile, Address, Password)
+VALUES ('admin', '91234567', 'blk 123 serangoon ave 1', 'password');
+
 -- SEEDING INTO DRUG REHAB PROGRAMME
 INSERT INTO DrugRehabProgramme(ProgName, ProgDescrip, StartDate, EndDate)
 VALUES 
