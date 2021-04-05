@@ -4,7 +4,6 @@
     <h2><%: Title %></h2>
         <div>
             <asp:HiddenField ID="hfVocProgID" runat="server" />
-            <form>
             <div class="form-group">
                 <asp:Label ID="lblProgName" runat="server" Text="Programme Name"></asp:Label>
                 <asp:TextBox ID="txtProgName" runat="server" TextMode="SingleLine" class="form-control"></asp:TextBox>
@@ -31,7 +30,6 @@
                     <asp:Label ID="lblSuccessMessage" runat="server" Text="" ForeColor="Green"></asp:Label>
                     <asp:Label ID="lblErrorMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
             </div>
-        </form>
             <br />
             <asp:GridView ID="gvVocProg" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered table-condensed table-responsive table-hover">
             <Columns>
