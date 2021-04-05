@@ -76,6 +76,10 @@ ALTER TABLE [dbo].[InmateProgress]
 ALTER TABLE [dbo].[InmateProgress] 
 	ADD CONSTRAINT [FK_InmateProgress_InmateID] FOREIGN KEY ([InmateID]) REFERENCES [Inmates]([inmateID])
 
+-- SEEDING INTO USER
+INSERT INTO Users(Name, Mobile, Address, Password)
+VALUES ('admin', '91234567', 'blk 123 serangoon ave 1', 'password');
+
 -- SEEDING INTO DRUG REHAB PROGRAMME
 INSERT INTO DrugRehabProgramme(ProgName, ProgDescrip, StartDate, EndDate)
 VALUES 
