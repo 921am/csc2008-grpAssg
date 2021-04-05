@@ -2,7 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="row">
+    <%--<div class="row">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
 
 
     <div class="row">
@@ -68,51 +68,51 @@
 
     <script type="text/javascript">
 
-        // Chart.js for line chart
-        var linechart = document.getElementById('line2').getContext('2d');
-        var mylinechart = new Chart(linechart, {
-            type: 'line',
-            data: {
-                labels: ['001', '002', '003'],
-                datasets: [{
-                    label: 'Line Chart',
-                    data: [100, 200, 300],
-                    backgroundColor: 'rgba(6,128,250)'
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        })
+        //// Chart.js for line chart
+        //var linechart = document.getElementById('line2').getContext('2d');
+        //var mylinechart = new Chart(linechart, {
+        //    type: 'line',
+        //    data: {
+        //        labels: ['001', '002', '003'],
+        //        datasets: [{
+        //            label: 'Line Chart',
+        //            data: [100, 200, 300],
+        //            backgroundColor: 'rgba(6,128,250)'
+        //        }]
+        //    },
+        //    options: {
+        //        scales: {
+        //            yAxes: [{
+        //                ticks: {
+        //                    beginAtZero: true
+        //                }
+        //            }]
+        //        }
+        //    }
+        //})
 
-        // Chart.js for pie chart
-        var piechart = document.getElementById('pie').getContext('2d');
-        var mypiechart = new Chart(piechart, {
-            type: 'pie',
-            data: {
-                labels: ['001', '002', '003'],
-                datasets: [{
-                    label: "Enrolled duration",
-                    data: [12, 32, 4124],
-                    backgroundColor: 'rgba(6,128,250)'
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        })
+        //// Chart.js for pie chart
+        //var piechart = document.getElementById('pie').getContext('2d');
+        //var mypiechart = new Chart(piechart, {
+        //    type: 'pie',
+        //    data: {
+        //        labels: ['001', '002', '003'],
+        //        datasets: [{
+        //            label: "Enrolled duration",
+        //            data: [12, 32, 4124],
+        //            backgroundColor: 'rgba(6,128,250)'
+        //        }]
+        //    },
+        //    options: {
+        //        scales: {
+        //            yAxes: [{
+        //                ticks: {
+        //                    beginAtZero: true
+        //                }
+        //            }]
+        //        }
+        //    }
+        //})
 
         //Yearly Enrolment of Inmates in Academic Programmes
         let request1 = new XMLHttpRequest();
