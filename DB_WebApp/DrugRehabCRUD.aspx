@@ -4,74 +4,32 @@
     <h2><%: Title %></h2>
         <div>
             <asp:HiddenField ID="hfDrugRehabID" runat="server" />
-            <table>
-                    <tr>
-                    <td>
-                        <asp:Label ID="lblProgName" runat="server" Text="Programme Name"></asp:Label>
+            <div class="form-group">
+                <asp:Label ID="lblProgName" runat="server" Text="Programme Name"></asp:Label>
+                <asp:TextBox ID="txtProgName" runat="server" TextMode="SingleLine" class="form-control"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <asp:Label ID="lblProgDescription" runat="server" Text="Programme Description"></asp:Label>
+                <asp:TextBox ID="txtProgDescription" runat="server" TextMode="MultiLine" class="form-control"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <asp:Label ID="lblStartDate" runat="server" Text="Start Date"></asp:Label>
+                <asp:TextBox ID="txtStartDate" runat="server" TextMode="DateTime" class="form-control"></asp:TextBox>
+            </div>
+            <div class="form-group">
+                <asp:Label ID="lblEndDate" runat="server" Text="End Date" class="hasDatepicker"></asp:Label>
+                <asp:TextBox ID="txtEndDate" runat="server" TextMode="DateTime" class="form-control hasDatepicker"></asp:TextBox>
 
-                    </td>
-                    <td colspan="2">
-                        <asp:TextBox ID="txtProgName" runat="server"></asp:TextBox>
-                    </td>
-                    </tr>
-
-                   <tr>
-                       <td>
-                        <asp:Label ID="lblProgDescription" runat="server" Text="Programme Description"></asp:Label>
-                        </td>
-                
-                    <td colspan="2">
-                        <asp:TextBox ID="txtProgDescription" runat="server" TextMode="MultiLine"></asp:TextBox>
-                    </td>
-                    </tr>
-                <tr>
-                       <td>
-                        <asp:Label ID="lblStartDate" runat="server" Text="Start Date"></asp:Label>
-                        </td>
-
-                    <td colspan="2">
-                        <asp:TextBox ID="txtStartDate" runat="server" TextMode="DateTime"></asp:TextBox>
-                    </td>
-                    </tr>
-
-                <tr>
-                       <td>
-                        <asp:Label ID="lblEndDate" runat="server" Text="End Date"></asp:Label>
-                        </td>
-
-                    <td colspan="2">
-                        <asp:TextBox ID="txtEndDate" runat="server" TextMode="DateTime"></asp:TextBox>
-                    </td>
-                    </tr>
-               
-                
-                <tr>
-                <td>
-                    
-                </td>
-                <td colspan="2">
-                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" />
-                    <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" />
-                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" />
-                </td>
-            </tr>
-                <tr>
-                <td>
-                    
-                </td>
-                <td colspan="2">
+            </div>
+            <div class="form-group">
+                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" class="btn btn-primary" />
+                    <asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" class="btn btn-danger" />
+                    <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" class="btn btn-secondary" />
+            </div>
+            <div class="form-group">
                     <asp:Label ID="lblSuccessMessage" runat="server" Text="" ForeColor="Green"></asp:Label>
-                </td>
-                <tr>
-                <td>
-                    
-                </td>
-                <td colspan="2">
                     <asp:Label ID="lblErrorMessage" runat="server" Text="" ForeColor="Red"></asp:Label>
-                </td>
-            </tr>
-            </tr>
-            </table>
+            </div>
             <br />
             <asp:GridView ID="gvDrugRehab" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered table-condensed table-responsive table-hover">
             <Columns>
