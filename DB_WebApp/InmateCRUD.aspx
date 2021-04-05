@@ -99,7 +99,7 @@
             </Columns>
         </asp:GridView>
             <br />
-            <asp:GridView ID="gvInmate" runat="server" AutoGenerateColumns="false">
+            <asp:GridView ID="gvInmate" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered table-condensed table-responsive table-hover">
             <Columns>
                 <asp:BoundField DataField="inmateName" HeaderText="Inmate Name" />
                 <asp:BoundField DataField="gender" HeaderText="Gender" />
