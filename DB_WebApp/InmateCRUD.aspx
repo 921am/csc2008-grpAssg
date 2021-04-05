@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Inmate Progress" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InmateCRUD.aspx.cs" Inherits="DB_WebApp.InmateCRUD" %>
+﻿<%@ Page Title="Inmate" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="InmateCRUD.aspx.cs" Inherits="DB_WebApp.InmateCRUD" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <h2><%: Title %></h2>

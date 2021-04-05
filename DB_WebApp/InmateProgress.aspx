@@ -105,12 +105,6 @@
             </Columns>
         </asp:GridView>
             <br />
-                    <asp:Button ID="btnAcadProg" runat="server" Text="Academic Programmes" OnClick="btnAcadProg_Click" />
-                    <asp:Button ID="btnDrugRehab" runat="server" Text="Drug Rehab Programmes" OnClick="btnDrugRehab_Click" />
-                    <asp:Button ID="btnVocProg" runat="server" Text="Vocational Programmes" OnClick="btnVocProg_Click" /></br>
-                    <asp:Button ID="btnInmates" runat="server" Text="Inmates" OnClick="btnInmates_Click" />
-                    <asp:Button ID="btnUsers" runat="server" Text="Users" OnClick="btnUsers_Click" />
-                    <asp:Button ID="btnInmateProgress" runat="server" Text="Inmate Progress" OnClick="btnInmateProgress_Click" />
         </div>
 
 </asp:Content>
