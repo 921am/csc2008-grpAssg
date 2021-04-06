@@ -6,7 +6,7 @@ CREATE TABLE [dbo].[Users] (
     [Password] VARCHAR (75)  NULL,
     CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED ([UserID] ASC)
 );
-
+-- Elapsed Time: 0.006 s
 -- INMATES
 CREATE TABLE [dbo].[Inmates] (
     [inmateID]         INT           IDENTITY (1, 1) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE [dbo].[Inmates] (
     CONSTRAINT [inmateID] PRIMARY KEY CLUSTERED ([inmateID] ASC),
     
 );
-
+-- Elapsed Time: 0.002 s
 
 -- ACADEMIC PROGRAMME
 CREATE TABLE [dbo].[AcadProgramme] (
@@ -29,6 +29,8 @@ CREATE TABLE [dbo].[AcadProgramme] (
     [EndDate]     DATE          NULL,
     CONSTRAINT [PK_AcadProgramme] PRIMARY KEY CLUSTERED ([ProgID] ASC)
 );
+-- Elapsed Time: 0.001 s
+
 
 -- DRUG REHAB PROGRAMME
 CREATE TABLE [dbo].[DrugRehabProgramme] (
@@ -39,6 +41,8 @@ CREATE TABLE [dbo].[DrugRehabProgramme] (
     [EndDate]     DATE          NULL,
     CONSTRAINT [PK_DrugRehabProgramme] PRIMARY KEY CLUSTERED ([ProgID] ASC)
 );
+-- Elapsed Time: 0.001 s
+
 
 -- VOCATIONAL PROGRAMME
 CREATE TABLE [dbo].[VocationalProgramme] (
@@ -49,6 +53,8 @@ CREATE TABLE [dbo].[VocationalProgramme] (
     [EndDate]     DATE          NULL,
     CONSTRAINT [PK_VocationalProgramme] PRIMARY KEY CLUSTERED ([ProgID] ASC)
 );
+-- Elapsed Time: 0.001 s
+
 
 -- INMATE PROGRESS
 CREATE TABLE [dbo].[InmateProgress] (
@@ -62,6 +68,7 @@ CREATE TABLE [dbo].[InmateProgress] (
     [InmateID]         INT          DEFAULT 0 NULL,
     CONSTRAINT [PK_InmateProgress] PRIMARY KEY CLUSTERED ([InmateProgressID] ASC)
 );
+-- Elapsed Time: 0.001 s
 
 
 ALTER TABLE [dbo].[InmateProgress] 
@@ -75,6 +82,8 @@ ALTER TABLE [dbo].[InmateProgress]
 
 ALTER TABLE [dbo].[InmateProgress] 
 	ADD CONSTRAINT [FK_InmateProgress_InmateID] FOREIGN KEY ([InmateID]) REFERENCES [Inmates]([inmateID])
+-- Elapsed Time: 0.001 s
+
 
 -- SEEDING INTO USER
 INSERT INTO Users(Name, Mobile, Address, Password)
@@ -416,6 +425,9 @@ VALUES
     (1, 'Pass', 3, 'Pass', 2, 'Pass', 14),
     (3, 'Pass', 3, 'Pass', 9, 'Pass', 67);
 
+-- Elapsed Time: 0.022 s
+
+
 GO
 
 CREATE PROC [AcadProgrammeViewAll]
@@ -604,7 +616,7 @@ ELSE
 		DateEntered = @DateEntered,
 		DateReleased = @DateReleased,
 		DrugOffender = @DrugOffender
-	WHERE inmateID=inmateID
+	WHERE inmateID=@inmateID
 	END
 
 END
@@ -758,3 +770,5 @@ AS
 	END
 
 GO
+
+-- Elapsed Time: 0.626 s
