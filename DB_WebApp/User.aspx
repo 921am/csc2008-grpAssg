@@ -13,7 +13,7 @@
             <asp:TextBox ID="txtMobile" runat="server" class="form-control"></asp:TextBox>
         </div>
         <div class="form-group">
-            <asp:Label ID="lblAddress" runat="server"></asp:Label>
+            <asp:Label ID="lblAddress" runat="server" Text="Address"></asp:Label>
             <asp:TextBox ID="txtAddress" runat="server" TextMode="MultiLine" class="form-control"></asp:TextBox>
         </div>
         <div class="form-group">
