@@ -616,7 +616,7 @@ ELSE
 		DateEntered = @DateEntered,
 		DateReleased = @DateReleased,
 		DrugOffender = @DrugOffender
-	WHERE inmateID=inmateID
+	WHERE inmateID=@inmateID
 	END
 
 END
