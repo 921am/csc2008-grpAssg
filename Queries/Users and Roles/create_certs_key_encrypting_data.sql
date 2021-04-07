@@ -50,3 +50,4 @@ UPDATE Inmates
 -- close symmetric key session
 CLOSE SYMMETRIC KEY SymKey_test;
             GO
+

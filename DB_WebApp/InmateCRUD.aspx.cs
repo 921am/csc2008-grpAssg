@@ -35,6 +35,7 @@ namespace DB_WebApp
                 Response.Write("Please login to access this page.");
                 FillGridView();
                 Keep();
+                
             }
         }
 
@@ -118,6 +119,7 @@ namespace DB_WebApp
             gvInmate.DataBind();
             gvAverage.DataBind();
 
+            
 
         }
 

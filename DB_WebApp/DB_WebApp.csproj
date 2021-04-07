@@ -216,7 +216,6 @@
     <Content Include="GraphDisplay.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="InmateCRUD.aspx" />
-    <Content Include="InmateCRUD_Decrypted.aspx" />
     <Content Include="InmateProgress.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -302,13 +301,6 @@
     </Compile>
     <Compile Include="InmateCRUD.aspx.designer.cs">
       <DependentUpon>InmateCRUD.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="InmateCRUD_Decrypted.aspx.cs">
-      <DependentUpon>InmateCRUD_Decrypted.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="InmateCRUD_Decrypted.aspx.designer.cs">
-      <DependentUpon>InmateCRUD_Decrypted.aspx</DependentUpon>
     </Compile>
     <Compile Include="InmateProgress.aspx.cs">
       <DependentUpon>InmateProgress.aspx</DependentUpon>
