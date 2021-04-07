@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 
 namespace DB_WebApp
 {
-    public partial class InmateCRUD : System.Web.UI.Page
+    public partial class InmateCRUD_Decrypted : System.Web.UI.Page
     {
         SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CRUD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         protected void Page_Load(object sender, EventArgs e)
@@ -25,7 +25,7 @@ namespace DB_WebApp
                 if (!IsPostBack)
                 {
                     btnDeleteInmate.Enabled = false;
-                    FillGridViewWithDecrypted();
+                    FillGridView();
                     btnSaveInmate.Visible = false;
 
                 }
@@ -33,38 +33,10 @@ namespace DB_WebApp
             else
             {
                 Response.Write("Please login to access this page.");
-                FillGridView();
-                Keep();
             }
         }
 
-        void Keep()
-        {
-            txtDateEntered.Visible = false;
-            txtDateReleased.Visible = false;
-            txtDrugOff.Visible = false;
-            txtEnrolled.Visible = false;
-            txtGender.Visible = false;
-            txtInmateName.Visible = false;
-            btnSaveInmate.Visible = false;
-            btnClearInmate.Visible = false;
-            btnDeleteInmate.Visible = false;
-        }
-
-        void Show()
-        {
-            txtDateEntered.Visible = true;
-            txtDateReleased.Visible = true;
-            txtDrugOff.Visible = true;
-            txtEnrolled.Visible = true;
-            txtGender.Visible = true;
-            txtInmateName.Visible = true;
-            btnSaveInmate.Visible = false;
-            btnClearInmate.Visible = true;
-            btnDeleteInmate.Visible = false;
-        }
-
-        void FillGridViewWithDecrypted()
+        void FillGridView()
         {
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
@@ -90,34 +62,6 @@ namespace DB_WebApp
             gvInmate.DataBind();
             gvAverage.DataBind();
 
-        }
-
-        void FillGridView()
-        {
-            if (sqlcon.State == ConnectionState.Closed)
-                sqlcon.Open();
-
-            
-            SqlDataAdapter sqlDa = new SqlDataAdapter("InmatesViewEncrypted", sqlcon);
-            
-            SqlDataAdapter sqlDa2 = new SqlDataAdapter("AverageEnroll", sqlcon);
-            
-            sqlDa.SelectCommand.CommandType = CommandType.StoredProcedure;
-            sqlDa2.SelectCommand.CommandType = CommandType.StoredProcedure;
-           
-            DataTable dtbl = new DataTable();
-            DataTable dtbl2 = new DataTable();
-
-            sqlDa.Fill(dtbl);
-            sqlDa2.Fill(dtbl2);
-            
-            sqlcon.Close();
-            gvInmate.DataSource = dtbl;
-            gvAverage.DataSource = dtbl2;
-
-            gvInmate.DataBind();
-            gvAverage.DataBind();
-
 
         }
 
@@ -135,7 +79,6 @@ namespace DB_WebApp
             btnDeleteInmate.Enabled = false;
             btnSaveInmate.Visible = false;
         }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
             if (sqlcon.State == ConnectionState.Closed)
@@ -237,6 +180,5 @@ namespace DB_WebApp
         {
             Response.Redirect("InmateProgress.aspx");
         }
-
     }
 }

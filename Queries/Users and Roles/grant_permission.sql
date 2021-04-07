@@ -1,0 +1,30 @@
+﻿-- grant privileges 
+GRANT VIEW DEFINITION ON SYMMETRIC KEY::SymKey_test TO spsAdmin; 
+GO
+GRANT VIEW DEFINITION ON Certificate::[Certificate_test] TO spsAdmin;
+GO
+GRANT CONTROL ON Certificate::[Certificate_test] TO spsAdmin;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON
+AcadProgramme
+TO spsAdmin;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON
+DrugRehabProgramme
+TO spsAdmin;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON
+InmateProgress
+TO spsAdmin;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON
+Inmates
+TO spsAdmin;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON
+Users
+TO spsAdmin;
+
+GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON
+VocationalProgramme
+TO spsAdmin;
