@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB_API.Models;
 using MongoDB.Driver;
-using MongoDB_API.Models;
 
 namespace MongoDB_API.Services
 {
