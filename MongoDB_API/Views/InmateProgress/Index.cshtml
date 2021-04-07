@@ -24,9 +24,9 @@
         </div>
 
         @*<div class="form-group">
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-                <button type="reset" class="btn btn-secondary">Clear</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
             </div>*@
         <div class="form-group">
             <label id="lblSuccessMessage" style="display:none">Success</label>
@@ -91,16 +91,16 @@
             //-------- Begin creating <tr> and <td> HTML element ------
             for (index = 0; index < inmateProgList.length; index++) {
                 inmateProg = inmateProgList[index];
-                id = inmateProg.inmateName;
+                iName = inmateProg.inmateName;
                 ipId = inmateProg.inmateProgressID;
                 rpId = inmateProg.rehabProgName;
                 rpStat = inmateProg.rehabProgStatus;
                 apId = inmateProg.acadProgName;
                 apStat = inmateProg.acadProgStatus;
                 vpId = inmateProg.vocalProgName;
-                vpStat = inmateProg.vocProgStatus;
+                vpStat = inmateProg.vocalProgStatus;
                 $rowElement = $('<tr></tr>');
-                $cellElement = $('<td></td>', { text: id });
+                $cellElement = $('<td></td>', { text: iName });
                 $rowElement.append($cellElement);
                 $cellElement = $('<td></td>', { text: rpId });
                 $rowElement.append($cellElement);
@@ -114,7 +114,7 @@
                 $rowElement.append($cellElement);
                 $cellElement = $('<td></td>', { text: vpStat });
                 $rowElement.append($cellElement);
-                $hyperLinkElement = $('<a href=javascript:viewInmateProg(\'' + id + '\')>View</a>');
+                $hyperLinkElement = $('<a href=javascript:viewInmateProg(\'' + ipId + '\')>View</a>');
                 $cellElement = $('<td></td>');
                 $cellElement.append($hyperLinkElement);
                 $rowElement.append($cellElement);
