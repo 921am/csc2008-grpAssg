@@ -8,8 +8,7 @@ using MongoDB_API.Services;
 
 namespace MongoDB_API.Controllers
 {
-    [Route("api/[controller]")]
-    public class AcadProgrammeController : ControllerBase
+    public class AcadProgrammeController : Controller
     {
         private readonly AcadProgrammeService _acadProgrammeService;
         private readonly CounterService _counterService;
@@ -20,11 +19,11 @@ namespace MongoDB_API.Controllers
             _counterService = counterService;
         }
 
-        [HttpGet]
+        [HttpGet("api/[controller]")]
         public ActionResult<List<AcadProgramme>> Get() =>
             _acadProgrammeService.Get();
 
-        [HttpGet("{id}", Name = "GetAcadProg")]
+        [HttpGet("api/[controller]/{id}", Name = "GetAcadProg")]
         public ActionResult<AcadProgramme> Get(string id)
         {
             var acadProg = _acadProgrammeService.Get(int.Parse(id));
@@ -36,7 +35,7 @@ namespace MongoDB_API.Controllers
             return acadProg;
         }
 
-        [HttpPost]
+        [HttpPost("api/[controller]")]
         public ActionResult<AcadProgramme> Create(AcadProgramme acadProg)
         {
             var counter = _counterService.getNextSequence("acadProjID");
@@ -45,7 +44,7 @@ namespace MongoDB_API.Controllers
             return CreatedAtRoute("GetAcadProg", new { id = acadProg.ProgID.ToString() }, acadProg);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("api/[controller]/{id}")]
         public IActionResult Update(string id, AcadProgramme acadProgIn)
         {
             var acadProg = _acadProgrammeService.Get(int.Parse(id));
@@ -59,7 +58,7 @@ namespace MongoDB_API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("api/[controller]/{id}")]
         public IActionResult Delete(string id)
         {
             var acadProg = _acadProgrammeService.Get(int.Parse(id));
@@ -71,6 +70,10 @@ namespace MongoDB_API.Controllers
 
             _acadProgrammeService.Remove(acadProg.ProgID);
             return NoContent();
+        }
+        public IActionResult Index()
+        {
+            return View();
         }
     }
 }

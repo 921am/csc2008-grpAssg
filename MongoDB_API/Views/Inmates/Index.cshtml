@@ -1,0 +1,265 @@
+﻿@{
+    ViewData["Title"] = "Inmate Page";
+}
+
+<div @*class="text-center"*@>
+    <h2>Inmate</h2>
+    <div>
+        <div class="form-group">
+            <label id="inmateId" hidden></label>
+            <label for="lblName">Name</label>
+            <input type="text" class="form-control" id="txtName" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="lblGender">Gender</label>
+            <input type="text" class="form-control" id="txtGender" placeholder="Enter Gender">
+        </div>
+        <div class="form-group">
+            <label for="lblDateEntered">Date Entered</label>
+            <input type="datetime-local" class="form-control" id="txtDateEntered" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="lblDateReleased">Date Released</label>
+            <input type="datetime-local" class="form-control" id="txtDateReleased" placeholder="Enter name">
+
+        </div>
+        <div class="form-group">
+            <label for="lblDrugOffender">Drug Offender (True/False)</label>
+            <input type="text" class="form-control" id="txtDrugOff" placeholder="Enter Gender">
+        </div>
+        @*<div class="form-group">
+            <label for="lblEnrolled">Enrolled to a programme (Yes/No)</label>
+            <input type="text" class="form-control" id="txtEnrolled" placeholder="Enter Gender">
+        </div>*@
+        <div class="form-group">
+            <button type="submit" onclick="saveInmate()" class="btn btn-primary">Save</button>
+            <button type="button" onclick="deleteInmate()" class="btn btn-danger">Delete</button>
+            <button type="reset" onclick="clearFields()" class="btn btn-secondary">Clear</button>
+        </div>
+        <div class="form-group">
+            <label id="lblSuccessMessage" style="display:none">Success</label>
+            <label id="lblErrorMessage" style="display:none">Error</label>
+        </div>
+        <br />
+        <table class="table table-striped table-bordered table-condensed table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>Inmate Name</th>
+                    <th>Gender</th>
+                    <th>Entered</th>
+                    <th>Released</th>
+                    <th>Drug Off.</th>
+                    @*<th>Enrolled to a programme</th>*@
+                    @*<th>Sentence Duration</th>*@
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="inmateTableBody"></tbody>
+        </table>
+
+        <br />
+    </div>
+</div>
+
+<script>
+    //$(document).ready(function () {
+    //    console.log("document loaded");
+    //});
+    $(document).ready(function () {
+        console.log("document loaded");
+        loadInmateData();
+        console.log("nope");
+    });
+
+    function loadInmateData() {
+        //Note: jQuery.ajax(..) is also often written is $.ajax(..)
+        $loadInmateDataHandler = jQuery.ajax({
+            url: '/api/Inmates/',
+            method: 'GET',
+            dataType: 'json',
+            cache: false,
+        });
+        $loadInmateDataHandler.done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            var inmateList = data;
+            var id = '';
+            var name = '';
+            var gender = '';
+            var dateEntered = '';
+            var dateReleased = '';
+            var drugOffender = '';
+            var $tableElement = null;
+            var $cellElement = null;
+            var $rowElement = null;
+            var $xElement = null;
+            //-------- Find the table element -----------
+            $tableBodyElement = $('#inmateTableBody');
+            //-------- Begin creating <tr> and <td> HTML element ------
+            for (index = 0; index < inmateList.length; index++) {
+                inmate = inmateList[index];
+                id = inmate.inmateID;
+                name = inmate.inmateName;
+                gender = inmate.gender;
+                dateEntered = inmate.dateEntered;
+                dateReleased = inmate.dateReleased;
+                drugOffender = inmate.drugOffender;
+
+                $rowElement = $('<tr></tr>');
+                $cellElement = $('<td></td>', { text: name });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: gender });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: dateEntered });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: dateReleased });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: drugOffender });
+                $rowElement.append($cellElement);
+                $hyperLinkElement = $('<a href=javascript:viewInmate(\'' + id + '\')>View</a>');
+                $cellElement = $('<td></td>');
+                $cellElement.append($hyperLinkElement);
+                $rowElement.append($cellElement);
+                $tableBodyElement.append($rowElement);
+            }//end of for loop.
+        }//end of JavaScript anonymous function
+        )//end of the done() method;
+        $loadInmateDataHandler.fail(function (data, textStatus, jqXHR) {
+            $.notify(data.statusText, "error");
+        })//end of $loadLabDataHandler.fail()
+    }//end of loadLabData();
+
+    function viewInmate(inmateId) {
+        //Note: jQuery.ajax(..) is also often written is $.ajax(..)
+        $loadSingleInmateDataHandler = jQuery.ajax({
+            url: '/api/Inmates/' + inmateId,
+            method: 'GET',
+            dataType: 'json',
+            cache: false,
+        });
+
+        $loadSingleInmateDataHandler.done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            var inmate = data;
+            id = inmate.inmateID;
+            name = inmate.inmateName;
+            gender = inmate.gender;
+            dateEntered = inmate.dateEntered;
+            dateReleased = inmate.dateReleased;
+            drugOffender = inmate.drugOffender;
+
+            document.getElementById("inmateId").innerHTML = id;
+            document.getElementById('txtName').value = name;
+            document.getElementById('txtGender').value = gender;
+            document.getElementById('txtDateEntered').value = dateEntered;
+            document.getElementById('txtDateReleased').value = dateReleased;
+            document.getElementById('txtDrugOff').value = drugOffender;
+
+            //}//end of for loop.
+        }//end of JavaScript anonymous function
+        )//end of the done() method;
+        $loadSingleInmateDataHandler.fail(function (data, textStatus, jqXHR) {
+            $.notify(data.statusText, "error");
+        })//end of $loadLabDataHandler.fail()
+    } //viewUser Function
+    //function redirectPage() {
+    //    location.replace('/UserManager/Index');
+    //}// end of redirectPage() method (function)
+
+    function saveInmate() {
+        var inmateId = $("#inmateId").text();
+        console.log('userId to act on ' + inmateId);
+        if (inmateId == '') {
+            console.log('inmateId is empty. gonna create');
+            var putString = '';
+            //collect data
+            var name = $("#txtName").val();
+            var gender = $("#txtGender").val();
+            var dateEntered = $("#txtDateEntered").val();
+            var dateReleased = $("#txtDateReleased").val();
+            var drugOffender = $("#txtDrugOff").val();
+            putString = '?inmateName=' + name + '&gender=' + gender + '&dateEntered=' + dateEntered + '&dateReleased=' + dateReleased + '&drugOffender=' + drugOffender;
+            //var password = '';
+            $postInmateDataHandler = jQuery.ajax({
+                url: '/api/Inmates/' + putString,
+                method: 'POST',
+                dataType: 'json',
+                cache: false,
+            });
+
+            $postInmateDataHandler.done(function (data, textStatus, jqXHR) {
+                console.log(data);
+                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                $("#lblSuccessMessage").show();
+                redirectPage();
+            }//end of JavaScript anonymous function
+            )//end of the done() method;
+            $postInmateDataHandler.fail(function (data, textStatus, jqXHR) {
+                console.log(data);
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                $("#lblErrorMessage").show();
+            })//end of $loadLabDataHandler.fail()
+        } else {
+            console.log('inmateId is NOT empty. gonna update');
+            var putString = '';
+            //collect data
+            var name = $("#txtName").val();
+            var gender = $("#txtGender").val();
+            var dateEntered = $("#txtDateEntered").val();
+            var dateReleased = $("#txtDateReleased").val();
+            var drugOffender = $("#txtDrugOff").val();
+            putString = inmateId + '?inmateName=' + name + '&gender=' + gender + '&dateEntered=' + dateEntered + '&dateReleased=' + dateReleased + '&drugOffender=' + drugOffender;
+
+            $putInmateDataHandler = jQuery.ajax({
+                url: '/api/Inmates/' + putString,
+                method: 'PUT',
+                dataType: 'json',
+                cache: false,
+            });
+
+            $putInmateDataHandler.done(function (data, textStatus, jqXHR) {
+                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                $("#lblSuccessMessage").show();
+                redirectPage();
+            }//end of JavaScript anonymous function
+            )//end of the done() method;
+            $putInmateDataHandler.fail(function (data, textStatus, jqXHR) {
+                console.log(data);
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                $("#lblErrorMessage").show();
+            })//end of $loadLabDataHandler.fail()
+
+        }
+    }
+
+    function deleteInmate() {
+
+        var userId = $("#userId").text();
+        console.log('userId to delete is ' + userId);
+        $deleteUserHandler = jQuery.ajax({
+            type: 'DELETE',
+            url: '/api/Users/' + userId
+        });//end of jQuery.ajax() call
+        $deleteUserHandler.done(function (data, textStatus, jqXHR) {
+            document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+            redirectPage();
+        });//end of $deleteStudentHandler.done()
+        $deleteUserHandler.fail(function (data, textStatus, jqXHR) {
+            console.log(data);
+            document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+            //    });//end of $deleteStudentHandler.fail()
+        });
+    }
+
+    function clearFields() {
+        $("#userId").text('');
+        $("#lblSuccessMessage").hide();
+        $("#lblErrorMessage").hide();
+        document.getElementById('txtName').value = '';
+        document.getElementById('txtMobile').value = '';
+        document.getElementById('txtAddress').value = '';
+    }
+
+    function redirectPage() {
+        location.replace('/Inmates');
+    }// end of redirectPage() method (function)
+</script>
