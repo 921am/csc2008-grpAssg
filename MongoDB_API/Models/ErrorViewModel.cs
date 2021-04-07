@@ -1,6 +1,6 @@
 using System;
 
-namespace WebApplication2.Models
+namespace MongoDB_WebApp.Models
 {
     public class ErrorViewModel
     {

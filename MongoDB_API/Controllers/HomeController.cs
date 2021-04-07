@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplication2.Models;
+using MongoDB_WebApp.Models;
 
-namespace WebApplication2.Controllers
+namespace MongoDB_WebApp.Controllers
 {
     public class HomeController : Controller
     {
