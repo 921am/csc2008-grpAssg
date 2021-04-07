@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB_WebApp.Models;
 using MongoDB_WebApp.Services;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace MongoDB_WebApp.Controllers
 {
-    [Route("api/[controller]")]
-    public class InmatesController : ControllerBase
+    public class InmatesController : Controller
     {
         private readonly InmateService _inmateService;
         private readonly CounterService _counterService;
@@ -20,11 +21,11 @@ namespace MongoDB_WebApp.Controllers
             _counterService = counterService;
         }
 
-        [HttpGet]
+        [HttpGet("api/[controller]")]
         public ActionResult<List<Inmates>> Get() =>
             _inmateService.Get();
 
-        [HttpGet("{id}", Name = "GetInmate")]
+        [HttpGet("api/[controller]/{id}", Name = "GetInmate")]
         public ActionResult<Inmates> Get(string id)
         {
             var inmate = _inmateService.Get(int.Parse(id));
@@ -36,7 +37,7 @@ namespace MongoDB_WebApp.Controllers
             return inmate;
         }
 
-        [HttpPost]
+        [HttpPost("api/[controller]")]
         public ActionResult<Inmates> Create(Inmates inmates)
         {
             var counter = _counterService.getNextSequence("inmateID");
@@ -45,7 +46,7 @@ namespace MongoDB_WebApp.Controllers
             return CreatedAtRoute("GetInmate", new { id = inmates.InmateID.ToString() }, inmates);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("api/[controller]/{id}")]
         public IActionResult Update(string id, Inmates inmatesIn)
         {
             var inmates = _inmateService.Get(int.Parse(id));
@@ -59,7 +60,7 @@ namespace MongoDB_WebApp.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("api/[controller]/{id}")]
         public IActionResult Delete(string id)
         {
             var inmate = _inmateService.Get(int.Parse(id));
@@ -71,6 +72,11 @@ namespace MongoDB_WebApp.Controllers
 
             _inmateService.Remove(inmate.InmateID);
             return NoContent();
+        }
+
+        public IActionResult Index()
+        {
+            return View();
         }
     }
 }

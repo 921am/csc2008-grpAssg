@@ -8,8 +8,7 @@ using MongoDB_WebApp.Services;
 
 namespace MongoDB_WebApp.Controllers
 {
-    [Route("api/[controller]")]
-    public class DrugRehabProgrammeController : ControllerBase
+    public class DrugRehabProgrammeController : Controller
     {
         private readonly DrugRehabProgrammeService _drugRehabProgrammeService;
         private readonly CounterService _counterService;
@@ -20,11 +19,11 @@ namespace MongoDB_WebApp.Controllers
             _counterService = counterService;
         }
 
-        [HttpGet]
+        [HttpGet("api/[controller]")]
         public ActionResult<List<DrugRehabProgramme>> Get() =>
             _drugRehabProgrammeService.Get();
 
-        [HttpGet("{id}", Name = "GetDrugRehabProg")]
+        [HttpGet("api/[controller]/{id}", Name = "GetDrugRehabProg")]
         public ActionResult<DrugRehabProgramme> Get(string id)
         {
             var drugRehabProg = _drugRehabProgrammeService.Get(int.Parse(id));
@@ -36,7 +35,7 @@ namespace MongoDB_WebApp.Controllers
             return drugRehabProg;
         }
 
-        [HttpPost]
+        [HttpPost("api/[controller]")]
         public ActionResult<DrugRehabProgramme> Create(DrugRehabProgramme drugRehabProg)
         {
             var counter = _counterService.getNextSequence("drugRehabProjID");
@@ -45,7 +44,7 @@ namespace MongoDB_WebApp.Controllers
             return CreatedAtRoute("GetDrugRehabProg", new { id = drugRehabProg.ProgID.ToString() }, drugRehabProg);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("api/[controller]/{id}")]
         public IActionResult Update(string id, DrugRehabProgramme drugRehabProgIn)
         {
             var drugRehabProg = _drugRehabProgrammeService.Get(int.Parse(id));
@@ -59,7 +58,7 @@ namespace MongoDB_WebApp.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("api/[controller]/{id}")]
         public IActionResult Delete(string id)
         {
             var drugRehabProg = _drugRehabProgrammeService.Get(int.Parse(id));
@@ -71,6 +70,10 @@ namespace MongoDB_WebApp.Controllers
 
             _drugRehabProgrammeService.Remove(drugRehabProg.ProgID);
             return NoContent();
+        }
+        public IActionResult Index()
+        {
+            return View();
         }
     }
 }
