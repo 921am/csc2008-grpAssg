@@ -19,7 +19,7 @@ namespace MongoDB_API.Controllers
             _counterService = counterService;
         }
 
-        [HttpGet]
+        [HttpGet("api/[controller]")]
         public ActionResult<List<InmateProgDetails>> Get() =>
             _inmateProgressService.Get();
 

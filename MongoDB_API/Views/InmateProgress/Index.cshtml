@@ -91,13 +91,13 @@
             //-------- Begin creating <tr> and <td> HTML element ------
             for (index = 0; index < inmateProgList.length; index++) {
                 inmateProg = inmateProgList[index];
-                id = inmateProg.inmateID;
+                id = inmateProg.inmateName;
                 ipId = inmateProg.inmateProgressID;
-                rpId = inmateProg.rehabProgID;
+                rpId = inmateProg.rehabProgName;
                 rpStat = inmateProg.rehabProgStatus;
-                apId = inmateProg.acadProgID;
+                apId = inmateProg.acadProgName;
                 apStat = inmateProg.acadProgStatus;
-                vpId = inmateProg.vocProgID;
+                vpId = inmateProg.vocalProgName;
                 vpStat = inmateProg.vocProgStatus;
                 $rowElement = $('<tr></tr>');
                 $cellElement = $('<td></td>', { text: id });
