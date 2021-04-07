@@ -1,6 +1,7 @@
 ﻿CREATE PROC InmatesViewEncrypted
 AS 
 	BEGIN
+	EXEC AS USER = 'spsGuest'
 	SELECT inmateID, CASE WHEN EXISTS(SELECT Inmates.inmateName_Encrypted FROM Inmates)
 	THEN 'Permission denied'
 	END

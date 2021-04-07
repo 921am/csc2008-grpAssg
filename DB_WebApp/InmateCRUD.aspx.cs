@@ -32,7 +32,7 @@ namespace DB_WebApp
             }
             else
             {
-                Response.Write("Please login to access this page.");
+                
                 FillGridView();
                 Keep();
                 
@@ -50,6 +50,12 @@ namespace DB_WebApp
             btnSaveInmate.Visible = false;
             btnClearInmate.Visible = false;
             btnDeleteInmate.Visible = false;
+            lblDateEntered.Visible = false;
+            lblDateReleased.Visible = false;
+            lblDrugOffender.Visible = false;
+            lblEnrolled.Visible = false;
+            lblGender.Visible = false;
+            lblInmateName.Visible = false;
         }
 
         void Show()
@@ -63,6 +69,22 @@ namespace DB_WebApp
             btnSaveInmate.Visible = false;
             btnClearInmate.Visible = true;
             btnDeleteInmate.Visible = false;
+
+            txtDateEntered.Visible = true;
+            txtDateReleased.Visible = true;
+            txtDrugOff.Visible = true;
+            txtEnrolled.Visible = true;
+            txtGender.Visible = true;
+            txtInmateName.Visible = true;
+            btnSaveInmate.Visible = true;
+            btnClearInmate.Visible = true;
+            btnDeleteInmate.Visible = true;
+            lblDateEntered.Visible = true;
+            lblDateReleased.Visible = true;
+            lblDrugOffender.Visible = true;
+            lblEnrolled.Visible = true;
+            lblGender.Visible = true;
+            lblInmateName.Visible = true;
         }
 
         void FillGridViewWithDecrypted()
