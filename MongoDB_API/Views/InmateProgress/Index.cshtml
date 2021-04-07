@@ -91,16 +91,16 @@
             //-------- Begin creating <tr> and <td> HTML element ------
             for (index = 0; index < inmateProgList.length; index++) {
                 inmateProg = inmateProgList[index];
-                id = inmateProg.inmateID;
+                iName = inmateProg.inmateName;
                 ipId = inmateProg.inmateProgressID;
-                rpId = inmateProg.rehabProgID;
+                rpId = inmateProg.rehabProgName;
                 rpStat = inmateProg.rehabProgStatus;
-                apId = inmateProg.acadProgID;
+                apId = inmateProg.acadProgName;
                 apStat = inmateProg.acadProgStatus;
-                vpId = inmateProg.vocProgID;
-                vpStat = inmateProg.vocProgStatus;
+                vpId = inmateProg.vocalProgName;
+                vpStat = inmateProg.vocalProgStatus;
                 $rowElement = $('<tr></tr>');
-                $cellElement = $('<td></td>', { text: id });
+                $cellElement = $('<td></td>', { text: iName });
                 $rowElement.append($cellElement);
                 $cellElement = $('<td></td>', { text: rpId });
                 $rowElement.append($cellElement);
@@ -114,7 +114,7 @@
                 $rowElement.append($cellElement);
                 $cellElement = $('<td></td>', { text: vpStat });
                 $rowElement.append($cellElement);
-                $hyperLinkElement = $('<a href=javascript:viewInmateProg(\'' + id + '\')>View</a>');
+                $hyperLinkElement = $('<a href=javascript:viewInmateProg(\'' + ipId + '\')>View</a>');
                 $cellElement = $('<td></td>');
                 $cellElement.append($hyperLinkElement);
                 $rowElement.append($cellElement);
