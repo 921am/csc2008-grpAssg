@@ -26,6 +26,8 @@ namespace DB_WebApp
                 {
                     btnDeleteInmate.Enabled = false;
                     FillGridView();
+                    btnSaveInmate.Visible = false;
+
                 }
             }
             else
@@ -73,6 +75,7 @@ namespace DB_WebApp
             lblErrorMessage.Text = lblSuccessMessage.Text = "";
             btnSaveInmate.Text = "Save";
             btnDeleteInmate.Enabled = false;
+            btnSaveInmate.Visible = false;
         }
 
         protected void btnSave_Click(object sender, EventArgs e)
@@ -113,6 +116,7 @@ namespace DB_WebApp
 
         protected void lnk_OnClick(object sender, EventArgs e)
         {
+            btnSaveInmate.Visible = true;
             int inmateID = Convert.ToInt32((sender as LinkButton).CommandArgument);
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
