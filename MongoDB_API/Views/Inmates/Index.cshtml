@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Inmate Page";
+}
+
+<div @*class="text-center"*@>
+    <h2>Inmate</h2>
+    <div>
+        <div class="form-group">
+            <label for="lblName">Name</label>
+            <input type="text" class="form-control" id="txtName" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="lblGender">Gender</label>
+            <input type="text" class="form-control" id="txtGender" placeholder="Enter Gender">
+        </div>
+        <div class="form-group">
+            <label for="lblDateEntered">Date Entered</label>
+            <input type="text" class="form-control" id="txtDateEntered" placeholder="Enter Gender">
+        </div>
+        <div class="form-group">
+            <label for="lblDateReleased">Date Released</label>
+            <input type="text" class="form-control" id="txtDateReleased" placeholder="Enter Gender">
+        </div>
+        <div class="form-group">
+            <label for="lblDrugOffender">Drug Offender (True/False)</label>
+            <input type="text" class="form-control" id="txtDrugOff" placeholder="Enter Gender">
+        </div>
+        <div class="form-group">
+            <label for="lblEnrolled">Enrolled to a programme (Yes/No)</label>
+            <input type="text" class="form-control" id="txtEnrolled" placeholder="Enter Gender">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </div>
+        <div class="form-group">
+            <label for="lblSuccessMessage" style="display:none">Success</label>
+            <label for="lblErrorMessage" style="display:none">Error</label>
+        </div>
+        <br />
+        @*Insert table here*@
+        <br />
+    </div>
+</div>

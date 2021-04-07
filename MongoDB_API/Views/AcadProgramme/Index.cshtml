@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Academic Programmes Page";
+}
+
+<div @*class="text-center"*@>
+    <h2>Academic Programmes</h2>
+    <div>
+        <div class="form-group">
+            <label for="lblProgName">Programme Name</label>
+            <input type="text" class="form-control" id="txtProgName" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="lblProgDescription">Programme Description</label>
+            <textarea class="form-control" id="txtProgDescription" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="lblStartDate">Start Date</label>
+            <input type="text" class="form-control" id="txtStartDate" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="lblEndDate">End Date</label>
+            <input type="text" class="form-control" id="txtEndDate" placeholder="Enter name">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </div>
+        <div class="form-group">
+            <label for="lblSuccessMessage" style="display:none">Success</label>
+            <label for="lblErrorMessage" style="display:none">Error</label>
+        </div>
+        <br />
+        @*Insert table here*@
+        <br />
+    </div>
+</div>

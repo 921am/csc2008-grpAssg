@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Inmate Progress Page";
+}
+
+<div @*class="text-center"*@>
+    <h2>Inmate Progress</h2>
+    <div>
+        <div class="form-group">
+            <label for="lblInmateID">Inmate ID</label>
+            <input type="text" class="form-control" id="txtInmateID" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="lblRehabProgID">Rehab Prog ID</label>
+            <input type="text" class="form-control" id="txtRehabProgID" placeholder="Enter Mobile Number">
+        </div>
+        <div class="form-group">
+            <label for="lblAcadProgID">Acad Prog ID</label>
+            <input type="text" class="form-control" id="txtAcadProgID" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="lblVocProgID">Vocational Prog ID</label>
+            <input type="text" class="form-control" id="txtVocProgID" placeholder="Enter Mobile Number">
+        </div>
+
+        @*<div class="form-group">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger">Delete</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
+        </div>*@
+        <div class="form-group">
+            <label for="lblSuccessMessage" style="display:none">Success</label>
+            <label for="lblErrorMessage" style="display:none">Error</label>
+        </div>
+        <br />
+        @*Insert table here*@
+        <br />
+    </div>
+</div>
