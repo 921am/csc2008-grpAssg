@@ -18,11 +18,20 @@ namespace DB_WebApp
         SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CRUD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            // check if logged in
+            if (Session["logged_in"] != null)
             {
-                btnDelete.Enabled = false;
-                FillGridView();
+                if (!IsPostBack)
+                {
+                    btnDelete.Enabled = false;
+                    FillGridView();
+                }
             }
+            else
+            {
+                Response.Write("Please login to access this page.");
+            }
+            
         }
 
         public void Clear()

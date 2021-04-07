@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace DB_WebApp
 {
@@ -18,10 +19,18 @@ namespace DB_WebApp
         SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CRUD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            // check if logged in
+            if (Session["logged_in"] != null)
             {
-                btnDeleteInmate.Enabled = false;
-                FillGridView();
+                if (!IsPostBack)
+                {
+                    btnDeleteInmate.Enabled = false;
+                    FillGridView();
+                }
+            }
+            else
+            {
+                Response.Write("Please login to access this page.");
             }
         }
 
@@ -70,25 +79,33 @@ namespace DB_WebApp
         {
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlCommand sqlCmd = new SqlCommand("InmatesCreateOrUpdate", sqlcon);
-            sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@inmateID", (hfInmateID.Value == "" ? 0 : Convert.ToInt32(hfInmateID.Value)));
-            sqlCmd.Parameters.AddWithValue("@inmateName", txtInmateName.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@gender", txtGender.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@DateEntered", DateTime.ParseExact(txtDateEntered.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
-            sqlCmd.Parameters.AddWithValue("@DateReleased", DateTime.ParseExact(txtDateReleased.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
-            sqlCmd.Parameters.AddWithValue("@DrugOffender", txtDrugOff.Text.Trim());
-            sqlCmd.ExecuteNonQuery();
-            sqlcon.Close();
-            string UserID = hfInmateID.Value;
-            Clear();
-            if (UserID == "")
-                lblSuccessMessage.Text = "Saved Successfully";
-            else
-                lblSuccessMessage.Text = "Updated Successfully";
-            FillGridView();
-        }
 
+            //validate input
+            if (txtInmateName.Text == "" || txtGender.Text == "" || txtDateEntered.Text == "" || txtDateReleased.Text == "")
+            {
+                lblSuccessMessage.Text = "Please ensure that all fields are filled.";
+            }
+            else
+            {
+                SqlCommand sqlCmd = new SqlCommand("InmatesCreateOrUpdate", sqlcon);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@inmateID", (hfInmateID.Value == "" ? 0 : Convert.ToInt32(hfInmateID.Value)));
+                sqlCmd.Parameters.AddWithValue("@inmateName", txtInmateName.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@gender", txtGender.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@DateEntered", DateTime.ParseExact(txtDateEntered.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+                sqlCmd.Parameters.AddWithValue("@DateReleased", DateTime.ParseExact(txtDateReleased.Text, "dd/MM/yyyy hh:mm:ss tt", CultureInfo.InvariantCulture));
+                sqlCmd.Parameters.AddWithValue("@DrugOffender", txtDrugOff.Text.Trim());
+                sqlCmd.ExecuteNonQuery();
+                sqlcon.Close();
+                string UserID = hfInmateID.Value;
+                Clear();
+                if (UserID == "")
+                    lblSuccessMessage.Text = "Saved Successfully";
+                else
+                    lblSuccessMessage.Text = "Updated Successfully";
+                FillGridView();
+            }
+        }
         protected void btnClear_Click(object sender, EventArgs e)
         {
             Clear();

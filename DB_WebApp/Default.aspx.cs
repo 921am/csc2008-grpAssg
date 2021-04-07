@@ -15,10 +15,18 @@ namespace DB_WebApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            // check if logged in
+            if (Session["logged_in"] != null)
             {
-                ShowPieChart();
-                hardcode();
+                if (!IsPostBack)
+                {
+                    ShowPieChart();
+                    hardcode();
+                }
+            }
+            else
+            {
+                Response.Write("Please login to access this page.");
             }
         }
 
