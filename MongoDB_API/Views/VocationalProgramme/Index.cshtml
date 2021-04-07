@@ -31,7 +31,217 @@
             <label for="lblErrorMessage" style="display:none">Error</label>
         </div>
         <br />
-        @*Insert table here*@
+        <table class="table table-striped table-bordered table-condensed table-responsive table-hover">
+            <thead>
+                <tr>
+                    <th>Programme Name</th>
+                    <th>Description</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="vocProgTableBody"></tbody>
+        </table>
         <br />
     </div>
 </div>
+<script>
+    //$(document).ready(function () {
+    //    console.log("document loaded");
+    //});
+    $(document).ready(function () {
+        console.log("document loaded");
+        loadVocProgData();
+        console.log("nope");
+    });
+
+    function loadVocProgData() {
+        //Note: jQuery.ajax(..) is also often written is $.ajax(..)
+        $loadvocProgDataHandler = jQuery.ajax({
+            url: '/api/VocationalProgramme/',
+            method: 'GET',
+            dataType: 'json',
+            cache: false,
+        });
+        $loadvocProgDataHandler.done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            var vocProgList = data;
+            var name = '';
+            var desc = '';
+            var startDate = '';
+            var endDate = '';
+            var $tableElement = null;
+            var $cellElement = null;
+            var $rowElement = null;
+            var $xElement = null;
+            //-------- Find the table element -----------
+            $tableBodyElement = $('#vocProgTableBody');
+            //-------- Begin creating <tr> and <td> HTML element ------
+            for (index = 0; index < vocProgList.length; index++) {
+                vocProg = vocProgList[index];
+                id = vocProg.progID;
+                name = vocProg.progName;
+                desc = vocProg.progDescrip;
+                startDate = vocProg.startDate;
+                endDate = vocProg.endDate;
+                $rowElement = $('<tr></tr>');
+                $cellElement = $('<td></td>', { text: name });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: desc });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: startDate });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: endDate });
+                $rowElement.append($cellElement);
+                $hyperLinkElement = $('<a href=javascript:viewUser(\'' + id + '\')>View</a>');
+                $cellElement = $('<td></td>');
+                $cellElement.append($hyperLinkElement);
+                $rowElement.append($cellElement);
+                $tableBodyElement.append($rowElement);
+            }//end of for loop.
+        }//end of JavaScript anonymous function
+        )//end of the done() method;
+        $loadvocProgDataHandler.fail(function (data, textStatus, jqXHR) {
+            $.notify(data.statusText, "error");
+        })//end of $loadLabDataHandler.fail()
+    }//end of loadLabData();
+
+    function viewUser(userId) {
+        //Note: jQuery.ajax(..) is also often written is $.ajax(..)
+        $loadSingleUserDataHandler = jQuery.ajax({
+            url: '/api/AcadProgramme/' + acadProgId,
+            method: 'GET',
+            dataType: 'json',
+            cache: false,
+        });
+
+        $loadSingleUserDataHandler.done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            //var userList = data;
+            var id = '';
+            var name = '';
+            var mobile = '';
+            var address = '';
+            var password = '';
+            //-------- Begin creating <tr> and <td> HTML element ------
+            //for (index = 0; index < userList.length; index++) {
+            var user = data;
+            //console.log(user.name);
+            id = user.userID;
+            name = user.name;
+            mobile = user.mobile;
+            address = user.address;
+            password = user.password;
+            document.getElementById("userId").innerHTML = id;
+            document.getElementById('txtName').value = name;
+            document.getElementById('txtMobile').value = mobile;
+            document.getElementById('txtAddress').value = address;
+
+            //}//end of for loop.
+        }//end of JavaScript anonymous function
+        )//end of the done() method;
+        $loadUserDataHandler.fail(function (data, textStatus, jqXHR) {
+            $.notify(data.statusText, "error");
+        })//end of $loadLabDataHandler.fail()
+    } //viewUser Function
+    //function redirectPage() {
+    //    location.replace('/UserManager/Index');
+    //}// end of redirectPage() method (function)
+
+    function saveUser() {
+        var userId = $("#userId").text();
+        console.log('userId to act on ' + userId);
+        if (userId == '') {
+            console.log('userId is empty. gonna create');
+            var putString = '';
+            //collect data
+            var name = $("#txtName").val();
+            var mobile = $("#txtMobile").val();
+            var address = $("#txtAddress").val();
+            putString = '?name=' + name + '&mobile=' + mobile + '&address=' + address + '&password=password';
+            //var password = '';
+            $postUserDataHandler = jQuery.ajax({
+                url: '/api/Users/' + putString,
+                method: 'POST',
+                dataType: 'json',
+                cache: false,
+            });
+
+            $postUserDataHandler.done(function (data, textStatus, jqXHR) {
+                console.log(data);
+                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                $("#lblSuccessMessage").show();
+                redirectPage();
+            }//end of JavaScript anonymous function
+            )//end of the done() method;
+            $postUserDataHandler.fail(function (data, textStatus, jqXHR) {
+                console.log(data);
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                $("#lblErrorMessage").show();
+            })//end of $loadLabDataHandler.fail()
+        } else {
+            console.log();
+            console.log('userId is NOT empty. gonna update');
+
+            var putString = '';
+            //collect data
+            var name = $("#txtName").val();
+            var mobile = $("#txtMobile").val();
+            var address = $("#txtAddress").val();
+            putString = userId +'?name='+name+'&mobile='+mobile+'&address='+address+'&password=password';
+            //var password = '';
+            $putUserDataHandler = jQuery.ajax({
+                url: '/api/Users/' + putString,
+                method: 'PUT',
+                dataType: 'json',
+                cache: false,
+            });
+
+            $putUserDataHandler.done(function (data, textStatus, jqXHR) {
+                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                $("#lblSuccessMessage").show();
+                redirectPage();
+            }//end of JavaScript anonymous function
+            )//end of the done() method;
+            $putUserDataHandler.fail(function (data, textStatus, jqXHR) {
+                console.log(data);
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                $("#lblErrorMessage").show();
+            })//end of $loadLabDataHandler.fail()
+
+        }
+    }
+
+    function deleteUser() {
+
+        var userId = $("#userId").text();
+        console.log('userId to delete is ' + userId);
+        $deleteUserHandler = jQuery.ajax({
+            type: 'DELETE',
+            url: '/api/Users/' + userId
+        });//end of jQuery.ajax() call
+        $deleteUserHandler.done(function (data, textStatus, jqXHR) {
+            document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+            redirectPage();
+        });//end of $deleteStudentHandler.done()
+        $deleteUserHandler.fail(function (data, textStatus, jqXHR) {
+            console.log(data);
+            document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+            //    });//end of $deleteStudentHandler.fail()
+        });
+    }
+
+    function clearFields() {
+        $("#userId").text('');
+        $("#lblSuccessMessage").hide();
+        $("#lblErrorMessage").hide();
+        document.getElementById('txtName').value = '';
+        document.getElementById('txtMobile').value = '';
+        document.getElementById('txtAddress').value = '';
+    }
+
+    function redirectPage() {
+        location.replace('/Users');
+    }// end of redirectPage() method (function)
+</script>

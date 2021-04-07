@@ -8,7 +8,6 @@ using MongoDB_WebApp.Services;
 
 namespace MongoDB_WebApp.Controllers
 {
-    [Route("api/[controller]")]
     public class InmateProgressController : Controller
     {
         private readonly InmateProgressService _inmateProgressService;

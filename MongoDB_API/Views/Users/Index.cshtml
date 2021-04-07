@@ -7,7 +7,7 @@
     <div class="form-group">
         <label id="userId" hidden></label>
         <label for="lblName">Name</label>
-        <input type="text" class="form-control" id="txtName" placeholder="Enter name">
+        <input type="text" class="form-control" id="txtName" placeholder="Enter Name">
     </div>
     <div class="form-group">
         <label for="lblMobile">Mobile</label>
@@ -27,6 +27,11 @@
         <label id="lblErrorMessage" hidden>Error</label>
     </div>
     <br />
+
+
+    <br />
+</div>
+<div class="text-center">
     <table class="table table-striped table-bordered table-condensed table-responsive table-hover">
         <thead>
             <tr>
@@ -39,8 +44,6 @@
         </thead>
         <tbody id="userTableBody"></tbody>
     </table>
-
-    <br />
 </div>
 
 <script>
@@ -180,13 +183,13 @@
         } else {
             console.log();
             console.log('userId is NOT empty. gonna update');
-         
+
             var putString = '';
             //collect data
             var name = $("#txtName").val();
             var mobile = $("#txtMobile").val();
             var address = $("#txtAddress").val();
-            putString = userId +'?name='+name+'&mobile='+mobile+'&address='+address+'&password=password';
+            putString = userId + '?name=' + name + '&mobile=' + mobile + '&address=' + address + '&password=password';
             //var password = '';
             $putUserDataHandler = jQuery.ajax({
                 url: '/api/Users/' + putString,
@@ -211,7 +214,7 @@
     }
 
     function deleteUser() {
-        
+
         var userId = $("#userId").text();
         console.log('userId to delete is ' + userId);
         $deleteUserHandler = jQuery.ajax({

@@ -22,6 +22,10 @@ namespace MongoDB_WebApp.Controllers
         {
             return View();
         }
+        public IActionResult Default()
+        {
+            return View();
+        }
 
         public IActionResult Privacy()
         {
