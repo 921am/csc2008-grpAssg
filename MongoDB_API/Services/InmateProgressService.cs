@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MongoDB_WebApp.Models;
+using MongoDB_API.Models;
 using MongoDB.Driver;
+using MongoDB_API.Models;
 
-namespace MongoDB_WebApp.Services
+namespace MongoDB_API.Services
 {
     public class InmateProgressService
     {
         private readonly IMongoCollection<InmateProgress> _InmateProgressService;
+        private readonly IMongoCollection<DrugRehabProgramme> _DrugRehabProgrammeService;
+        private readonly IMongoCollection<AcadProgramme> _AcadProgrammeService;
+        private readonly IMongoCollection<VocationalProgramme> _VocationalProgrammeService;
+        private readonly IMongoCollection<Inmates> _Inmates;
 
         public InmateProgressService(IPrisonDatabaseSettings settings)
         {
@@ -17,10 +22,35 @@ namespace MongoDB_WebApp.Services
             var database = client.GetDatabase(settings.DatabaseName);
 
             _InmateProgressService = database.GetCollection<InmateProgress>(settings.InmateProgressCollectionName);
+            _DrugRehabProgrammeService = database.GetCollection<DrugRehabProgramme>(settings.DrugRehabProgrammeCollectionName);
+            _AcadProgrammeService = database.GetCollection<AcadProgramme>(settings.AcadProgrammeCollectionName);
+            _VocationalProgrammeService = database.GetCollection<VocationalProgramme>(settings.VocationalProgrammeCollectionName);
+            _Inmates = database.GetCollection<Inmates>(settings.InmatesCollectionName);
         }
 
-        public List<InmateProgress> Get() =>
-            _InmateProgressService.Find(InmateProg => true).ToList();
+        public List<InmateProgDetails> Get()
+        {
+            var inmateData = _InmateProgressService.AsQueryable().Where(inmate => true);
+
+            var query = from ip in inmateData
+                        join d in _DrugRehabProgrammeService.AsQueryable() on ip.RehabProgID equals d.ProgID
+                        join a in _AcadProgrammeService.AsQueryable() on ip.AcadProgID equals a.ProgID
+                        join v in _VocationalProgrammeService.AsQueryable() on ip.VocProgID equals v.ProgID
+                        join i in _Inmates.AsQueryable() on ip.InmateID equals i.InmateID
+                        select new InmateProgDetails()
+                        {
+                            InmateProgressID = ip.InmateProgressID,
+                            RehabProgName = d.ProgName,
+                            RehabProgStatus = ip.RehabProgStatus,
+                            AcadProgName = a.ProgName,
+                            AcadProgStatus = ip.AcadProgStatus,
+                            VocalProgName = v.ProgName,
+                            VocalProgStatus = ip.VocProgStatus,
+                            InmateName = i.InmateName
+                        };
+
+            return query.ToList();
+        }
 
         public InmateProgress Get(int InmateProgressID) =>
             _InmateProgressService.Find(InmateProg => InmateProg.InmateProgressID == InmateProgressID).FirstOrDefault();

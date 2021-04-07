@@ -7,19 +7,18 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MongoDB_API.Models
 {
-    public class InmateProgress
+    public class InmateProgDetails
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string _Id { get; set; }
-
         public int InmateProgressID { get; set; }
-        public int RehabProgID { get; set; }
+
+        public string RehabProgName { get; set; }
         public string RehabProgStatus { get; set; }
-        public int AcadProgID { get; set; }
+        public string AcadProgName { get; set; }
         public string AcadProgStatus { get; set; }
-        public int VocProgID { get; set; }
-        public string VocProgStatus { get; set; }
-        public int InmateID { get; set; }
+        public string VocalProgName { get; set; }
+        public string VocalProgStatus { get; set; }
+        public string InmateName { get; set; }
     }
 }

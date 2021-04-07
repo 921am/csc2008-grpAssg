@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB_WebApp.Models;
-using MongoDB_WebApp.Services;
+using MongoDB_API.Models;
+using MongoDB_API.Services;
 
-namespace MongoDB_WebApp.Controllers
+namespace MongoDB_API.Controllers
 {
     [Route("api/[controller]")]
     public class InmatesController : ControllerBase
