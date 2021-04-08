@@ -19,10 +19,19 @@ namespace DB_WebApp
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            // check if logged in
+            if (Session["logged_in"] != null)
             {
-                btnDelete.Enabled = false;
-                FillGridView();
+                if (!IsPostBack)
+                {
+                    btnDelete.Enabled = false;
+                    FillGridView();
+                }
+            }
+            else
+            {
+                Response.Write("<span style= 'color:red'>Please Login as Admin to view more</span>");
+                gvAcadProg.Visible = false;
             }
         }
 

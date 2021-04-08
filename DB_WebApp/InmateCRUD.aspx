@@ -48,7 +48,7 @@
         <br />
         <asp:GridView ID="gvInmate" runat="server" AutoGenerateColumns="false" class="table table-striped table-bordered table-condensed table-responsive table-hover">
             <Columns>
-                <asp:BoundField DataField="inmateName" HeaderText="Inmate Name" />
+                <asp:BoundField DataField="inmateNameValue" HeaderText="Inmate Name" />
                 <asp:BoundField DataField="gender" HeaderText="Gender" />
                 <asp:BoundField DataField="DateEntered" HeaderText="Entered" DataFormatString="{0:d}" />
                 <asp:BoundField DataField="DateReleased" HeaderText="Released" DataFormatString="{0:d}" />

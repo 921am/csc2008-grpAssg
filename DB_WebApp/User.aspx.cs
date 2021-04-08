@@ -18,10 +18,18 @@ namespace DB_WebApp
         SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CRUD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            // check if logged in
+            if (Session["logged_in"] != null)
             {
-                btnDelete.Enabled = false;
-                FillGridView();
+                if (!IsPostBack)
+                {
+                    btnDelete.Enabled = false;
+                    FillGridView();
+                }
+            }
+            else
+            {
+                Response.Write("<span style= 'color:red'>Please Login as Admin to view more</span>");
             }
         }
 
@@ -45,21 +53,31 @@ namespace DB_WebApp
         {
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
-            SqlCommand sqlCmd = new SqlCommand("UsersCreateOrUpdate", sqlcon);
-            sqlCmd.CommandType = CommandType.StoredProcedure;
-            sqlCmd.Parameters.AddWithValue("@UserID", (hfUserID.Value == "" ? 0 : Convert.ToInt32(hfUserID.Value)));
-            sqlCmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Mobile", txtMobile.Text.Trim());
-            sqlCmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
-            sqlCmd.ExecuteNonQuery();
-            sqlcon.Close();
-            string UserID = hfUserID.Value;
-            Clear();
-            if (UserID == "")
-                lblSuccessMessage.Text = "Saved Successfully";
+
+            //validate fields
+            if(txtName.Text == "" || txtMobile.Text == "" || txtAddress.Text == "")
+            {
+                lblErrorMessage.Text = "Please ensure that all fields are filled!";
+            }
             else
-                lblSuccessMessage.Text = "Updated Successfully";
-            FillGridView();
+            {
+                SqlCommand sqlCmd = new SqlCommand("UsersCreateOrUpdate", sqlcon);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@UserID", (hfUserID.Value == "" ? 0 : Convert.ToInt32(hfUserID.Value)));
+                sqlCmd.Parameters.AddWithValue("@Name", txtName.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@Mobile", txtMobile.Text.Trim());
+                sqlCmd.Parameters.AddWithValue("@Address", txtAddress.Text.Trim());
+                sqlCmd.ExecuteNonQuery();
+                sqlcon.Close();
+                string UserID = hfUserID.Value;
+                Clear();
+                if (UserID == "")
+                    lblSuccessMessage.Text = "Saved Successfully";
+                else
+                    lblSuccessMessage.Text = "Updated Successfully";
+                FillGridView();
+            }
+           
         }
 
         void FillGridView()

@@ -11,7 +11,14 @@ namespace DB_WebApp
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["logged_in"] != null)
+            {
 
+            }
+            else
+            {
+
+            }
         }
     }
 }
