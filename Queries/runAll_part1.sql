@@ -11506,3 +11506,35 @@ AS
 
 GO
 
+USE CRUD;
+GO
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'password';
+
+-- verify master key is created or not
+SELECT name KeyName, 
+    symmetric_key_id KeyID, 
+    key_length KeyLength, 
+    algorithm_desc KeyAlgorithm
+FROM sys.symmetric_keys;
+
+-- create master key SPS certificate
+USE CRUD;
+GO
+CREATE CERTIFICATE Certificate_test WITH SUBJECT = 'SPS Certificate';
+GO
+
+-- verify certificate
+SELECT name CertName, 
+    certificate_id CertID, 
+    pvt_key_encryption_type_desc EncryptType, 
+    issuer_name Issuer
+FROM sys.certificates;
+
+-- add new encrypted column to Inmate
+ALTER TABLE Inmates
+ADD inmateName_Encrypted varbinary(MAX)
+
+
+
+
+
