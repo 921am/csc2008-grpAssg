@@ -27,6 +27,10 @@
             <label for="lblDrugOffender">Drug Offender (True/False)</label>
             <input type="text" class="form-control" id="txtDrugOff" placeholder="Enter Gender">
         </div>
+        <div class="form-group">
+            <label for="lblSentenceDuration">Sentence Duration</label>
+            <input type="text" class="form-control" id="txtSentDuration" placeholder="Enter Gender">
+        </div>
         @*<div class="form-group">
             <label for="lblEnrolled">Enrolled to a programme (Yes/No)</label>
             <input type="text" class="form-control" id="txtEnrolled" placeholder="Enter Gender">
@@ -49,8 +53,8 @@
                     <th>Entered</th>
                     <th>Released</th>
                     <th>Drug Off.</th>
-                    @*<th>Enrolled to a programme</th>*@
-                    @*<th>Sentence Duration</th>*@
+                    <th>Enrolled to a programme</th>
+                    <th>Sentence Duration</th>
                     <th></th>
                 </tr>
             </thead>
@@ -88,6 +92,8 @@
             var dateEntered = '';
             var dateReleased = '';
             var drugOffender = '';
+            var enrolled = '';
+            var sentenceDuration = '';
             var $tableElement = null;
             var $cellElement = null;
             var $rowElement = null;
@@ -103,6 +109,8 @@
                 dateEntered = inmate.dateEntered;
                 dateReleased = inmate.dateReleased;
                 drugOffender = inmate.drugOffender;
+                enrolled = (inmate.enrolled ? 'Yes' : 'No');
+                sentenceDuration = inmate.sentenceDuration;
 
                 $rowElement = $('<tr></tr>');
                 $cellElement = $('<td></td>', { text: name });
@@ -114,6 +122,10 @@
                 $cellElement = $('<td></td>', { text: dateReleased });
                 $rowElement.append($cellElement);
                 $cellElement = $('<td></td>', { text: drugOffender });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: enrolled });
+                $rowElement.append($cellElement);
+                $cellElement = $('<td></td>', { text: sentenceDuration });
                 $rowElement.append($cellElement);
                 $hyperLinkElement = $('<a href=javascript:viewInmate(\'' + id + '\')>View</a>');
                 $cellElement = $('<td></td>');
@@ -146,6 +158,7 @@
             dateEntered = inmate.dateEntered;
             dateReleased = inmate.dateReleased;
             drugOffender = inmate.drugOffender;
+            sentenceDuration = inmate.sentenceDuration;
 
             document.getElementById("inmateId").innerHTML = id;
             document.getElementById('txtName').value = name;
@@ -153,6 +166,7 @@
             document.getElementById('txtDateEntered').value = dateEntered;
             document.getElementById('txtDateReleased').value = dateReleased;
             document.getElementById('txtDrugOff').value = drugOffender;
+            document.getElementById('txtSentDuration').value = sentenceDuration;
 
             //}//end of for loop.
         }//end of JavaScript anonymous function

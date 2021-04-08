@@ -22,7 +22,7 @@ namespace MongoDB_API.Controllers
         }
 
         [HttpGet("api/[controller]")]
-        public ActionResult<List<Inmates>> Get() =>
+        public ActionResult<List<InmatesDetails>> Get() =>
             _inmateService.Get();
 
         [HttpGet("api/[controller]/{id}", Name = "GetInmate")]

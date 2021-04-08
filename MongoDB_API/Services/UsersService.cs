@@ -38,7 +38,7 @@ namespace MongoDB_API.Services
 
             if (userIn.Name != null)
                 targetUser.Name = userIn.Name;
-            if (userIn.Mobile != null)
+            if (userIn.Mobile != 0)
                 targetUser.Mobile = userIn.Mobile;
             if (userIn.Address != null)
                 targetUser.Address = userIn.Address;
