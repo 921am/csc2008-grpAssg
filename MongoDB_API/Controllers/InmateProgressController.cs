@@ -20,7 +20,7 @@ namespace MongoDB_API.Controllers
         }
 
         [HttpGet("api/[controller]")]
-        public ActionResult<List<InmateProgress>> Get() =>
+        public ActionResult<List<InmateProgDetails>> Get() =>
             _inmateProgressService.Get();
 
         [HttpGet("api/[controller]/{id}", Name = "GetInmateProg")]
