@@ -8,8 +8,7 @@ using MongoDB_API.Services;
 
 namespace MongoDB_API.Controllers
 {
-    [Route("api/[controller]")]
-    public class InmateProgressController : ControllerBase
+    public class InmateProgressController : Controller
     {
         private readonly InmateProgressService _inmateProgressService;
         private readonly CounterService _counterService;
@@ -20,11 +19,11 @@ namespace MongoDB_API.Controllers
             _counterService = counterService;
         }
 
-        [HttpGet]
-        public ActionResult<List<InmateProgDetails>> Get() =>
+        [HttpGet("api/[controller]")]
+        public ActionResult<List<InmateProgress>> Get() =>
             _inmateProgressService.Get();
 
-        [HttpGet("{id}", Name = "GetInmateProg")]
+        [HttpGet("api/[controller]/{id}", Name = "GetInmateProg")]
         public ActionResult<InmateProgress> Get(string id)
         {
             var inmateProg = _inmateProgressService.Get(int.Parse(id));
@@ -36,7 +35,7 @@ namespace MongoDB_API.Controllers
             return inmateProg;
         }
 
-        [HttpPost]
+        [HttpPost("api/[controller]")]
         public ActionResult<InmateProgress> Create(InmateProgress inmateProg)
         {
             var counter = _counterService.getNextSequence("inmateProjID");
@@ -45,7 +44,7 @@ namespace MongoDB_API.Controllers
             return CreatedAtRoute("GetInmateProg", new { id = inmateProg.InmateProgressID.ToString() }, inmateProg);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("api/[controller]/{id}")]
         public IActionResult Update(string id, InmateProgress inmateProgIn)
         {
             var inmateProg = _inmateProgressService.Get(int.Parse(id));
@@ -59,7 +58,7 @@ namespace MongoDB_API.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("api/[controller]/{id}")]
         public IActionResult Delete(string id)
         {
             var inmateProg = _inmateProgressService.Get(int.Parse(id));
@@ -71,6 +70,10 @@ namespace MongoDB_API.Controllers
 
             _inmateProgressService.Remove(inmateProg.InmateProgressID);
             return NoContent();
+        }
+        public IActionResult Index()
+        {
+            return View();
         }
     }
 }
