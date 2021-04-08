@@ -27,10 +27,10 @@
             <label for="lblDrugOffender">Drug Offender (True/False)</label>
             <input type="text" class="form-control" id="txtDrugOff" placeholder="Enter Gender">
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label for="lblSentenceDuration">Sentence Duration</label>
             <input type="text" class="form-control" id="txtSentDuration" placeholder="Enter Gender">
-        </div>
+        </div>*@
         @*<div class="form-group">
             <label for="lblEnrolled">Enrolled to a programme (Yes/No)</label>
             <input type="text" class="form-control" id="txtEnrolled" placeholder="Enter Gender">
@@ -50,8 +50,8 @@
                 <tr>
                     <th>Inmate Name</th>
                     <th>Gender</th>
-                    <th>Entered</th>
-                    <th>Released</th>
+                    <th>Entered (MM/DD/YYYY)</th>
+                    <th>Released (MM/DD/YYYY)</th>
                     <th>Drug Off.</th>
                     <th>Enrolled to a programme</th>
                     <th>Sentence Duration</th>
@@ -158,7 +158,6 @@
             dateEntered = inmate.dateEntered;
             dateReleased = inmate.dateReleased;
             drugOffender = inmate.drugOffender;
-            sentenceDuration = inmate.sentenceDuration;
 
             document.getElementById("inmateId").innerHTML = id;
             document.getElementById('txtName').value = name;
@@ -166,7 +165,6 @@
             document.getElementById('txtDateEntered').value = dateEntered;
             document.getElementById('txtDateReleased').value = dateReleased;
             document.getElementById('txtDrugOff').value = drugOffender;
-            document.getElementById('txtSentDuration').value = sentenceDuration;
 
             //}//end of for loop.
         }//end of JavaScript anonymous function
