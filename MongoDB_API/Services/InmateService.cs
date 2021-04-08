@@ -26,7 +26,6 @@ namespace MongoDB_API.Services
         {
             var inmateData = _inmates.AsQueryable().Where(inmate => true);
 
-            CultureInfo culture = CultureInfo.InvariantCulture;
             var query = (from i in inmateData
                          join ip in _InmateProgressService.AsQueryable()
                          on i.InmateID equals ip.InmateID
