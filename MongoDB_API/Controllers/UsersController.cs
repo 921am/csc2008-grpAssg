@@ -8,7 +8,7 @@ using MongoDB_API.Services;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace MongoDB_WebApp.Controllers
+namespace MongoDB_API.Controllers
 {
     public class UsersController : Controller
     {
