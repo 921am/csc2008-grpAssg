@@ -26,7 +26,7 @@ namespace DB_WebApp
             }
             else
             {
-                Response.Write("Please login to access this page.");
+                Response.Write("<span style= 'color:red'>Please Login as Admin to view more</span>");
             }
         }
 

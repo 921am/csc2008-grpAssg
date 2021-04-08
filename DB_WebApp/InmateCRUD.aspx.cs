@@ -27,6 +27,7 @@ namespace DB_WebApp
                     btnDeleteInmate.Enabled = false;
                     FillGridViewWithDecrypted();
                     btnSaveInmate.Visible = false;
+                    btnDeleteInmate.Visible = false;
 
                 }
             }
@@ -198,7 +199,7 @@ namespace DB_WebApp
 
         protected void lnk_OnClick(object sender, EventArgs e)
         {
-            btnSaveInmate.Visible = true;
+            btnSaveInmate.Visible = false;
             int inmateID = Convert.ToInt32((sender as LinkButton).CommandArgument);
             if (sqlcon.State == ConnectionState.Closed)
                 sqlcon.Open();
