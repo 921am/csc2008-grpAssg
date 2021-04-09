@@ -2,28 +2,7 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <%--<div class="row">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Line Chart</h3>
-                </div>
-                <div class="card-body">
-                    <canvas class="my-4 h-25" id="line2"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3>Pie Chart</h3>
-                </div>
-                <div class="card-body">
-                    <canvas class="my-4 h-25" id="pie"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>--%>
+
 
 
     <div class="row">

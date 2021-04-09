@@ -18,11 +18,21 @@ namespace DB_WebApp
         SqlConnection sqlcon = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CRUD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (Session["logged_in"] != null)
             {
-                //btnDeleteInmate.Enabled = false;
-                FillGridView();
+                if (!IsPostBack)
+                {
+                    //btnDeleteInmate.Enabled = false;
+                    FillGridView();
+                }
+                
             }
+            else
+            {
+                Response.Write("<span style= 'color:red'>Please Login as Admin to view more</span>");
+                gvInmateProgress.Visible = false;
+            }
+
         }
 
         void FillGridView()
@@ -44,20 +54,10 @@ namespace DB_WebApp
             hfInmateProgressID.Value = "";
             
             lblErrorMessage.Text = lblSuccessMessage.Text = "";
-            //btnSaveInmate.Text = "Save";
-            //btnDeleteInmate.Enabled = false;
+ 
         }
 
 
-        //protected void btnSave_Click(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //protected void btnClear_Click(object sender, EventArgs e)
-        //{
-        //    Clear();
-        //}
 
         protected void lnk_OnClick(object sender, EventArgs e)
         {
@@ -78,10 +78,7 @@ namespace DB_WebApp
 
         }
 
-        //protected void btnDelete_Click(object sender, EventArgs e)
-        //{
 
-        //}
 
         protected void btnAcadProg_Click(object sender, EventArgs e)
         {

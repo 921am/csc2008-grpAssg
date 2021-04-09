@@ -35,11 +35,10 @@ The system will also provide effective analysis to determine factors or programm
 ## To run ASP.NET application
 - Create Database under SQL Server Object Explorer
 - Database name: CRUD
-- Go to Solution Explorer -> Double Click on DB_WebApp.sln
+- Run the solution ``` .sln ``` file 
 
-## To Create Tables
-- Run all the User queries
-- Run Create Tables, followed by Create FK, and lastly seed data
+## To populate the Database and include all the queries
+- Run all the ``` runAll_part<1/2/3/4>.sql ``` queries in CRUD
 
 ## To Migrate
 - Run SQL scripts ```SELECT * FROM TABLE``` to get the results.
