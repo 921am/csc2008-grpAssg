@@ -40,7 +40,7 @@ The system will also provide effective analysis to determine factors or programm
 ## To populate the Database and include all the queries
 - Run all the ``` runAll_part<1/2/3/4>.sql ``` queries in CRUD
 
-## To Migrate
+## To Migrate to MongoDB
 - Run SQL scripts ```SELECT * FROM TABLE``` to get the results.
 	- Do make sure that the results are set to grids
 - Right click on the results and click ```Save result as``` to save the csv files in the same folder as ```MongoDB-Migration.ipynb```
@@ -51,5 +51,5 @@ The system will also provide effective analysis to determine factors or programm
 		4. inmates.csv
 		5. vocationalProgramme.csv
 	- Insert header in the csv files as per the tables' attribute
-- Launch jupyer-notebook and run ```MongoDB-Migration.ipynb```
+- Launch jupyter-notebook and run ```MongoDB-Migration.ipynb```
 
