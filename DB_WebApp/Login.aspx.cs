@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace DB_WebApp
 {
     public partial class Login : System.Web.UI.Page
@@ -40,6 +41,7 @@ namespace DB_WebApp
             sqlcon.Close();
             if (dtbl.Rows.Count > 0)
             {
+                Session["logged_in"] = Name;
                 Response.Redirect("Default.aspx");
             }
             else
