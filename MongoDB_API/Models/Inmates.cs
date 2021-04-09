@@ -19,5 +19,7 @@ namespace MongoDB_API.Models
         public string DateEntered { get; set; }
         public string DateReleased { get; set; }
         public Boolean DrugOffender { get; set; }
+        [BsonExtraElements]
+        public BsonDocument CatchAll { get; set; }
     }
 }
