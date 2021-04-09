@@ -16,25 +16,21 @@
         </div>
         <div class="form-group">
             <label for="lblDateEntered">Date Entered</label>
-            <input type="datetime-local" class="form-control" id="txtDateEntered" placeholder="Enter name">
+            <input type="datetime-local" class="form-control" id="txtDateEntered" placeholder="Enter Date Entered">
         </div>
         <div class="form-group">
             <label for="lblDateReleased">Date Released</label>
-            <input type="datetime-local" class="form-control" id="txtDateReleased" placeholder="Enter name">
+            <input type="datetime-local" class="form-control" id="txtDateReleased" placeholder="Enter Date Released">
 
         </div>
         <div class="form-group">
             <label for="lblDrugOffender">Drug Offender (True/False)</label>
-            <input type="text" class="form-control" id="txtDrugOff" placeholder="Enter Gender">
+            <input type="text" class="form-control" id="txtDrugOff" placeholder="Enter Drug Offender Status">
         </div>
-        @*<div class="form-group">
-            <label for="lblSentenceDuration">Sentence Duration</label>
-            <input type="text" class="form-control" id="txtSentDuration" placeholder="Enter Gender">
-        </div>*@
-        @*<div class="form-group">
+        <div class="form-group">
             <label for="lblEnrolled">Enrolled to a programme (Yes/No)</label>
-            <input type="text" class="form-control" id="txtEnrolled" placeholder="Enter Gender">
-        </div>*@
+            <input type="text" class="form-control" id="txtEnrolled" placeholder="Enter Enrolled Status" disabled>
+        </div>
         <div class="form-group">
             <button type="submit" onclick="saveInmate()" class="btn btn-primary">Save</button>
             <button type="button" onclick="deleteInmate()" class="btn btn-danger">Delete</button>
@@ -75,6 +71,7 @@
         console.log("nope");
     });
 
+    //View All Inmates
     function loadInmateData() {
         //Note: jQuery.ajax(..) is also often written is $.ajax(..)
         $loadInmateDataHandler = jQuery.ajax({
@@ -137,9 +134,10 @@
         )//end of the done() method;
         $loadInmateDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadLabDataHandler.fail()
-    }//end of loadLabData();
+        })//end of $loadInmateDataHandler.fail()
+    }//end of loadInmateData();
 
+    //View a Single Inmate
     function viewInmate(inmateId) {
         //Note: jQuery.ajax(..) is also often written is $.ajax(..)
         $loadSingleInmateDataHandler = jQuery.ajax({
@@ -155,27 +153,51 @@
             id = inmate.inmateID;
             name = inmate.inmateName;
             gender = inmate.gender;
-            dateEntered = inmate.dateEntered;
-            dateReleased = inmate.dateReleased;
+            inDateEntered = inmate.dateEntered;
+            inDateReleased = inmate.dateReleased;
             drugOffender = inmate.drugOffender;
+            //enrolled = (inmate.enrolled ? 'Yes' : 'No');
 
+            //Convert Dates
+            var dateEntered = convertStrToDT(inDateEntered)
+            var dateReleased = convertStrToDT(inDateReleased)
+
+            //Update Fields
             document.getElementById("inmateId").innerHTML = id;
             document.getElementById('txtName').value = name;
             document.getElementById('txtGender').value = gender;
             document.getElementById('txtDateEntered').value = dateEntered;
             document.getElementById('txtDateReleased').value = dateReleased;
             document.getElementById('txtDrugOff').value = drugOffender;
+            //document.getElementById('txtEnrolled').value = enrolled;
 
             //}//end of for loop.
         }//end of JavaScript anonymous function
         )//end of the done() method;
         $loadSingleInmateDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadLabDataHandler.fail()
+        })//end of $loadSingleInmateDataHandler.fail()
     } //viewUser Function
-    //function redirectPage() {
-    //    location.replace('/UserManager/Index');
-    //}// end of redirectPage() method (function)
+
+    //takes in string value to convert and return as ISO String, retaining local timezone format
+    function convertStrToDT(inString) {
+        var splitDate = inString.split("/");
+        console.log(splitDate);
+        var date = new Date(splitDate[2], parseInt(splitDate[0]) - 1, splitDate[1], 0, 0, 0);
+        console.log('Enter Date Converted is: ' + date.toString());
+        var fmDate = date.getFullYear().toString() + "-" + ((date.getMonth() + 1).toString()).padStart(2, '0') + "-" + (date.getDate().toString()).padStart(2, '0') + "T00:00";
+        console.log('Formatted EnterDate: ' + fmDate);
+        return fmDate;
+    } //convertDate Function
+
+    //takes in string Formatted DT to convert and return as mm/dd/yyyy
+    function convertDtToStr(inDt) {
+        var splitDt = inDt.split("T");
+        var splitDate = splitDt[0].split("-");
+        var date = new Date(splitDate[0], splitDate[1], splitDate[2]);
+        var fmDate = ((date.getMonth()).toString()).padStart(2, '0') + "/" +(date.getDate().toString()).padStart(2, '0') + "/" + date.getFullYear().toString();
+        return fmDate;
+    }
 
     function saveInmate() {
         var inmateId = $("#inmateId").text();
@@ -186,8 +208,17 @@
             //collect data
             var name = $("#txtName").val();
             var gender = $("#txtGender").val();
-            var dateEntered = $("#txtDateEntered").val();
-            var dateReleased = $("#txtDateReleased").val();
+
+            var inDateEntered = $("#txtDateEntered").val();
+            console.log('SaveInmate Entered: ' + inDateEntered);
+            var dateEntered = convertDtToStr(inDateEntered);
+            console.log('SaveInmate formatted: ' + dateEntered);
+
+            var inDateReleased = $("#txtDateReleased").val();
+            console.log('SaveInmate Released: ' + inDateReleased);
+            var dateReleased = convertDtToStr(inDateReleased);
+            console.log('SaveInmate formatted: ' + dateReleased);
+
             var drugOffender = $("#txtDrugOff").val();
             putString = '?inmateName=' + name + '&gender=' + gender + '&dateEntered=' + dateEntered + '&dateReleased=' + dateReleased + '&drugOffender=' + drugOffender;
             //var password = '';
@@ -200,24 +231,34 @@
 
             $postInmateDataHandler.done(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                document.getElementById("lblSuccessMessage").innerHTML = "Inmate Created."
                 $("#lblSuccessMessage").show();
                 redirectPage();
             }//end of JavaScript anonymous function
             )//end of the done() method;
             $postInmateDataHandler.fail(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Create."
                 $("#lblErrorMessage").show();
-            })//end of $loadLabDataHandler.fail()
+            })//end of $loadInmateDataHandler.fail()
         } else {
             console.log('inmateId is NOT empty. gonna update');
             var putString = '';
             //collect data
             var name = $("#txtName").val();
             var gender = $("#txtGender").val();
-            var dateEntered = $("#txtDateEntered").val();
-            var dateReleased = $("#txtDateReleased").val();
+
+
+            var inDateEntered = $("#txtDateEntered").val();
+            console.log('SaveInmate Entered: ' + inDateEntered);
+            var dateEntered = convertDtToStr(inDateEntered);
+            console.log('SaveInmate formatted: ' + dateEntered);
+
+            var inDateReleased = $("#txtDateReleased").val();
+            console.log('SaveInmate Released: ' + inDateReleased);
+            var dateReleased = convertDtToStr(inDateReleased);
+            console.log('SaveInmate formatted: ' + dateReleased);
+
             var drugOffender = $("#txtDrugOff").val();
             putString = inmateId + '?inmateName=' + name + '&gender=' + gender + '&dateEntered=' + dateEntered + '&dateReleased=' + dateReleased + '&drugOffender=' + drugOffender;
 
@@ -229,30 +270,30 @@
             });
 
             $putInmateDataHandler.done(function (data, textStatus, jqXHR) {
-                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                document.getElementById("lblSuccessMessage").innerHTML = "Inmate Updated."
                 $("#lblSuccessMessage").show();
                 redirectPage();
             }//end of JavaScript anonymous function
             )//end of the done() method;
             $putInmateDataHandler.fail(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Update."
                 $("#lblErrorMessage").show();
-            })//end of $loadLabDataHandler.fail()
+            })//end of $loadInmateDataHandler.fail()
 
         }
     }
 
     function deleteInmate() {
 
-        var userId = $("#userId").text();
-        console.log('userId to delete is ' + userId);
+        var inmateId = $("#inmateId").text();
+        console.log('inmateId to delete is ' + inmateId);
         $deleteUserHandler = jQuery.ajax({
             type: 'DELETE',
-            url: '/api/Users/' + userId
+            url: '/api/Inmates/' + inmateId
         });//end of jQuery.ajax() call
         $deleteUserHandler.done(function (data, textStatus, jqXHR) {
-            document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+            document.getElementById("lblSuccessMessage").innerHTML = "Inmate Deleted."
             redirectPage();
         });//end of $deleteStudentHandler.done()
         $deleteUserHandler.fail(function (data, textStatus, jqXHR) {
@@ -263,12 +304,15 @@
     }
 
     function clearFields() {
-        $("#userId").text('');
+        $("#inmateId").text('');
         $("#lblSuccessMessage").hide();
         $("#lblErrorMessage").hide();
         document.getElementById('txtName').value = '';
-        document.getElementById('txtMobile').value = '';
-        document.getElementById('txtAddress').value = '';
+        document.getElementById('txtGender').value = '';
+        document.getElementById('txtDateEntered').value = '';
+        document.getElementById('txtDateReleased').value = '';
+        document.getElementById('txtDrugOff').value = '';
+        document.getElementById('txtEnrolled').value = '';
     }
 
     function redirectPage() {
