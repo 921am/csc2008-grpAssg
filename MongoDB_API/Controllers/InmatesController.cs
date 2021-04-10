@@ -26,7 +26,7 @@ namespace MongoDB_API.Controllers
             _inmateService.Get();
 
         [HttpGet("api/[controller]/{id}", Name = "GetInmate")]
-        public ActionResult<Inmates> Get(string id)
+        public ActionResult<InmatesDetails> Get(string id)
         {
             var inmate = _inmateService.Get(int.Parse(id));
 

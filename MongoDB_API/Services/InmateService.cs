@@ -48,7 +48,7 @@ namespace MongoDB_API.Services
                              DateReleased = x.DateReleased,
                              DrugOffender = x.DrugOffender,
                              Enrolled = x.Enrolled,
-                             SentenceDuration = sentenceDuration(x.DateReleased, x.DateEntered).ToString()
+                             SentenceDuration = SentenceDuration(x.DateReleased, x.DateEntered).ToString()
                          });
             
             var query2 = (from i in inmateData
@@ -71,7 +71,7 @@ namespace MongoDB_API.Services
                               DateReleased = x.DateReleased,
                               DrugOffender = x.DrugOffender,
                               Enrolled = x.Enrolled,
-                              SentenceDuration = sentenceDuration(x.DateReleased, x.DateEntered).ToString()
+                              SentenceDuration = SentenceDuration(x.DateReleased, x.DateEntered).ToString()
                           });
 
             IEnumerable<InmatesDetails> queryUnion = query.Union(query2, new DefaultQueryComparer());
@@ -80,8 +80,22 @@ namespace MongoDB_API.Services
             return sortedQuery;
         }
 
-        public Inmates Get(int InmateID) =>
-            _inmates.Find(inmate => inmate.InmateID == InmateID).FirstOrDefault();
+        public InmatesDetails Get(int InmateID)
+        {
+            var inmateData = _inmates.Find(inmate => inmate.InmateID == InmateID).FirstOrDefault();
+            bool enrolled = _InmateProgressService.Find(ip => ip.InmateID == InmateID).Any();
+
+            InmatesDetails inmateDetails = new InmatesDetails();
+            inmateDetails.InmateID = inmateData.InmateID;
+            inmateDetails.InmateName = inmateData.InmateName;
+            inmateDetails.Gender = inmateData.Gender;
+            inmateDetails.DateEntered = inmateData.DateEntered;
+            inmateDetails.DateReleased = inmateData.DateReleased;
+            inmateDetails.DrugOffender = inmateData.DrugOffender;
+            inmateDetails.Enrolled = enrolled;
+
+            return inmateDetails;
+        }
 
         public Inmates Create(Inmates inmates, int counter)
         {
@@ -92,7 +106,7 @@ namespace MongoDB_API.Services
 
         public void Update(int InmateID, Inmates inmateIn)
         {
-            var targetInmate = Get(InmateID);
+            var targetInmate = _inmates.Find(inmate => inmate.InmateID == InmateID).FirstOrDefault();
 
             targetInmate.DrugOffender = inmateIn.DrugOffender;
             if (inmateIn.InmateName != null)
@@ -110,7 +124,7 @@ namespace MongoDB_API.Services
         public void Remove(int InmateID) =>
             _inmates.DeleteOne(inmate => inmate.InmateID == InmateID);
 
-        private int sentenceDuration (string DateReleased, string DateEntered)
+        private int SentenceDuration (string DateReleased, string DateEntered)
         {
             DateTime releasedDateTime = Convert.ToDateTime(DateReleased);
             DateTime enteredDateTime = Convert.ToDateTime(DateEntered);
