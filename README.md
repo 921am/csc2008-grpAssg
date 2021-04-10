@@ -40,7 +40,20 @@ The system will also provide effective analysis to determine factors or programm
 - Run the solution ``` .sln ``` file 
 
 ## To populate the Database and include all the queries
-- Run all the ``` runAll_part<1/2/3/4>.sql ``` queries in CRUD
+- Run all the ``` runAll_part<1/2/3/4>.sql ``` queries in the CRUD database.
+
+## Admin account seeded inside:
+``` 
+Name: Admin
+Password: password
+```
+
+## Screenshots of the Web Application
+![LoginImage](https://github.com/921am/csc2008-grpAssg/blob/haadee/Screenshots/login.png)
+![AdminAcad](https://github.com/921am/csc2008-grpAssg/blob/haadee/Screenshots/AdminAcad.png)
+
+### If not logged in, the Academic Programme page will not display gridview
+![nonAdmin](https://github.com/921am/csc2008-grpAssg/blob/haadee/Screenshots/nonAdmin.png)
 
 ## To Migrate to MongoDB
 - Run SQL scripts ```SELECT * FROM TABLE``` to get the results.
