@@ -106,8 +106,8 @@
         )//end of the done() method;
         $loadProgDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadAcadProgDataHandler.fail()
-    }//end of loadAcadProgData();
+        })//end of $loadProgDataHandler.fail()
+    }//end of $loadProgDataHandler();
 
     function viewProg(progId) {
         //Note: jQuery.ajax(..) is also often written is $.ajax(..)
@@ -150,7 +150,7 @@
         )//end of the done() method;
         $loadSingleProgDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadAcadProgDataHandler.fail()
+        })//end of $loadSingleProgDataHandler.fail()
     } //viewProg Function
 
     //takes in string value to convert and return as ISO String, retaining local timezone format
@@ -205,16 +205,16 @@
 
             $postProgDataHandler.done(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblSuccessMessage").innerHTML = "Programme Deleted.";
+                document.getElementById("lblSuccessMessage").innerHTML = "Programme Created.";
                 $("#lblSuccessMessage").show();
                 redirectPage();
             }//end of JavaScript anonymous function
             )//end of the done() method;
             $postProgDataHandler.fail(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete";
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Create";
                 $("#lblErrorMessage").show();
-            })//end of $loadAcadProgDataHandler.fail()
+            })//end of $postProgDataHandler.fail()
         } else {
             console.log();
             console.log('progId is NOT empty. gonna update');
@@ -253,7 +253,7 @@
                 console.log(data);
                 document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
                 $("#lblErrorMessage").show();
-            })//end of $loadAcadProgDataHandler.fail()
+            })//end of $putProgDataHandler.fail()
 
         }
     }
@@ -269,11 +269,11 @@
         $deleteProgHandler.done(function (data, textStatus, jqXHR) {
             document.getElementById("lblSuccessMessage").innerHTML = "Programme Deleted."
             redirectPage();
-        });//end of $deleteStudentHandler.done()
+        });//end of $deleteProgHandler.done()
         $deleteProgHandler.fail(function (data, textStatus, jqXHR) {
             console.log(data);
             document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
-            //    });//end of $deleteStudentHandler.fail()
+            //    });//end of $deleteProgHandler.fail()
         });
     }
 

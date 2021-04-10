@@ -104,8 +104,8 @@
         )//end of the done() method;
         $loadUserDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadLabDataHandler.fail()
-    }//end of loadLabData();
+        })//end of $loadUserDataHandler.fail()
+    }//end of loadUserData();
 
     function viewUser(userId) {
         //Note: jQuery.ajax(..) is also often written is $.ajax(..)
@@ -145,9 +145,6 @@
             $.notify(data.statusText, "error");
         })//end of $loadLabDataHandler.fail()
     } //viewUser Function
-    //function redirectPage() {
-    //    location.replace('/UserManager/Index');
-    //}// end of redirectPage() method (function)
 
     function saveUser() {
         var userId = $("#userId").text();
@@ -170,16 +167,16 @@
 
             $postUserDataHandler.done(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                document.getElementById("lblSuccessMessage").innerHTML = "User Created."
                 $("#lblSuccessMessage").show();
                 redirectPage();
             }//end of JavaScript anonymous function
             )//end of the done() method;
             $postUserDataHandler.fail(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Create"
                 $("#lblErrorMessage").show();
-            })//end of $loadLabDataHandler.fail()
+            })//end of $postUserDataHandler.fail()
         } else {
             console.log();
             console.log('userId is NOT empty. gonna update');
@@ -199,16 +196,16 @@
             });
 
             $putUserDataHandler.done(function (data, textStatus, jqXHR) {
-                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                document.getElementById("lblSuccessMessage").innerHTML = "User Updated."
                 $("#lblSuccessMessage").show();
                 redirectPage();
             }//end of JavaScript anonymous function
             )//end of the done() method;
             $putUserDataHandler.fail(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Update"
                 $("#lblErrorMessage").show();
-            })//end of $loadLabDataHandler.fail()
+            })//end of $putUserDataHandler.fail()
 
         }
     }
@@ -224,11 +221,11 @@
         $deleteUserHandler.done(function (data, textStatus, jqXHR) {
             document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
             redirectPage();
-        });//end of $deleteStudentHandler.done()
+        });//end of $deleteUserHandler.done()
         $deleteUserHandler.fail(function (data, textStatus, jqXHR) {
             console.log(data);
             document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
-            //    });//end of $deleteStudentHandler.fail()
+            //    });//end of $deleteUserHandler.fail()
         });
     }
 

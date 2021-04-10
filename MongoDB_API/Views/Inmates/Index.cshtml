@@ -62,9 +62,6 @@
 </div>
 
 <script>
-    //$(document).ready(function () {
-    //    console.log("document loaded");
-    //});
     $(document).ready(function () {
         console.log("document loaded");
         loadInmateData();
@@ -295,11 +292,11 @@
         $deleteInmateHandler.done(function (data, textStatus, jqXHR) {
             document.getElementById("lblSuccessMessage").innerHTML = "Inmate Deleted."
             redirectPage();
-        });//end of $deleteStudentHandler.done()
+        });//end of $deleteInmateHandler.done()
         $deleteInmateHandler.fail(function (data, textStatus, jqXHR) {
             console.log(data);
             document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
-            //    });//end of $deleteStudentHandler.fail()
+            //    });//end of $deleteInmateHandler.fail()
         });
     }
 

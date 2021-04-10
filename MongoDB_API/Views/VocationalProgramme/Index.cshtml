@@ -105,8 +105,8 @@
         )//end of the done() method;
         $loadvocProgDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadLabDataHandler.fail()
-    }//end of loadLabData();
+        })//end of $loadvocProgDataHandler.fail()
+    }//end of loadVocProgData();
 
     function viewProg(progId) {
         //Note: jQuery.ajax(..) is also often written is $.ajax(..)
@@ -149,7 +149,7 @@
         )//end of the done() method;
         $loadSingleProgDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadLabDataHandler.fail()
+        })//end of $loadSingleProgDataHandler.fail()
     } //viewUser Function
 
     //takes in string value to convert and return as ISO String, retaining local timezone format
@@ -214,7 +214,7 @@
                 console.log(data);
                 document.getElementById("lblErrorMessage").innerHTML = "Failed to Create"
                 $("#lblErrorMessage").show();
-            })//end of $loadLabDataHandler.fail()
+            })//end of $postProgDataHandler.fail()
         } else {
             console.log();
             console.log('progId is NOT empty. gonna update');
@@ -254,7 +254,7 @@
                 console.log(data);
                 document.getElementById("lblErrorMessage").innerHTML = "Failed to Update"
                 $("#lblErrorMessage").show();
-            })//end of $loadLabDataHandler.fail()
+            })//end of $putProgDataHandler.fail()
 
         }
     }

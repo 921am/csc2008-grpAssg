@@ -59,11 +59,11 @@
     //});
     $(document).ready(function () {
         console.log("document loaded");
-        loadUserData();
+        loadInmateProgressData();
         console.log("nope");
     });
 
-    function loadUserData() {
+    function loadInmateProgressData() {
         //Note: jQuery.ajax(..) is also often written is $.ajax(..)
         $loadInmateProgDataHandler = jQuery.ajax({
             url: '/api/InmateProgress/',
@@ -124,8 +124,8 @@
         )//end of the done() method;
         $loadInmateProgDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadLabDataHandler.fail()
-    }//end of loadLabData();
+        })//end of $loadInmateProgDataHandler.fail()
+    }//end of loadInmateProgressData();
 
     function viewInmateProg(inmateProgId) {
         //Note: jQuery.ajax(..) is also often written is $.ajax(..)
@@ -171,6 +171,6 @@
         )//end of the done() method;
         $loadSingleIpDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
-        })//end of $loadLabDataHandler.fail()
-    } //viewUser Function
+        })//end of $loadSingleIpDataHandler.fail()
+    } //viewInmateProg Function
 </script>
