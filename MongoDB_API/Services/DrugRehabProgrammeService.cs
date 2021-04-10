@@ -45,7 +45,7 @@ namespace MongoDB_API.Services
             if (DrugRehabProgIn.EndDate != null)
                 targetDrugRehabProg.EndDate = DrugRehabProgIn.EndDate;
 
-            _DrugRehabProgramme.ReplaceOne(DrugRehabProg => DrugRehabProg.ProgID == ProgID, DrugRehabProgIn);
+            _DrugRehabProgramme.ReplaceOne(DrugRehabProg => DrugRehabProg.ProgID == ProgID, targetDrugRehabProg);
         }
 
         public void Remove(int ProgID) =>

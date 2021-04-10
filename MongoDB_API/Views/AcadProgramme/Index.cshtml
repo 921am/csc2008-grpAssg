@@ -122,9 +122,9 @@
             console.log(data);
             var id = '';
             var name = '';
-            var mobile = '';
-            var address = '';
-            var password = '';
+            var desc = '';
+            var inStartDate = '';
+            var inEndDate = '';
             //-------- Begin creating <tr> and <td> HTML element ------
             //for (index = 0; index < progList.length; index++) {
             var prog = data;
@@ -152,7 +152,6 @@
             $.notify(data.statusText, "error");
         })//end of $loadAcadProgDataHandler.fail()
     } //viewProg Function
-
 
     //takes in string value to convert and return as ISO String, retaining local timezone format
     function convertStrToDT(inString) {
@@ -236,7 +235,7 @@
             console.log('SaveProg formatted: ' + endDate);
 
             putString = progId + '?progName=' + name + '&progDescrip=' + desc + '&startDate=' + startDate + '&endDate=' + endDate;
-            //var password = '';
+
             $putProgDataHandler = jQuery.ajax({
                 url: '/api/AcadProgramme/' + putString,
                 method: 'PUT',
