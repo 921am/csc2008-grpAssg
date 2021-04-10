@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MongoDB_WebApp.Models
+namespace MongoDB_API.Models
 {
     public class PrisonDatabaseSettings : IPrisonDatabaseSettings
     {

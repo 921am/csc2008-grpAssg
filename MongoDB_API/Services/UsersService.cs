@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MongoDB_WebApp.Models;
+using MongoDB_API.Models;
 using MongoDB.Driver;
 
-namespace MongoDB_WebApp.Services
+namespace MongoDB_API.Services
 {
     public class UsersService
     {
@@ -38,7 +38,7 @@ namespace MongoDB_WebApp.Services
 
             if (userIn.Name != null)
                 targetUser.Name = userIn.Name;
-            if (userIn.Mobile != null)
+            if (userIn.Mobile != 0)
                 targetUser.Mobile = userIn.Mobile;
             if (userIn.Address != null)
                 targetUser.Address = userIn.Address;

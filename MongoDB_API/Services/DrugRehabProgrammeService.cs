@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MongoDB_WebApp.Models;
+using MongoDB_API.Models;
 using MongoDB.Driver;
 
-namespace MongoDB_WebApp.Services
+namespace MongoDB_API.Services
 {
     public class DrugRehabProgrammeService
     {
@@ -45,7 +45,7 @@ namespace MongoDB_WebApp.Services
             if (DrugRehabProgIn.EndDate != null)
                 targetDrugRehabProg.EndDate = DrugRehabProgIn.EndDate;
 
-            _DrugRehabProgramme.ReplaceOne(DrugRehabProg => DrugRehabProg.ProgID == ProgID, DrugRehabProgIn);
+            _DrugRehabProgramme.ReplaceOne(DrugRehabProg => DrugRehabProg.ProgID == ProgID, targetDrugRehabProg);
         }
 
         public void Remove(int ProgID) =>

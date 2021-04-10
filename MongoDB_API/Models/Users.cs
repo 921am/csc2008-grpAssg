@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MongoDB_WebApp.Models
+namespace MongoDB_API.Models
 {
     public class Users
     {
@@ -15,7 +15,7 @@ namespace MongoDB_WebApp.Models
 
         public int UserID { get; set; }
         public string Name { get; set; }
-        public string Mobile { get; set; }
+        public int Mobile { get; set; }
         public string Address { get; set; }
         public string Password { get; set; }
     }

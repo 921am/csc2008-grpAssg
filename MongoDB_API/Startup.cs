@@ -10,11 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MongoDB_WebApp.Models;
-using MongoDB_WebApp.Services;
+using MongoDB_API.Models;
+using MongoDB_API.Services;
 using Microsoft.Extensions.Options;
 
-namespace MongoDB_WebApp
+namespace MongoDB_API
 {
     public class Startup
     {
@@ -41,7 +41,7 @@ namespace MongoDB_WebApp
             services.AddSingleton<VocationalProgrammeService>();
             services.AddSingleton<CounterService>();
 
-            services.AddControllers();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,8 +51,15 @@ namespace MongoDB_WebApp
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -60,7 +67,9 @@ namespace MongoDB_WebApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Users}/{action=Login}/{id?}");
             });
         }
     }

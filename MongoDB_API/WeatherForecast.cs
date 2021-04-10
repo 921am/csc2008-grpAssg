@@ -1,6 +1,6 @@
 using System;
 
-namespace MongoDB_WebApp
+namespace MongoDB_API
 {
     public class WeatherForecast
     {

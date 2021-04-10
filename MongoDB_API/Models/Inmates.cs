@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MongoDB_WebApp.Models
+namespace MongoDB_API.Models
 {
     public class Inmates
     {
@@ -19,5 +19,7 @@ namespace MongoDB_WebApp.Models
         public string DateEntered { get; set; }
         public string DateReleased { get; set; }
         public Boolean DrugOffender { get; set; }
+        [BsonExtraElements]
+        public BsonDocument CatchAll { get; set; }
     }
 }

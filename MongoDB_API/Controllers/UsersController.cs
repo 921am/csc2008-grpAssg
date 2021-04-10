@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB_WebApp.Models;
-using MongoDB_WebApp.Services;
+using MongoDB_API.Models;
+using MongoDB_API.Services;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
-namespace MongoDB_WebApp.Controllers
+namespace MongoDB_API.Controllers
 {
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : Controller
     {
         private readonly UsersService _userService;
         private readonly CounterService _counterService;
+
 
         public UsersController(UsersService usersService, CounterService counterService)
         {
@@ -20,11 +22,11 @@ namespace MongoDB_WebApp.Controllers
             _counterService = counterService;
         }
 
-        [HttpGet]
+        [HttpGet("api/[controller]")]
         public ActionResult<List<Users>> Get() =>
             _userService.Get();
 
-        [HttpGet("{id}", Name = "GetUser")]
+        [HttpGet("api/[controller]/{id}", Name = "GetUser")]
         public ActionResult<Users> Get(string id)
         {
             var user = _userService.Get(int.Parse(id));
@@ -36,7 +38,7 @@ namespace MongoDB_WebApp.Controllers
             return user;
         }
 
-        [HttpPost]
+        [HttpPost("api/[controller]")]
         public ActionResult<Users> Create(Users user)
         {
             var counter = _counterService.getNextSequence("userID");
@@ -45,7 +47,7 @@ namespace MongoDB_WebApp.Controllers
             return CreatedAtRoute("GetUser", new { id = user.UserID.ToString() }, user);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("api/[controller]/{id}")]
         public IActionResult Update(string id, Users userIn)
         {
             var user = _userService.Get(int.Parse(id));
@@ -59,7 +61,7 @@ namespace MongoDB_WebApp.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("api/[controller]/{id}")]
         public IActionResult Delete(string id)
         {
             var user = _userService.Get(int.Parse(id));
@@ -72,5 +74,16 @@ namespace MongoDB_WebApp.Controllers
             _userService.Remove(user.UserID);
             return NoContent();
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
     }
 }
