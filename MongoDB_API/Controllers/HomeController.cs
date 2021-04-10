@@ -18,10 +18,6 @@ namespace MongoDB_WebApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
         public IActionResult Default()
         {
             return View();

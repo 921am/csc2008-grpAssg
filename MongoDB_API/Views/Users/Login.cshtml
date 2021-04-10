@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+}
+
+<div @*class="text-center"*@>
+    <h2>Login</h2>
+    <div class="form-group">
+        <label id="userId" hidden></label>
+        <label for="lblName">Name</label>
+        <input type="text" class="form-control" id="txtName" placeholder="Enter Name">
+    </div>
+    <div class="form-group">
+        <label for="lblPwd">Password</label>
+        <input type="password" class="form-control" id="tbPwd" placeholder="Enter Password">
+    </div>
+    <div class="form-group">
+        <button type="submit" onclick="login()" class="btn btn-primary">Login</button>
+    </div>
+    <div class="form-group">
+        <label id="lblSuccessMessage" class="hidden"></label>
+        <label id="lblErrorMessage" class="hidden"></label>
+    </div>
+</div>
+
+<script>
+    //Check if fields are filled
+    function validateFields() {
+        //Initialise variables
+        var valid = false;
+        var id = '';
+        var pwd = '';
+
+        //Get data
+        id = $("#txtName").val();
+        pwd = $("#tbPwd").val();
+        console.log(id);
+        console.log(pwd);
+
+        if (id.length == 0 || pwd.length == 0) {
+            console.log("[Error] Empty Fields");
+            document.getElementById("lblErrorMessage").innerHTML = 'Name and password must not be empty';
+            document.getElementById("lblErrorMessage").className = '';
+        } else {
+            valid = true;
+        }
+
+        return valid;
+    }
+
+    //Check if credentials are valid
+    function login() {
+        var auth = false;
+        var valid = validateFields();
+        if (valid == true) {
+            auth = checkAuth();
+        }
+        if (auth == true) {
+            redirectPage()
+        }
+    }
+
+    //Redirect to Home Charts Page
+    function redirectPage() {
+        location.replace('/Home/Default');
+    }// end of redirectPage() method (function)
+
+    function checkAuth() {
+        var check = false;
+        //Note: jQuery.ajax(..) is also often written is $.ajax(..)
+        $loadUserDataHandler = jQuery.ajax({
+            url: '/api/Users/',
+            method: 'GET',
+            dataType: 'json',
+            cache: false,
+        });
+        $loadUserDataHandler.done(function (data, textStatus, jqXHR) {
+            console.log(data);
+            var userList = data;
+            var id = '';
+            var pwd = '';
+
+            id = $("#txtName").val();
+            pwd = $("#tbPwd").val();
+
+            for (index = 0; index < userList.length; index++) {
+                var user = userList[index];
+                name = user.name;
+                password = user.password;
+
+                if (id == name && pwd == password) {
+                    check = true;
+                    console.log('credentials found');
+                }
+            }//end of for loop.
+
+            if (check == false) {
+                document.getElementById("lblErrorMessage").innerHTML = 'Invalid credentials';
+                document.getElementById("lblErrorMessage").className = '';
+            } else {
+                redirectPage()
+            }
+        }//end of JavaScript anonymous function
+        )//end of the done() method;
+        $loadUserDataHandler.fail(function (data, textStatus, jqXHR) {
+            $.notify(data.statusText, "error");
+        })//end of $loadUserDataHandler.fail()
+    }//end of loadUserData();
+</script>
