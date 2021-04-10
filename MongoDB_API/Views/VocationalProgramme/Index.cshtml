@@ -6,8 +6,9 @@
     <h2>Vocational Programmes</h2>
     <div>
         <div class="form-group">
+            <label id="vProgId" hidden></label>
             <label for="lblProgName">Programme Name</label>
-            <input type="text" class="form-control" id="txtProgName" placeholder="Enter name">
+            <input type="text" class="form-control" id="txtProgName" placeholder="Enter Programme name">
         </div>
         <div class="form-group">
             <label for="lblProgDescription">Programme Description</label>
@@ -15,20 +16,20 @@
         </div>
         <div class="form-group">
             <label for="lblStartDate">Start Date</label>
-            <input type="datetime-local" class="form-control" id="txtStartDate" placeholder="Enter name">
+            <input type="datetime-local" class="form-control" id="txtStartDate" placeholder="Enter  Start Date">
         </div>
         <div class="form-group">
             <label for="lblEndDate">End Date</label>
-            <input type="datetime-local" class="form-control" id="txtEndDate" placeholder="Enter name">
+            <input type="datetime-local" class="form-control" id="txtEndDate" placeholder="Enter  End Date">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary">Save</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-            <button type="reset" class="btn btn-secondary">Clear</button>
+            <button type="submit" onclick="saveProg()" class="btn btn-primary">Save</button>
+            <button type="button" onclick="deleteProg()" class="btn btn-danger">Delete</button>
+            <button type="reset" onclick="clearFields()" class="btn btn-secondary">Clear</button>
         </div>
         <div class="form-group">
-            <label for="lblSuccessMessage" style="display:none">Success</label>
-            <label for="lblErrorMessage" style="display:none">Error</label>
+            <label id="lblSuccessMessage" style="display:none">Success</label>
+            <label id="lblErrorMessage" style="display:none">Error</label>
         </div>
         <br />
         <table class="table table-striped table-bordered table-condensed table-responsive table-hover">
@@ -94,7 +95,7 @@
                 $rowElement.append($cellElement);
                 $cellElement = $('<td></td>', { text: endDate });
                 $rowElement.append($cellElement);
-                $hyperLinkElement = $('<a href=javascript:viewUser(\'' + id + '\')>View</a>');
+                $hyperLinkElement = $('<a href=javascript:viewProg(\'' + id + '\')>View</a>');
                 $cellElement = $('<td></td>');
                 $cellElement.append($hyperLinkElement);
                 $rowElement.append($cellElement);
@@ -107,141 +108,187 @@
         })//end of $loadLabDataHandler.fail()
     }//end of loadLabData();
 
-    function viewUser(userId) {
+    function viewProg(progId) {
         //Note: jQuery.ajax(..) is also often written is $.ajax(..)
-        $loadSingleUserDataHandler = jQuery.ajax({
-            url: '/api/AcadProgramme/' + acadProgId,
+        $loadSingleProgDataHandler = jQuery.ajax({
+            url: '/api/VocationalProgramme/' + progId,
             method: 'GET',
             dataType: 'json',
             cache: false,
         });
 
-        $loadSingleUserDataHandler.done(function (data, textStatus, jqXHR) {
+        $loadSingleProgDataHandler.done(function (data, textStatus, jqXHR) {
             console.log(data);
-            //var userList = data;
             var id = '';
             var name = '';
-            var mobile = '';
-            var address = '';
-            var password = '';
+            var desc = '';
+            var inStartDate = '';
+            var inEndDate = '';
             //-------- Begin creating <tr> and <td> HTML element ------
             //for (index = 0; index < userList.length; index++) {
-            var user = data;
+            var prog = data;
             //console.log(user.name);
-            id = user.userID;
-            name = user.name;
-            mobile = user.mobile;
-            address = user.address;
-            password = user.password;
-            document.getElementById("userId").innerHTML = id;
-            document.getElementById('txtName').value = name;
-            document.getElementById('txtMobile').value = mobile;
-            document.getElementById('txtAddress').value = address;
+            id = progId;
+            name = prog.progName;
+            desc = prog.progDescrip;
+            inStartDate = prog.startDate;
+            inEndDate = prog.endDate;
+
+            //Convert Dates
+            var startDate = convertStrToDT(inStartDate)
+            var endDate = convertStrToDT(inEndDate)
+
+            document.getElementById("vProgId").innerHTML = id;
+            document.getElementById('txtProgName').value = name;
+            document.getElementById('txtProgDescription').value = desc;
+            document.getElementById('txtStartDate').value = startDate;
+            document.getElementById('txtEndDate').value = endDate;
 
             //}//end of for loop.
         }//end of JavaScript anonymous function
         )//end of the done() method;
-        $loadUserDataHandler.fail(function (data, textStatus, jqXHR) {
+        $loadSingleProgDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
         })//end of $loadLabDataHandler.fail()
     } //viewUser Function
-    //function redirectPage() {
-    //    location.replace('/UserManager/Index');
-    //}// end of redirectPage() method (function)
 
-    function saveUser() {
-        var userId = $("#userId").text();
-        console.log('userId to act on ' + userId);
-        if (userId == '') {
-            console.log('userId is empty. gonna create');
+    //takes in string value to convert and return as ISO String, retaining local timezone format
+    function convertStrToDT(inString) {
+        var splitDate = inString.split("/");
+        console.log(splitDate);
+        var date = new Date(splitDate[2], parseInt(splitDate[0]) - 1, splitDate[1], 0, 0, 0);
+        console.log('Enter Date Converted is: ' + date.toString());
+        var fmDate = date.getFullYear().toString() + "-" + ((date.getMonth() + 1).toString()).padStart(2, '0') + "-" + (date.getDate().toString()).padStart(2, '0') + "T00:00";
+        console.log('Formatted EnterDate: ' + fmDate);
+        return fmDate;
+    } //convertDate Function
+
+    //takes in string Formatted DT to convert and return as mm/dd/yyyy
+    function convertDtToStr(inDt) {
+        var splitDt = inDt.split("T");
+        var splitDate = splitDt[0].split("-");
+        var date = new Date(splitDate[0], splitDate[1], splitDate[2]);
+        var fmDate = ((date.getMonth()).toString()).padStart(2, '0') + "/" + (date.getDate().toString()).padStart(2, '0') + "/" + date.getFullYear().toString();
+        return fmDate;
+    }
+
+    function saveProg() {
+        var progId = $("#vProgId").text();
+        console.log('progId to act on ' + progId);
+        if (progId == '') {
+            console.log('progId is empty. gonna create');
             var putString = '';
+
             //collect data
-            var name = $("#txtName").val();
-            var mobile = $("#txtMobile").val();
-            var address = $("#txtAddress").val();
-            putString = '?name=' + name + '&mobile=' + mobile + '&address=' + address + '&password=password';
-            //var password = '';
-            $postUserDataHandler = jQuery.ajax({
-                url: '/api/Users/' + putString,
+            var name = $("#txtProgName").val();
+            var desc = $("#txtProgDescription").val();
+            var inStartDate = $("#txtStartDate").val();
+            var inEndDate = $("#txtEndDate").val();
+
+            //Convert Dates
+            console.log('SaveProg Start: ' + inStartDate);
+            var startDate = convertDtToStr(inStartDate);
+            console.log('SaveProg formatted: ' + startDate);
+
+            console.log('SaveProg End: ' + inEndDate);
+            var endDate = convertDtToStr(inEndDate);
+            console.log('SaveProg formatted: ' + endDate);
+
+            putString = '?progName=' + name + '&progDescrip=' + desc + '&startDate=' + startDate + '&endDate=' + endDate;
+
+            $postProgDataHandler = jQuery.ajax({
+                url: '/api/VocationalProgramme/' + putString,
                 method: 'POST',
                 dataType: 'json',
                 cache: false,
             });
 
-            $postUserDataHandler.done(function (data, textStatus, jqXHR) {
+            $postProgDataHandler.done(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+                document.getElementById("lblSuccessMessage").innerHTML = "Programme Created."
                 $("#lblSuccessMessage").show();
                 redirectPage();
             }//end of JavaScript anonymous function
             )//end of the done() method;
-            $postUserDataHandler.fail(function (data, textStatus, jqXHR) {
+            $postProgDataHandler.fail(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Create"
                 $("#lblErrorMessage").show();
             })//end of $loadLabDataHandler.fail()
         } else {
             console.log();
-            console.log('userId is NOT empty. gonna update');
+            console.log('progId is NOT empty. gonna update');
 
             var putString = '';
+
             //collect data
-            var name = $("#txtName").val();
-            var mobile = $("#txtMobile").val();
-            var address = $("#txtAddress").val();
-            putString = userId +'?name='+name+'&mobile='+mobile+'&address='+address+'&password=password';
-            //var password = '';
-            $putUserDataHandler = jQuery.ajax({
-                url: '/api/Users/' + putString,
+            var name = $("#txtProgName").val();
+            var desc = $("#txtProgDescription").val();
+            var inStartDate = $("#txtStartDate").val();
+            var inEndDate = $("#txtEndDate").val();
+
+            console.log('SaveProg Start: ' + inStartDate);
+            var startDate = convertDtToStr(inStartDate);
+            console.log('SaveProg formatted: ' + startDate);
+
+            console.log('SaveProg End: ' + inEndDate);
+            var endDate = convertDtToStr(inEndDate);
+            console.log('SaveProg formatted: ' + endDate);
+
+            putString = progId + '?progName=' + name + '&progDescrip=' + desc + '&startDate=' + startDate + '&endDate=' + endDate;
+
+            $putProgDataHandler = jQuery.ajax({
+                url: '/api/VocationalProgramme/' + putString,
                 method: 'PUT',
                 dataType: 'json',
                 cache: false,
             });
 
-            $putUserDataHandler.done(function (data, textStatus, jqXHR) {
-                document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+            $putProgDataHandler.done(function (data, textStatus, jqXHR) {
+                document.getElementById("lblSuccessMessage").innerHTML = "Programme Updated."
                 $("#lblSuccessMessage").show();
                 redirectPage();
             }//end of JavaScript anonymous function
             )//end of the done() method;
-            $putUserDataHandler.fail(function (data, textStatus, jqXHR) {
+            $putProgDataHandler.fail(function (data, textStatus, jqXHR) {
                 console.log(data);
-                document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
+                document.getElementById("lblErrorMessage").innerHTML = "Failed to Update"
                 $("#lblErrorMessage").show();
             })//end of $loadLabDataHandler.fail()
 
         }
     }
 
-    function deleteUser() {
+    function deleteProg() {
 
-        var userId = $("#userId").text();
-        console.log('userId to delete is ' + userId);
-        $deleteUserHandler = jQuery.ajax({
+        var progId = $("#vProgId").text();
+        console.log('progId to delete is ' + progId);
+        $deleteProgHandler = jQuery.ajax({
             type: 'DELETE',
-            url: '/api/Users/' + userId
+            url: '/api/VocationalProgramme/' + progId
         });//end of jQuery.ajax() call
-        $deleteUserHandler.done(function (data, textStatus, jqXHR) {
-            document.getElementById("lblSuccessMessage").innerHTML = "User Deleted."
+        $deleteProgHandler.done(function (data, textStatus, jqXHR) {
+            document.getElementById("lblSuccessMessage").innerHTML = "Programme Deleted."
             redirectPage();
-        });//end of $deleteStudentHandler.done()
-        $deleteUserHandler.fail(function (data, textStatus, jqXHR) {
+        });//end of $deleteProgHandler.done()
+        $deleteProgHandler.fail(function (data, textStatus, jqXHR) {
             console.log(data);
             document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
-            //    });//end of $deleteStudentHandler.fail()
+            //    });//end of $deleteProgHandler.fail()
         });
     }
 
     function clearFields() {
-        $("#userId").text('');
+        $("#vProgId").text('');
         $("#lblSuccessMessage").hide();
         $("#lblErrorMessage").hide();
-        document.getElementById('txtName').value = '';
-        document.getElementById('txtMobile').value = '';
-        document.getElementById('txtAddress').value = '';
+        document.getElementById('txtProgName').value = '';
+        document.getElementById('txtProgDescription').value = '';
+        document.getElementById('txtStartDate').value = '';
+        document.getElementById('txtEndDate').value = '';
     }
 
     function redirectPage() {
-        location.replace('/Users');
+        location.replace('/VocationalProgramme');
     }// end of redirectPage() method (function)
 </script>
