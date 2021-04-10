@@ -104,7 +104,7 @@ namespace MongoDB_API.Services
             if (inmateIn.DateReleased != null)
                 targetInmate.DateReleased = inmateIn.DateReleased;
 
-            _inmates.ReplaceOne(inmate => inmate.InmateID == InmateID, inmateIn);
+            _inmates.ReplaceOne(inmate => inmate.InmateID == InmateID, targetInmate);
         }
 
         public void Remove(int InmateID) =>

@@ -177,7 +177,7 @@
         $loadSingleInmateDataHandler.fail(function (data, textStatus, jqXHR) {
             $.notify(data.statusText, "error");
         })//end of $loadSingleInmateDataHandler.fail()
-    } //viewUser Function
+    } //viewInmate Function
 
     //takes in string value to convert and return as ISO String, retaining local timezone format
     function convertStrToDT(inString) {
@@ -201,7 +201,7 @@
 
     function saveInmate() {
         var inmateId = $("#inmateId").text();
-        console.log('userId to act on ' + inmateId);
+        console.log('inmateId to act on ' + inmateId);
         if (inmateId == '') {
             console.log('inmateId is empty. gonna create');
             var putString = '';
@@ -288,15 +288,15 @@
 
         var inmateId = $("#inmateId").text();
         console.log('inmateId to delete is ' + inmateId);
-        $deleteUserHandler = jQuery.ajax({
+        $deleteInmateHandler = jQuery.ajax({
             type: 'DELETE',
             url: '/api/Inmates/' + inmateId
         });//end of jQuery.ajax() call
-        $deleteUserHandler.done(function (data, textStatus, jqXHR) {
+        $deleteInmateHandler.done(function (data, textStatus, jqXHR) {
             document.getElementById("lblSuccessMessage").innerHTML = "Inmate Deleted."
             redirectPage();
         });//end of $deleteStudentHandler.done()
-        $deleteUserHandler.fail(function (data, textStatus, jqXHR) {
+        $deleteInmateHandler.fail(function (data, textStatus, jqXHR) {
             console.log(data);
             document.getElementById("lblErrorMessage").innerHTML = "Failed to Delete"
             //    });//end of $deleteStudentHandler.fail()
